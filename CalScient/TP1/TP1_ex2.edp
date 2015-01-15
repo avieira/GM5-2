@@ -1,0 +1,40 @@
+//abscisses
+real a=0, b=1;
+real pas=0.2;
+//real pas=0.02;
+real [int] xx(a:pas:b);
+cout<<"abscisses "<<xx<<endl;
+cout<<"dimension vecteur n="<<xx.n<<endl;
+
+//valeurs
+int n=xx.n;
+real [int] yy(n);
+for(int i=0;i<n;i++)
+	yy(i)=sin(pi*xx(i))+cos(pi*xx(i));
+
+cout<<"valeurs yy "<<yy<<endl;
+
+//ecriture dans un fichier
+ofstream fout("data_ex3.dat");
+for(int i=0;i<n;i++)
+	fout<<xx(i)<<" "<<yy(i)<<endl;
+
+//Définition d'une variable, interpolation
+real xP=0.5598;
+real fxP;
+int j;
+for(int k=0;k<n-1;k++){
+	if(xx[k]>xP){
+		j=k-1;
+		break;
+	}
+}
+
+cout<<"Valeur de j : "<<j<<endl;
+
+fxP=yy(j)+(xP-xx[j])/(xx[j+1]-xx[j])*(yy[j+1]-yy[j]);
+
+fout<<endl<<endl;
+fout<<xP<<" "<<fxP;
+cout<<"Erreur commise : "<<abs(fxP-sin(pi*xP)+cos(pi*xP))<<endl;
+
