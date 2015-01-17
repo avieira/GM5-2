@@ -1,0 +1,182 @@
+\part*{Introduction}
+Le but est de voir comment résoudre les équations du type :
+\begin{equation} \label{EDP} \tag{EDP} 
+\left\{ \begin{array}{r c c c}
+	F(x,u,Du,D^2u)&=&0 &\text{ sur } \Omega\\
+	u&=&g &\text{ sur } \partial\Omega
+\end{array}\right.
+\end{equation}
+
+$x\in\Omega\subset\mathbb{R}^n$, $u:\mathbb{R}^n\to\mathbb{R}$ est l'inconnue.\\
+On notera $u_{x_i}=\frac{\partial u}{\partial x_i}$\\
+\[Du=\nabla u=\begin{pmatrix} u_{x_1}\\ \vdots \\ u_{x_n} \end{pmatrix}\]
+$D^2u$ est la matrice hessienne.\\
+$g:\partial\Omega\to\mathbb{R}$
+
+\bigskip
+On note $S^n$ l'ensemble des matrices carrées sumétriques de taille $n$.\\
+Si $u\in\mathscr{C}^2$, $D^2u\in S^2$.\\
+$S^n$ est muni d'un ordre naturel :
+	\[X\geq Y \Leftrightarrow X-Y\geq 0\]
+où $X\geq0$ équivaut $\forall \xi\in\mathbb{R}^n$, $(X\xi,\xi)\geq0$\\
+
+$F:\Omega\times\mathbb{R}\times\mathbb{R}^n\times S^n \to \mathbb{R}$ est appelé l'hamiltonien.\\
+On note $(x,r,p,X)$ les variables de $F$. Le but est de donner un sens à l'\ref{EDP}.
+
+\begin{itemize}
+	\item En général, il n'y a pas de solution classique (ie appartenant à $\mathscr{C}^2$)
+	\item Comme l'équation est complètement non linéaire, on ne peut pas définir une solution au sens des distributions. On doit donc trouver une autre notion de solution.
+\end{itemize}
+
+\bigskip
+\textit{But :} Introduire la notion de viscosité.\\
+Cette notion sera bien posée dans le sens suivant :
+\begin{itemize}
+	\item existence et unicité des solutions
+	\item stabilité par rapport à $F$ et $g$.\\
+Si $F_n\to F$ et $g_n\to g$ localement uniformément, alors $u_n\to u$ localement uniformément.
+\end{itemize}
+
+\bigskip
+\textit{Outils essentiels :}\begin{itemize}
+	\item Principe de comparaison : si $u$ est sous-solution, $v$ sur-solution, alors $u\leq v$. Cela nous donnera l'unicité de la solution.
+	\item On utilisera souvent $\limsup$, $\liminf$ et la semi-continuité.
+	\item On aura également besoin d'un ordre : $F$ doit être à valeur dans $\mathbb{R}$ (limitation de la théorie)
+\end{itemize}
+
+\bigskip
+\textit{Application :} Géophysique, problèmes de mouvement et de front, trafic routier, imagerie, analyse numérique (convergence de schéma, extimation d'erreur...), homogénéisation (changement d'échelle),...
+
+\newpage
+\part{Solution classique et généralisation}
+\section{Premières définitions}
+\Def{Ellipticité}{\begin{itemize}
+\item On dit que $F$ est elliptique si $F$ est décroissante en $X$, ie \[Y\geq X \Rightarrow F(\bullet, \bullet, \bullet, Y)\leq F(\bullet, \bullet, \bullet,X)\]
+\item On dit que $F$ est strictement elliptique si : \[Y<X \Rightarrow F(\bullet, \bullet, \bullet, Y)< F(\bullet, \bullet, \bullet,X)\]
+\item On dit que $F$ est uniformément elliptique si : \[\exists \lambda, \Lambda >0; \forall X,Y\in S^n, Y\geq 0, -\Lambda tr(Y)\leq F(\bullet, \bullet, \bullet, X+Y)-F(\bullet, \bullet, \bullet, X)\leq -\lambda tr(Y)\]
+\item $F$ est propre si $F$ est croissante en $r$ et elliptique.
+\end{itemize}}
+
+Dans (presque) tout le reste du cours, on travaillera avec des opérateurs propres.
+
+\Def{Linéarité}{\begin{itemize}
+\item $F$ est linéaire si $F$ est linéaire en $r$, $p$ et $X$
+\item $F$ est semi-linéaire si $F$ est linéaire en $p$ et $X$
+\item $F$ est quasi-linéaire si $F$ est linéaire en $X$
+\item $F$ est complètement non linéaire sinon
+\end{itemize}}
+
+\subsection{Quelques exemples d'opérateurs propres}
+\begin{description}
+\item[Equation de Poisson : ] $-\Delta u=f$ dans $\Omega$\\
+$F(x,r,p,X)=-tr(X)-f(x)$
+\begin{itemize}
+	\item $F$ uniformément elliptique
+	\item $F$ propre
+\end{itemize}
+
+\item[Equation linéaire non sous forme divergentielle :] $\mathscr{L}u=f$, avec $\mathscr{L}u=-tr(a(x)D^2u)+b(x)Du+c(x)u$\\
+$a(x)$ symétrique positive, $c(x)\geq 0$. \\
+\textit{Exercice :} Montrez que $\mathscr{L}$ est propre. \textit{Montrer au préalable :} \[A,B\geq 0 \Rightarrow tr(AB)\geq 0\]
+
+\item[Equation linéaire sous forme divergentielle :] $\mathscr{L}'u=f$ avec $\mathscr{L}'u=-\div(a(x)Du)+b(x)Du+c(x)u$\\
+$\mathscr{L}'$ est elleiptique si $a\in\mathscr{C}^1(\Omega,S^n)$ avec $a\geq 0$ et propre si $c\geq 0$
+
+\item[Equation d'Hamilton-Jacobi d'ordre 1 : ] $H(x,u,\nabla u)=0$\\
+Propre si $H$ croissante en $u$
+
+\item[Equation d'Hamilton-Jacobi-Bellmann : ] $\mathscr{L}^\alpha$ linéaire, $\mathscr{L}^\alpha u=-tr(a^\alpha(x)D^2u)+b^\alpha(x)Du+c^\alpha u$\\
+Si $\sup_\alpha \{\mathscr{L}^\alpha u-f\alpha\}=0$, alors $\mathscr{L}^\alpha$ propre.
+\end{description}
+
+\section{Solutions classiques}
+\Def{Solution classique}{$u\in\mathscr{C}^2(\Omega)\cap\mathscr{C}^0(\overline{\Omega})$ est une solution classique de $F(x,u,Du,D^2u)=0$ si $u$ vérifie l'équation en tout point.\\
+(on se limite à $\mathscr{C}^1$ pour les équations du premier ordre)}
+
+\Propo{}{Soient $u,v\in\mathscr{C}^2(\Omega)\cap\mathscr{C}^0(\overline{\Omega})$ tel que $u-v$ atteint un maximum positif en $\bar{x}\in\Omega$.\\
+Alors $F(\bar{x}, u(\bar{x}), Du(\bar{x}), D^2u(\bar{x}))\geq F(\bar{x}, v(\bar{x}), Dv(\bar{x}), D^2v(\bar{x}))$}
+
+\begin{dem}
+\[u(\bar{x})\geq v(\bar{x})\]
+\[D(u-v)(\bar{x})=0 \Rightarrow Du(\bar{x})=Dv(\bar{x}) \text{ car on atteint un maximum}\]
+\[D^2(u-v)(\bar{x})\leq0 \Rightarrow D^2u(\bar{x})\leq Dv(\bar{x})\]
+
+Comme $F$ est propre : \[F(\bar{x}, u(\bar{x}), Du(\bar{x}), D^2u(\bar{x}))\geq F(\bar{x}, v(\bar{x}), Dv(\bar{x}), D^2v(\bar{x}))\]
+\end{dem}
+
+\Def{}{$u\in\mathscr{C}^2(\Omega)\cap\mathscr{C}^0(\overline{\Omega})$ est sous solution de (\ref{EDP}) si $F(x,u(x),Du(x),D^2u(x))\leq 0$ $\forall x\in\Omega$\\
+De même, $u$ est sur solution de (\ref{EDP}) si $F(x,u(x),Du(x),D^2u(x))\geq 0$ $\forall x\in\Omega$}
+
+\Propo{}{Supposons $\Omega$ borné. On suppose $u$ sous-solution, $v$ sur-solution, $F$ strictement croissante en $r$ et $u\leq v$ sur $\partial\Omega$.\\
+Alors $u\leq v$ sur $\overline{\Omega}$.}
+
+\begin{dem}
+On raisonne par l'absurde : on suppose $\max_\Omega (u-v)>0$. Soit $\bar{x}$ un point de maximum.\\
+\[u(\bar{x})-v(\bar{x})>0\]
+\[Du(\bar{x})=Dv(\bar{x}) \]
+\[D^2u(\bar{x})\leq Dv(\bar{x})\]
+\begin{eqnarray*}
+\Rightarrow 0&\geq&F(\bar{x}, u(\bar{x}), Du(\bar{x}), D^2u(\bar{x}))\\
+		&\geq& F(\bar{x}, u(\bar{x}), Dv(\bar{x}), D^2v(\bar{x}))\\
+		&>& F(\bar{x}, v(\bar{x}), Dv(\bar{x}), D^2v(\bar{x}))\\
+		& & \geq 0
+\end{eqnarray*}
+On a donc $0>0$, ce qui est absurde.
+\end{dem}
+
+
+\Coro{}{Sous les mêmes hypothèses, (\ref{EDP}) admet au plus une solution vérifiant $u=g$ sur $\partial\Omega$.}
+
+\begin{dem}
+Soient $u$ et $v$ deux solutions.\\
+$u$ est sous-solution, $v$ est sur-solution, donc $u\leq v$\\
+De même, $u$ est sur-solution, et $v$ est sous-solution, donc $v\leq u$.\\
+Donc $u=v$.
+\end{dem}
+
+\section{Vers une solution généralisée}
+On considère le problème :
+\[\left\{ \begin{array}{c}
+	|u'|=1 \text{ sur } \Omega=]-1,1[\\
+	u(-1)=u(1)=0
+\end{array}\right.\]
+
+D'après Rolle, il n'y a pas de solution classique. IL y a par contre une infinité de solution $\mathscr{C}^1$ par morceaux.
+Par exemple : \[u^+=\left\{ \begin{array}{c c c}
+	1+x &\text{ si } x\leq 0\\
+	1-x &\text{ si } x\geq 0
+\end{array}\right.\]
+et également $u^+=u^-$.\\
+On considère le problème pour $\varepsilon>0$ :
+\[\left\{ \begin{array}{c}
+	-\varepsilon u''+|u'|=1 \text{ sur } \Omega=]-1,1[\\
+	u(-1)=u(1)=0
+\end{array}\right.\]
+
+Le théorème de Safranov nous montre qu'il existe une unique solution $u^\varepsilon\in\mathscr{C}^2(\Omega)\cap\mathscr{C}^0(\overline{\Omega})$ tel que :
+\[u_\varepsilon(x)=\left\{ \begin{array}{c c c}
+	1+x-\varepsilon\left(\exp\left(\frac{x}{\epsilon}\right)-\exp\left(\frac{1}{\varepsilon}\right)\right) &\text{ si } x\leq 0\\
+	u_\varepsilon(-x) &\text{ si } x\geq 0
+\end{array}\right.\]
+
+Si $\varepsilon\to 0$, $u_\varepsilon\to u^+$ uniformément. $u^+$ est séléctionnée par la méthode de viscosité évanescente.
+
+\Theo{Principe du maximum}{$u\in\mathscr{C}^2(\Omega)$ est une solution de (\ref{EDP}) si et seulement si :
+\begin{enumerate}
+	\item $\forall \phi \in\mathscr{C}^2(\Omega)$ tel que $u-\phi$ atteint un maximum en $\bar{x}$ on a : \[F(\bar{x}, u(\bar{x}), D\phi(\bar{x}), D^2\phi(\bar{x}))\leq 0\]
+	\item $\forall \phi \in\mathscr{C}^2(\Omega)$ tel que $u-\phi$ atteint un minimum en $\bar{x}$ on a : \[F(\bar{x}, u(\bar{x}), D\phi(\bar{x}), D^2\phi(\bar{x}))\geq 0\]
+\end{enumerate}}
+
+\begin{dem}
+On suppose que $a$ est une solution classique. Soit $\phi$ tel que $u-\phi$ atteint un maximum en $\bar{x}$.
+	\[Du(\bar{x})=D\phi(\bar{x})\]
+	\[D^2u(\bar{x})\leq D^2\phi(\bar{x})\]
+\[0=F(\bar{x}, u(\bar{x}), Du(\bar{x}), D^2u(\bar{x}))\geq F(\bar{x}, u(\bar{x}), D\phi(\bar{x}), D^2\phi(\bar{x}))\]
+Le deuxième point se fait de la même manière.\\
+\textit{Réciproquement :} comme $u\in\mathscr{C}^2$, on peut prendre $\phi=u$ dans 1) et 2), donc $u-\phi$ atteint un max et un min en tout point.
+\begin{eqnarray*}
+	F(x,u,Du,D^2u)&\leq&0\\
+			&\geq&0\\
+	\Rightarrow F(x,u,Du,D^2u)&=&0\\
+\end{eqnarray*}
+\end{dem}
