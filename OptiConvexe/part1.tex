@@ -151,3 +151,134 @@ De plus, $\sigma_S=\sigma_{\convBar(S)}$}
 	\item $\sigma_{S_1+S_2}=\sigma_{S_1}+\sigma_{S_2}$
 	\item $\sigma_{S_1\cup S_2}=\max\{\sigma_{S_1},\sigma_{S_2}\}$
 \end{enumerate}}
+
+\section{Transformée de Fenchel}
+On va chercher les fonctions affines minorantes : \[\langle p,x\rangle + \alpha\leq f(x)\]
+\[-\alpha\geq \langle p,x\rangle -f(x)\]
+
+On va prendre $-\alpha=\sup_{x\in H} \{\langle p,x\rangle -f(x)\}=f^*(p)$.
+
+\Def{Transformée de Fenchel}{Soit $H$ un Hilbert et $f:H\to\overline{\mathbb{R}}$. On définit la transformée de Fenchel de $f$, notée $f^*:H\to\overline{\mathbb{R}}$ par :
+\[f^*(p)=\sup_{x\in H}\{\langle p,x\rangle -f(x)\}\]}
+
+\Prop{Inégalité de Young}{\[\forall p,x\in H,\ f^*(p)+f(x)\geq\langle p,x\rangle\]}
+
+\Propo{Semi-continue inférieurement}{Soit $f:H\to\mathbb{R}$. On dit que $f$ est semi-continue inférieurement (sci) si l'une des deux propositions équivalentes suivantes est vérifiée :
+\begin{enumerate}
+	\item $\forall x\in H,\ \forall x_n\to x$, $\liminf_{n\to+\infty} f(x_n)\geq f(x)$
+	\item $epi(f)$ est fermé.
+\end{enumerate}}
+
+\Propo{}{Soit $(f_i)_{i\in I}$ une famille de fonctions sci. Alors $\sup_{i\in I} f_i$ est sci.}
+
+\Coro{}{$f^*$ est sci et convexe.}
+
+\Def{Biconjuguée}{La biconjuguée de $f$, notée $f^{**}$ est définie par : \[f^{**}(x)=\sup_{p\in H}\{\langle p,x\rangle -f^*(p)\}\]}
+
+\Prop{}{\begin{itemize}
+	\item $f^{**}(x)+f^*(p)\geq\langle p,x\rangle$
+	\item $f(x)\geq f^{**}(x)$
+\end{itemize}}
+
+\Propo{}{Si $f$ est convexe, sci et propre, alors $f^*$ est convexe, sci et propre.}
+
+\Theo{Fenchel-Moreau}{Soit $f:H\to\overline{\mathbb{R}}$ une fonction propre. alors $f$ est convexe et sci si et seulement si $f=f^{**}$}
+
+\Rem{}{On peut définir la transformée de Fenchel sur un espace normé $E$ refléxif : 
+	\[f^*:\begin{array}{c c c} E'&\to&\mathbb{R}\\ p&\mapsto&\sup_{x\in E} \{\langle p,x\rangle_{E'E} -f(x)\}\end{array}\]
+Dans ce cas, les propositions précédentes et le théorème de Fenchel-Moreau restent vraies.}
+
+\Coro{}{Soit $f$ propre. alors $f$ est convexe et sci si et seulement si $f$ est l'eneoppe supérieure de ses minorantes affines.}
+
+\section{Continuité des fonctions convexes}
+\Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. On suppose qu'il existe une boule ouverte sur laquelle $f$ est bornée. Alors $f$ est continue sur l'intérieur de son domaine qui est non vide.}
+
+\Rem{}{Si $f$ est continue en un point, alors $f$ est bornée sur une boule, et donc $f$ est continue sur l'intérieur de son domaine.}
+
+\Coro{}{Si $f:H\to\overline{\mathbb{R}}$ est convexe et propre avec $H$ de dimension finie, alors $f$ restreinte à l'intérieur relatif de son domaine est continue.}
+
+\textbf{Remarque :} Si $f:H\to\mathbb{R}$, alors $f$ continue sur $H$.
+
+\section{Différentiabilité des fonctions convexes}
+\subsection{Dérivées directionnelles des fonctions convexes}
+\Theo{}{Soient $f:H\to\overline{\mathbb{R}}$, $x\in Dom(f)$, $d\in H$.
+\begin{enumerate}
+	\item $\varepsilon\in\mathbb{R}^*_+\mapsto\frac{f(x+\varepsilon d)-f(x)}{\varepsilon}$ est croissante
+	\item $f'(x,d)$ existe toujours et vaut éventuellement $\pm \infty$. De plus, $f'(x,d)=+\infty$ si et seulement si $x+\varepsilon d\not\in Dom(F)$ pour tout $\varepsilon$ petit, et :
+			\[f'(x,d)=\inf_{\varepsilon\in\mathbb{R}^*_+} \frac{f(x+\varepsilon d)-f(x)}{\varepsilon}\]
+			\[f'(x,d)\leq f(x+d)-f(x)\]
+	\item $f'(x,d)\geq -f'(x,d)$
+\end{enumerate}}
+
+\subsection{Reconnaître une fonction convexe à l'aide de ses dérivées}
+\Theo{}{Soit $f:H\to\overline{\mathbb{R}}$ une fonction propre. On suppose que $f$ est différentiable sur un ouvert $\Omega$ de $Dom(f)\subset H$. On a équivalence entre les propositions suivantes :
+\begin{enumerate}
+	\item $f$ est convexe (resp. strictement convexe) sur $\Omega$
+	\item $\forall x,y\in \Omega$, $f(y)\geq f(x)+f'(x,y-x)$ (resp. $f(y)> f(x)+f'(x,y-x)$)
+	\item $\forall x,y\in \Omega$, $(f'(y)-f'(x))(y-x)\geq 0$ (resp. $(f'(y)-f'(x))(y-x)\geq 0$)
+\end{enumerate}}
+
+\Theo{}{Soit $f:H\to\overline{\mathbb{R}}$ propre et 2 fois différentiable sur un ouvert $\Omega\subset Dom(f)$.\\
+Alors $f$ est convexe si et seulement si $D^2f(d,d)\geq 0$ $\forall d\in H$.\\
+De plus, si $D^2f(d,d)>0$, alors $f$ est strictement convexe (réciproque fausse : penser à $f(x)=x^4$)}
+
+\section{Sous-différentiabilité des fonctions convexes}
+\subsection{Définitions et premières propriétés}
+
+\Def{Fonction affine}{$a$ est affine si $\forall x,y\in H$, $\forall t\in \mathbb{R}$, \[a(tx+(1-t)y)=ta(x)+(1-t)a(y)\]
+Pour toute fonction affine, il existe $x^*$ (la pente) et $\alpha$ (l'ordonnée) telles que $a(x)=\langle x^*,x\rangle +\alpha$.}
+
+\Def{Minorante affine}{On dit que $a$ est une minorante affine de $f$ si $a$ est affine et si : \[\forall x\in H,\ f(x)\geq a(x)\]
+On dit qu'une minorante affine est exacte en $x_0$ si $f(x_0)=a(x_0)$. Dans ce cas, \[a(x)=\langle x^*,x-x_0\rangle +f(x)\]}
+
+\Theo{Existence d'une minorante affine}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. Alors $f$ admet une minorante affine.\\
+De plus, celle-ci peut être choisie exacte en un point de $ri(Dom(f))$, ie : si $x\in ri(Dom(f))$, \[\exists x^*\in H;\ f(y)\geq \langle x^*,y-x\rangle +f(x)\]}
+
+\Def{Sous-différentiable}{On dit que $f$ convexe et propre est sous-différentiable en $x$ s'il existe $x^*\in H$ tel que : \[\forall y\in H,\ f(y)\geq \langle x^*,y-x\rangle + f(x)\]
+Les éléments $x^*$ sont appelés les sous-gradients de $f$ en $x$, et on note $\partial f(x)$ l'ensemble des sous-gradients de $f$ en $x$.\\
+Par convention, si $x\not\in Dom(f)$, alors $\partial f(x)=\emptyset$}
+
+\Propo{Sur l'optimalité}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. Alors $f$ atteint un minimum en $x$ si et seulement si $0\in\partial f(x)$.}
+
+\Propo{}{Sous les mêmes hypothèses : \[\partial f(x)=\{x^*\in H;\ f'(x,d)\geq \langle x^*,d\rangle,\ \forall d\in H\}\]}
+
+\Theo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre, et soit $x\in Dom(f)$. Les assertions suivantes sont équivalentes : \begin{enumerate}
+	\item $\partial f(x)\neq \emptyset$
+	\item $\exists y\in ri(Dom(f))$; $f'(x,y-x)>-\infty$
+	\item $f'(x,\bullet)\neq-\infty$
+\end{enumerate}}
+
+\Coro{}{Si $f$ est convexe et propre et si $f$ est continue en $x\in Dom(f)$, alors $\partial f(x)\neq \emptyset$}
+
+\Propo{}{Soit $f$ convexe et propre tel que $f$ est continue en $x$. Alors \[f'(x,d)=\sigma_{\partial f(x)}(d)=\sup_{p\in\partial f(x)}\langle d,p\rangle\]}
+
+\subsection{Sous-différentiabilité et transformée de Fenchel}
+\Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. Alors \[\partial f(x)=\{p\in H;\ f(x)+f^*(p)=\langle p,x\rangle\}\]}
+
+On définit de la même manière : \[\partial f^*(p)=\{x\in H;\ f^{**}(x)+f^*(p)=\langle p,x\rangle\}\]
+
+\Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe, propre et sci. \[x\in\partial f^*(p)\Leftrightarrow p\in\partial f(x)\]}
+
+\subsection{Liens avec la différentiabilité}
+\Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe, sci et propre. On suppose que $f$ est continue en $x$.
+\begin{enumerate}
+	\item Si $f$ est Gâteaux-différentiable en $x$, alors \[\partial f(x)=\{\nabla f(x)\}\]
+	\item Réciproquement, si $\partial f(x)$ est réduit à un seul élément, alors $f$ est Gâteaux-différentiable en $x$ et $\partial f(x)=\{\nabla f(x)\}$
+\end{enumerate}}
+
+\subsection{Quelques règles de calcul}
+Dans toute la suite, on supposera la dimension de $H$ finie.
+\Def{Homogène et sous linéaire}{$f'(x,\bullet)$ est dite homogène de degré $n\in\mathbb{R}^*$ si : \[\forall \lambda\in\mathbb{R},\ f'(x,\lambda d)=\lambda^n f'(x,d)\]
+$f'(x,\bullet)$ est dite sous-linéaire si : \[\forall d\in H,\ \exists L>0;\ |f'(x,d)|\leq L\|d\|\]}
+
+\Propo{}{Soient $f:H\to\mathbb{R}$ une fonction convexe et propre et $x\in H$. Alors $f'(x,\bullet)$ est convexe, homogène de degré 1 et sous-linéaire.}
+
+\Coro{}{Sous les mêmes hypothèses, $\partial f(x)$ est un convexe compact non vide.}
+
+\Propo{}{Soient $f_1,f_2:H\to\mathbb{R}$ deux fonctions convexes, et $t_1,t_2>0$. Alors \[\partial(t_1f_1+t_2f_2)(x)=t_1\partial f_1(x)+t_2\partial f_2(x)\]}
+
+\Propo{}{Soient $A:\mathbb{R}^n\to\mathbb{R}^m$ une fonction affine ($Ax=A_0x+b$, $A\in\mathcal{M}_{m\times n}$, $b\in\mathbb{R}^m$)\\
+et $g:\mathbb{R)}^n\to\mathbb{R}$ une fonction convexe.\\
+	\[\partial(g\circ A)(x)=A_0^*\partial g(Ax)\]}
+
+
