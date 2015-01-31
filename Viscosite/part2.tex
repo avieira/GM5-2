@@ -1,0 +1,250 @@
+\part{Solutions de viscosité}
+\section{Définitions et propriétés}
+\subsection{Solutions continues}
+
+\Def{}{Soit $u\in\mathscr{C}^0(\Omega)$. On dit que $u$ est sous-solution de (\ref{EDP}) si $\forall \phi\in\mathscr{C}^2(\Omega)$ tel que $u-\phi$ atteint un maximum en $\bar{x}$, on a 
+\[F(\bar{x},u(\bar{x}),D\phi(\bar{x}),D^2\phi(\bar{x}))\leq 0\]
+On dit que $u$ est sur-solution de (\ref{EDP}) si $\forall \phi\in\mathscr{C}^2(\Omega)$ tel que $u-\phi$ atteint un minimum en $\bar{x}$, on a 
+\[F(\bar{x},u(\bar{x}),D\phi(\bar{x}),D^2\phi(\bar{x}))\geq 0\]}
+
+\Propo{}{\begin{itemize}
+	\item Dans la définition précédente, on peut remplacer maximum par maximum global ou maximum strict (de même pour le minimum)
+	\item On peut remplacer $\phi\in\mathscr{C}^2$ par $\phi\in\mathscr{C}^k$, $\forall k\geq 2$ pour les équations du deuxième ordre, et par $\phi\in\mathscr{C}^1$ pour les équations du premier ordre.
+\end{itemize}}
+
+\subsection{Propriété des solutions continues}
+\Def{Solution de viscosité}{Soit $u\in\mathscr{C}^0(\Omega)$. On appelle sur-différentiel d'ordre 2 de $u$ en $\bar{x}$, noté $D^{2+}(\bar{x})$ l'ensemble convexe constitué des couples $(p,M)\in\mathbb{R}^N\times S^N$ tel que :
+	\[\forall x\in\Omega,\ u(x)\leq u(\bar{x})+p(x-\bar{x})+\frac{1}{2}M(x-\bar{x}).(x-\bar{x})+o(|x-\bar{x}|^2)\]
+ On appelle sous-différentiel d'ordre 2 de $u$ en $\bar{x}$, noté $D^{2-}(\bar{x})$ l'ensemble convexe constitué des couples $(p,M)\in\mathbb{R}^N\times S^N$ tel que :
+	\[\forall x\in\Omega,\ u(x)\geq u(\bar{x})+p(x-\bar{x})+\frac{1}{2}M(x-\bar{x}).(x-\bar{x})+o(|x-\bar{x}|^2)\]
+Si $u$ est à la fois sous-solution et sur-solution, on dit qu'elle est alors solution de viscosité de (\ref{EDP}).}
+
+\Rem{}{Si $u\in\mathscr{C}^2(\Omega)$ :
+	\[D^{2+}u(\bar{x})=\{(Du(\bar{x}),M);\ M\geq D^2u(\bar{x})\}\]
+	\[D^{2-}u(\bar{x})=\{(Du(\bar{x}),M);\ M\leq D^2u(\bar{x})\}\]
+}
+
+\Theo{}{\begin{enumerate}
+	\item $u\in\mathscr{C}(\Omega)$ est sous-solution de (\ref{EDP}) si et seulement si $\forall (p,M)\in D^{2+}(\bar{x})$, on a : \[F(\bar{x},u(\bar{x}),p,M)\leq 0\]
+	\item $u\in\mathscr{C}(\Omega)$ est sur-solution de (\ref{EDP}) si et seulement si $\forall (p,M)\in D^{2-}(\bar{x})$, on a : \[F(\bar{x},u(\bar{x}),p,M)\geq 0\]
+\end{enumerate}}
+
+\Coro{}{\begin{enumerate}
+	\item Si $u\in\mathscr{C}^2(\Omega)$ et vérifie (\ref{EDP}) au sens classique alors $u$ est solution de viscosité
+	\item Si $u\in\mathscr{C}(\Omega)$ est solution de (\ref{EDP}) et si $u$ est deux fois différentiable en $\bar{x})$, alors $F(\bar{x},u(\bar{x}),Du(\bar{x}),D^2u(\bar{x}))=0$
+\end{enumerate}}
+
+\Propo{}{Si $u$ sous-solution de (\ref{EDP}), alors $v=-u=$ est sur-solution de \[-F(x,-v,-Dv,-D^2v)=0\]}
+
+\Theo{Résultat de stabilité}{On suppose que $\forall\varepsilon>0$, $u_\varepsilon$ est solution de \[F_\varepsilon(x,u_\varepsilon(x),Du_\varepsilon(x),D^2u_\varepsilon(x))=0 \text{ dans } \Omega\]
+où $F_\varepsilon$ est un opérateur continue et elliptique.\\
+Si $u_\varepsilon\xrightarrow[\varepsilon\to 0]{} u$ dans $\mathscr(\Omega)$, dans le sens où pour tout compact $K\subset\Omega$, $\|u_\varepsilon-u\|_{L^\infty(K)}\xrightarrow[\varepsilon\to 0]{} 0$\\
+et si $F_\varepsilon \xrightarrow[\varepsilon\to 0]{} F$ uniformément sur les compacts\\
+alors $u$ est solution de $F(x,u,Du,D^2u)=0$.}
+
+\paragraph{Utilisation du théorème}\begin{enumerate}
+	\item On montre que $u_\varepsilon$ est localement borné dans $L^\infty$ uniformément en $\varepsilon$
+	\item On montre que $u_\varepsilon$ est loalement uniformément holderienne ou lipschitzienne
+	\item On utilise le théorème d'Ascoli et le procédé d'extraction diagonal pour construire une fonction $u$ tel que $u_\varepsilon\to u$ dans $\mathscr{C}(\Omega)$ (à une sous-suite près)
+	\item On utilise le résultat de stabilité pour montrer que $u$ est solution de (\ref{EDP}).
+\end{enumerate}
+
+\subsection{Solutions discontinues}
+\subsubsection{Limite sup/Limite inf}
+On prend $X$ un espace topologique séparé. Soit $A\subset X$, $x\in\overline{A}$, $f:A\to\mathbb{R}\cup\{\pm\infty\}$.\\
+On note $V(x)$ l'ensemble des voisinages de $x$.
+
+\Def{Limsup/Liminf}{On définit la limite supérieure de $f$ en $x$ par : \[\limsup_{y\to x} f(y)=\inf_{V\in V(x)} \sup_{y\in V} f(y)\]
+On définit la limite inférieure de $f$ en $x$ par : \[\liminf_{y\to x} f(y)=\sup_{V\in V(x)} \inf_{y\in V} f(y)\]}
+
+\Rem{}{\begin{itemize}
+	\item $\limsup$ et $\liminf$ sont toujours définies (à valeur dans $\mathbb{R}\cup\{\pm\infty\}$)
+	\item $\liminf\leq\limsup$
+	\item $x\in A$, $\liminf_{y\to x} f(y)\leq f(x)\leq \limsup_{y\to x} f(y)$
+	\item $\limsup_{y\to x} f(y)=\liminf_{y\to x} f(y$ si et seulement si $\lim_{y\to x} f(y)$ existe.
+	\item $\liminf (-f)=-\limsup f$
+\end{itemize}}
+
+\Def{fonction semi-continue}{On dit que $f:X\to \mathbb{R}\cup\{\pm\infty\}$ est \begin{itemize}
+	\item semi-continue inférieurement (sci) en $x$ si : \[\forall x_n\to x,\ \liminf_{n\to +\infty} f(x_n)\geq f(x)\]
+	\item semi-continue supérieurement (scs) en $x$ si : \[\forall x_n\to x,\ \limsup_{n\to +\infty} f(x_n)\leq f(x)\]
+\end{itemize}
+}
+
+\Propo{}{$f$ est sci si et seulement si $epi(f)=\{(\lambda,x);\ \lambda\geq f(x)\}$ est fermé}
+
+\Prop{}{\begin{itemize}
+	\item la somme, le sup, l'inf de deux fonctions scs est scs
+	\item le sup d'une famille de fcts sci est sci
+\end{itemize}}
+
+\subsubsection{Enveloppe semi-continue}
+\Def{Enveloppe semi-continue}{Soit $f:X\to\mathbb{R}\cup\{\pm\infty\}$.\\
+On appelle enveloppe semi-continue supérieure de $f$, notée $f^*$, la fonction définie par : $f^*(x)=\limsup_{y\to x} f(y)$\\
+On appelle enveloppe semi-continue inférieure de $f$, notée $f_*$, la fonction définie par : $f_*(x)=\liminf_{y\to x} f(y)$}
+
+\Propo{}{$f^*$ est la plus petite fonction scs plus grande que $f$.\\
+$f_*$ est la plus grande fonction sci plus petite que $f$.}
+
+\Theo{Minimisation des fonctions sci}{Soit $X$ un espace compact et $f:X\to\mathbb{R}$ une fonction sci. Alors $f$ atteint son minimum sur $X$.}
+
+\Def{Semi-limites relaxées}{Soit $(f_i)_{i\in I}$ une famille de fonction, $f_i:X\to\mathbb{R}$. On définit la semi-limite relaxée supérieure de $(f_i)$ quand $i\to+\infty$ par :
+\[\bar{f}(x)=\lim_{i\to+\infty}\limsup_{y\to x} f_i(y) \text{ (scs)}\]
+On définit la semi-limite relaxée inférieure de $(f_i)$ quand $i\to+\infty$ par :
+\[\underline{f}(x)=\lim_{i\to+\infty}\liminf_{y\to x} f_i(y) \text{ (sci)}\]
+}
+
+\Theo{}{Soient $(f_i)_{i\in I}$ une famille de fonctions, $f_i:X\to\mathbb{R}$ et $X$ compact.\\
+Alors $\underline{f}=\bar{f}$ dans $\mathbb{R}$ si et seulement si $f_i$ converge uniformément sur $X$ quand $i\to+\infty$ vers une fonctions continue $f$.\\
+De plus, $f=\bar{f}=\underline{f}$.}
+
+\subsubsection{Solution de viscosité discontinues}
+\Def{Solutions de viscosité discontinues}{On dit que $u$ scs est sous-solution de (\ref{EDP}) si $\forall\phi\in\mathscr{C}^2(\Omega)$ tel que $u-\phi$ atteint un maximum en $x$, on a : 
+\[F(x,u(x),D\phi(x),D^2\phi(x))\leq 0\]
+On dit que $u$ sci est sur-solution de (\ref{EDP}) si $\forall\phi\in\mathscr{C}^2(\Omega)$ tel que $u-\phi$ atteint un minimum en $x$, on a : 
+\[F(x,u(x),D\phi(x),D^2\phi(x))\geq 0\]
+Une fonction $u$ localement bornée est solution de viscosité de (\ref{EDP}) si $u^*$ est sous-solution et $u_*$ est sur-solution.}
+
+\Propo{}{Si (\ref{EDP}) vérifie le principe de comparaison suivant : \\
+\label{PC}(PC) Si $u$ scs est sous-solution de (\ref{EDP}), si c sci est sur-solution, et si $u\leq g\leq v$ sur $\partial\Omega$ ($g\in\mathscr{C}^0(\Omega)$), alors $u\leq v$ dans $\Omega$\\
+Alors il existe au plus une solution de (\ref{EDP}) vérifiant $u=g$ sur $\partial\Omega$ et elle est continue.}
+
+\Rem{}{Comme pour les solutions continues, on peut définir les sous- et sur-solutions en utilisant les sous- et sur-différentiels (qui sont définis de la même manière pour une fonction scs et sci).}
+
+\Def{}{Le sur-différentiel limite d'ordre 2 de $u$ scs en $x$, noté $\bar{D}^{2+}u(x)$ est défini par : 
+\[\bar{D}^{2+}u(x)=\{(p,M);\ \exists (p_n,x_n,M_n);\ (p_n,M_n)\in D^{2+}u(x_n) \text{ et } p_n\to p,\ M_n\to M, x_n\to x,\ u(x_n)\to u(x)\}\]
+Le sous-différentiel limite d'ordre 2 de $u$ sci en $x$, noté $\bar{D}^{2-}u(x)$ est défini par : 
+\[\bar{D}^{2-}u(x)=\{(p,M);\ \exists (p_n,x_n,M_n);\ (p_n,M_n)\in D^{2-}u(x_n) \text{ et } p_n\to p,\ M_n\to M, x_n\to x,\ u(x_n)\to u(x)\}\]
+}
+
+\Theo{}{$u$ scs est sous-solution de (\ref{EDP}) si et seulement si $\forall (p,M)\in\bar{D}^{2+}u(x)$, on a $F(x,u(x),p,M)\leq 0$
+$u$ sci est sur-solution de (\ref{EDP}) si et seulement si $\forall (p,M)\in\bar{D}^{2-}u(x)$, on a $F(x,u(x),p,M)\geq 0$}
+
+\section{Existence par la méthode de Perron}
+On note 
+\begin{equation} \label{EDP-CB} \tag{EDP-CB} 
+\left\{ \begin{array}{r c c c}
+	F(x,u,Du,D^2u)&=&0 &\text{ sur } \Omega\\
+	u&=&g &\text{ sur } \partial\Omega
+\end{array}\right.
+\end{equation}
+
+\Def{}{On dit que $\utilde{u}$ scs est sous-solution barrière de (\ref{EDP-CB}) si : \begin{enumerate}
+	\item $\utilde{u}$ est sous-solution de (\ref{EDP}) dans $\Omega$
+	\item $\utilde{u}$ vérifie la confition au bord continuement : $\forall x\in\partial\Omega$, $\lim_{y\to x} \utilde{u}(y)=g(x)$
+\end{enumerate}
+On dit que $\tilde{u}$ sci est sur-solution barrière de (\ref{EDP-CB}) si : \begin{enumerate}
+	\item $\tilde{u}$ est sur-solution de (\ref{EDP}) dans $\Omega$
+	\item $\tilde{u}$ vérifie la confition au bord continuement : $\forall x\in\partial\Omega$, $\lim_{y\to x} \tilde{u}(y)=g(x)$
+\end{enumerate}}
+
+\Theo{}{On suppose qu'il existe une sous-solution bérrière $\utilde{u}$ et une sur-solution $\tilde{u}$ de (\ref{EDP-CB}).\\
+Alors il existe une solution discontinue $u$ de (\ref{EDP-CB}). De plus \[\utilde{u}\leq u\leq \tilde{u}\]}
+
+\section{Stabilité}
+On fixe $\varepsilon>0$ et on considère le problème : 
+\begin{equation} \label{EDPeps} \tag{$EDP_\varepsilon$}
+	F_\varepsilon(x,u_\varepsilon(x),Du_\varepsilon(x),D^2u_\varepsilon(x))=0 \text{ dans } \Omega
+\end{equation}
+
+où $F_\varepsilon$ est propre et continue (par rapport à toutes les variables).
+
+\Theo{}{On suppose que \begin{itemize}
+	\item $F_\varepsilon\to F$ uniformément sur les compact de $\Omega\times\mathbb{R}\times\mathbb{R}^N\times S^N$ 
+	\item La famille $\{u_\varepsilon,\ 0\leq\varepsilon\leq 1\}$ est équibornée sur les compacts de $\overline{\Omega}$
+\end{itemize}
+Si $u_\varepsilon$ est sous-solution de (\ref{EDPeps}), alors $\bar{u}$, $\bar{u}(x)=\limsup_{\varepsilon\to 0,\ y\to x} u_\varepsilon(y)$ est sous-solution de (\ref{EDP}).\\
+Si $u_\varepsilon$ est sur-solution de (\ref{EDPeps}), alors $\underline{u}$, $\underline{u}(x)=\liminf_{\varepsilon\to 0,\ y\to x} u_\varepsilon(y)$ est sur-solution de (\ref{EDP}).}
+
+\Coro{Convergence a priori}{On suppos que $u_\varepsilon\to u$ et $F_\varepsilon\to F$ sur les compacts. Alors $u$ solution de (\ref{EDP}).}
+
+\Coro{Convergence a posteriori}{On suppose que (\ref{EDP}) satisfait un principe de comparaison. Alors $u_\varepsilon$ converge uniformément sur les compacts vers l'unique solution de (\ref{EDP}).}
+
+\subsection{Illustration : méthode de viscosité evanescente}
+On regarde le problème :
+\[\left\{\begin{array}{c c c c}
+u+F(Du,D^2u)&=&f &\text{ sur } \Omega\\
+u&=&g &\text{ sur } \partial\Omega
+\end{array}\right.\]
+
+On suppose \begin{itemize}
+	\item $F$ continue et propre
+	\item $\Omega$ ouvert régulier (au moins $\mathcal{C}^2$)
+	\item $\exists$ une sous-solution barrière $\utilde{u}$ de : \[\utilde{u}+F(D\utilde{u},D^2\utilde{u})\leq f-1,\ \utilde{u}=g \text{ sur }\partial\Omega\]
+	\item $\exists$ une sur-solution barrière $\tilde{u}$ de : \[\tilde{u}+F(D\tilde{u},D^2\tilde{u})\geq f+1,\ \tilde{u}=g \text{ sur }\partial\Omega\]
+\end{itemize}
+
+Pour $\varepsilon>0$, on considère le problème :
+\[\left\{\begin{array}{c c c c}
+-\varepsilon\Delta u_\varepsilon+u_\varepsilon+F(Du_\varepsilon,D^2u_\varepsilon)&=&f &\text{ sur } \Omega\\
+u_\varepsilon&=&g &\text{ sur } \partial\Omega
+\end{array}\right.\]
+admet un principe de comparaison.\\
+On a donc l'existence et l'unicité de $u_\varepsilon$ pour les barrière, $u_\varepsilon\to u$.
+
+\section{Principe de comparaison}
+\subsection{Principe pour les équations du 1er ordre}
+
+\[\left\{ \begin{array}{r c c c}
+	F(x,u,Du)&=&0 &\text{ sur } \Omega\\
+	u&=&g &\text{ sur } \partial\Omega
+\end{array}\right.\]
+
+\subsubsection{Cas où $\Omega$ borné}
+On a besoin des hypothèses suivantes : \begin{description}
+	\item[\label{Mono} (M)] : monotonie : $\exists\gamma>0$; $\forall x\in\Omega$, $\forall r,s\in\mathbb{R}$, $r\geq s$, $\forall p\in\mathbb{R}^N$ : \[F(x,r,p)-F(x,s,p)\geq \gamma(r-s)\]
+	\item[\label{CS11} (CS1-1)] : $\forall R>0$, $\forall r\in[-R,R]$, $\forall x,y\in\Omega$, $\forall p\in\mathbb{R}^N$ : \[|F(x,r,p)-F(y,r,p)|\leq w_R\left(|x-y|(1+|p|)\right)\]
+où $w_R$ est un module de continuité, ie une fonction continue positive telle que $w_R(0)=0$.
+\end{description}
+
+\Exemp{}{\begin{itemize}
+	\item Opérateur linéaire : \[\mathscr{L}u=b(x)Du+c(x)u+f(x)\]
+avec $b$, $c$ et $f\in\mathscr{C}^0$, vérifie :\begin{itemize}
+		\item \nameref{Mono} si $c(x)\geq \delta>0$
+		\item \nameref{CS11} si $b\in W^{1,\infty}$
+	\end{itemize}
+
+	\item Opérateur complètement non linéaire :
+	\[\mathscr{L}u=\sup_\alpha \inf_\beta \mathscr{L}^{\alpha,\beta}u \text{ avec } \mathscr{L}^{\alpha,\beta}u=b^{\alpha,\beta}(x)Du+c^{\alpha,\beta}(x)u+f^{\alpha,\beta}\]
+avec $b^{\alpha,\beta}$, $c^{\alpha,\beta}$ et $f^{\alpha,\beta}\in\mathscr{C}^0$ uniformément, vérifie :\begin{itemize}
+		\item \nameref{Mono} si $c^{\alpha,\beta}(x)\geq \delta>0$
+		\item \nameref{CS11} si $b^{\alpha,\beta}\in W^{1,\infty}$ uniformément
+	\end{itemize}
+\end{itemize}}
+
+\Theo{principe de comparaison}{On suppose $\Omega$ borné, $F\in\mathscr{C}^0$ vérifie \nameref{Mono}, \nameref{CS11}, $g\in\mathscr{C}^0(\partial\Omega)$. Soit $u$ scs une sous-solution de (\ref{EDP-CB}) d'ordre 1 et $v$ sci sur solution. Alors $u\leq v$ dans $\overline{\Omega}$.}
+
+\subsubsection{Cas où $\Omega$ non borné}
+La condition aux bords doit être remplacée par une condition sur la croissance à l'infini.\\
+On rajoute donc l'hypothèse suivante : \begin{description}
+	\item[\label{CS12} (CS1-2)] : $\exists L>0$; $\forall x\in\Omega$, $\forall r\in\mathbb{R}$, $\forall p,q\in\mathbb{R}^N$, on a \[|F(x,r,p)-F(x,r,q)|\leq L|p-q|\]
+\end{description}
+
+\Theo{Principe de comparaison}{On suppose $F$ continue et satisfaisant \nameref{Mono}, \nameref{CS11} et \nameref{CS12}, et $g\in\mathcal{C}^0$.\\
+Soit $u$ scs sous-solution bornée et $v$ sci sur-solution bornée.\\
+Alors $u\leq v$ dans $\overline{\Omega}$.}
+
+\section{Principe de comparaison pour les équations d'ordre 2}
+On reprend (\ref{EDP-CB}) avec $\Omega$ un ouvert borné.\\
+Les hypothèses sont les suivantes : \begin{description}
+	\item[\label{Mono2} (M)] : monotonie : $\exists\gamma>0$; $\forall x\in\Omega$, $\forall r,s\in\mathbb{R}$, $r\geq s$, $\forall p\in\mathbb{R}^N$, $\forall X\in S^N$ : \[F(x,r,p,X)-F(x,s,p,X)\geq \gamma(r-s)\]
+	\item[\label{CS2} (CS2)] : $\forall R>0$, $\exists w_R$ un module de continuité tel que : $\forall r\in[-R,R]$, $\forall x,y\in\Omega$, $\forall\alpha>0$, $\forall X,Y\in S^N$ tels que: 
+\begin{equation}\label{matCS2}
+-3\alpha\begin{pmatrix} I_N & 0 \\ 0 & I_N \end{pmatrix} \leq \begin{pmatrix} X & 0 \\ 0 & -Y \end{pmatrix} \leq 3\alpha \begin{pmatrix} I_N & -I_N \\ -I_N & I_N \end{pmatrix}
+\end{equation}
+alors \[|F(x,r,\alpha(x-y),Y)-F(y,r,\alpha(x-y),X)|\leq w_R\left(\alpha|x-y|^2+|x-y|\right)\]
+\end{description}
+
+\Theo{Principe de comparaison}{On suppose $\Omega$ borné, $g\in\mathscr{C}^0$, $F$ continue vérifiant \nameref{Mono2} et \nameref{CS2}.\\
+Soient $u$ scs sous-solution et $v$ sci sur-solution. Alors $u\leq v$ dans $\overline{\Omega}$.}
+
+\section{Extension au cas parabolique}
+\begin{equation} \label{EDPP} \tag{EDP-P} 
+\left\{ \begin{array}{r c c c}
+	u_t+F(x,t,u,Du,D^2u)&=&0 &\text{ sur } [0,T]\times\Omega\\
+	u(0,x)&=&u_0(x) &\text{ sur } \Omega\\
+	u(t,x)&=&g(t,x) &\text{ sur } [0,T]\times\partial\Omega
+\end{array}\right.
+\end{equation}
+
+
