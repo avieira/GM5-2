@@ -1,0 +1,150 @@
+\documentclass{article}
+
+\input{../../../preambule}
+
+\newtheorem{theorem}{Théorème}[subsection]
+
+\title{Pr\'esentation d'un article : \\ On shape optimization of optical waveguides using inverse problem techniques\\\small{Thomas Felici \& Heinz W Engl}}
+\author{Alexandre \bsc{Vieira}}
+\date{\today}
+
+\hypersetup{colorlinks=true, urlcolor=bleu, linkcolor=red}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section*{Introduction}
+Les guides d'ondes optiques sont à la base de l'optoéléctronique, ie les composants éléctroniques interagissant avec de la lumière, et de l'industrie des télécommunications. L'exemple le plus connu est bien évidemment la fibre optique, mais il existe également d'autres exemples tout aussi important, comme les composants optiques qui manipulent, filtrent et dispatchent des signaux entrants. Ces composants sont souvent de l'ordre du quart de nanomètre, ce qui représente bien sûr un avantage en poids et en volume, et qui permettent de remplir des fonctions que ne peuvent pas faire des objets plus classiques. Le développement de cette technologie repose de plus en plus sur des modèles mathématiques de paire avec des simulations numériques pour la prédiction du comportement de ces appareils, ainsi que la production d'un appareil 'optimal', ce qui repose bien souvent sur des modèles reposant sur des EDP.\\
+Les adaptateurs de mode intégrés, aussi appelés "taper" en anglais, est un guide d'onde dont la section varie sur sa longueur, utilisés comme des sortes d'entonnoir. Il est bien connu que si le taper est assez long, la lumière sera transmise sans perte d'énergie. Mais plus la longueur est courte, plus le faisceau perd en énergie. Le but de ce papier était donc de trouver une formulation pour minimiser la perte d'énergie pour une longueur donnée.\\
+Dans un premier temps, l'article met en place un premier problème direct pour la propagation d'une onde éléctromagnétique à traver un guide d'onde, puis il définit le problème d'optimisation. Comme on le vera, on peut ensuite dériver de ce modèle une formulation pour les modes, et établir des équations d'évolution pour l'excitation des modes dans le taper. Une problème d'optimisation en dimension finie basée sur une discrétisation sortira enfin de tout cela. \\
+Des exemples numériques basés sur cette méthode montre que si la discrétisation devient trop fine, la convergence ralentit et la solution devient de plus en plus instable. Le problème vient du fait qur le problème d'optimisation est mal posé. L'article présente donc une méthode pour maximiser l'énergie résultante basée sur un problème inverse non linéaire, ainsi que des résultats numériques coroborant leur idée. 
+
+\section{Formulation du problème direct en 2D}
+Les équations homogènes de Maxwell dans un milieu continu avec la permitivité linéaire $\varepsilon$ et la perméabilité magnétique $\mu_0$ sont :
+\begin{equation}\label{MaxEq}
+\begin{array}{c c c}
+	\nabla\wedge H&=& \varepsilon\dot{E}\\
+	\nabla\wedge E&=& -\mu_0\dot{H}\\
+	\nabla\bullet(\varepsilon E)&=&\nabla\bullet H=0
+\end{array}
+\end{equation}
+On se concentre uniquement sur le cas 2D. On assume donc que $E$ et $H$ sont indépendants de $y$. Si on assume une dépendance périodique en temps $e^{-i\omega t}$ et qu'on note $E=(E_x,E_y,E_z)$ et $H=(H_x,H_y,H_z)$ les composantes spatiales de la solution, on a une solution avec $H_y=E_x=E_z=0$ - le champ TE (transverse electric) - vérifiant :
+\begin{equation} \label{eq2}
+\begin{array}{c c c}
+	\frac{\partial H_x}{\partial z} - \frac{\partial H_z}{\partial x}&=&-i\omega\varepsilon E_y\\
+	\frac{\partial E_y}{\partial z}&=&-i\omega\mu_0H_x\\
+	\frac{\partial E_y}{\partial x}&=&i\omega\mu_0  H_z
+\end{array}
+\end{equation}
+
+En redérivant les deux dernières équations de (\ref{eq2}) par rapport à respectivement $z$ et $x$ et en réintroduisant le résultat dans la première équation, on obtient l'équation d'Helmholtz pour $E_y$ :
+\[ \Delta E_y + k^2n^2E_y = 0 \text{ avec } \omega\sqrt{\mu_0\varepsilon_0}=k \text{ et } n^2=\frac{\varepsilon}{\varepsilon_0} \]
+où $\varepsilon_0$ désigne la permitivité du vide.
+
+On remarque également qu'on obtient une solution avec $E_y=H_x=H_z=0$ -le champ magnétique transverse ('TM') - donnant une équation légèrement modifiée :
+	\[-\Delta H_y+k^2n^2H_y=0\]
+
+Cependant, l'analyse ne se poursuivra qu'avec les modes du champ TE.
+
+\bigskip
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.35]{images/waveguide-Taper.png}
+	\caption{Profil du taper}
+	\label{fig:Profil}
+\end{figure}
+Nous allons maintenant formuler le problème de propagation de l'onde dans un guide d'onde générique $\Omega$ en notant la frontière $\Gamma\cup\Gamma_R\cup\Gamma_L$ (voir la figure \ref{fig:Profil}).\\
+À présent, pour plus de commodité, $E_y$ sera noté $U$. Sur le bord $\Gamma$, nous prenons des conditions de Dirichlet ($U=0$). Physiquement, cela signifie que le champ est réfléchi vers $\Omega$. En pratique, cela n'est pas un problème si on cherche des solutions de champs guidés, car ils sont par définition limités au guide d'onde et décroissent exponentiellement en dehors (ce qui sera discuté plus en détail ultérieurement). On réécrit donc les équations :
+\begin{eqnarray}
+	\label{eq3} \Delta U + n^2U&=&0 \text{ pour } (x,z)\in\Omega\\
+	\label{eq4} \restriction{U}{\Gamma}&=&0
+\end{eqnarray}
+où on a posé $k=1$. Cela n'est rien d'autre qu'une normalisation de l'équation : on pose simplement $x'=kx$ et $z'=kz$. Ainsi : 
+	\[(\partial^2_x+\partial^2_z)U(x',z')=k^2 (\partial^2_{x'}+\partial^2_{z'})U(x',z')=k^2\Delta U(x',z')\]
+D'où :
+	\[k^2\Delta U + n^2k^2 U =0\]
+On obtient l'équation précédente en simplifiant par $k^2$.
+
+\bigskip
+Nous avons besoin à présent de conditions à $\pm\infty$. Nous prenons comme hypothèse que nous avons un champ entrant venant de $-\infty$. Ce champ $U_I$ satisfait également (\ref{eq3}), (\ref{eq4}) dans $\Omega_L$. Nous devons retrouver le fait que le champ diffusé $U-U_I$ voyage vers l'extérieur des deux côtés du guide d'onde. Nous allons faire cela en terme de modes propres dans $\Omega_L$ et $\Omega_R$, ce qui amène donc à considérer un problème spectral dans ces régions.\\
+Dans $\Omega_L$, on prend une dépendance périodique par rapport à $z$ : $U(x,z)=\tilde{U}(x)e^{i\beta z}$. En réinjectant cela dans (\ref{eq3}), on obtient :
+\begin{equation}\label{eq5} \frac{d^2\tilde{U}}{dx^2} + (n^2-\beta^2)\tilde{U}=0 \text{ pour un } z \text{ fixé avec } \tilde{U}(x_{min})=\tilde{U}(x_{max})=0 \end{equation}
+
+Les conditions de Dirichlet (\ref{eq4}) nous assure que nous avons en ensemble de valeurs propres discrètes $\{(\tilde{U}_k,\pm\beta_k):k\in\mathbb{N}^*\}$. On a donc :
+\begin{equation}\label{eq6} U(x,z)=\sum_{k=1}^\infty \left(C_ke^{i\beta_k z}+C_{-k}e^{-i\beta_k z}\right) \tilde{U}_k(x) \text{ dans } \Omega_L \end{equation}
+
+Notons que le raisonnement tient toujours dans $\Omega_R$ et donne un résultat similaire.\\
+Dans (\ref{eq6}), on pose $\beta_k>0$ si $\beta_k$ est réel, $\beta_k=i|\beta_k|$ si $\beta_k$ est imaginaire. Ainsi, les coefficients $C_k$ et $C_{-k}$ représentent respectivement le voyage vers la droite et vers la gauche de l'onde.\\
+De plus, on remarque que l'opérateur utilisé dans (\ref{eq3}) est auto-adjoint pour le produit scalaire $\langle a,b\rangle = \int_{x_{min}}^{x_{max}} a(x)b(x)dx$. En effet :
+\begin{eqnarray*}
+\left\langle (\Delta +n^2 Id)u,v\right\rangle&=&\langle \Delta u,v\rangle + \langle n^2u,v\rangle \\
+					&=&\int_{x_{min}}^{x_{max}} \Delta u(x) v(x) dx + \langle u,n^2 v \rangle \\
+					&=&-\int_{x_{min}}^{x_{max}} \nabla u(x). \nabla v(x) dx + \underbrace{\left[\nabla u(x).n v(x)\right]_{x_{min}}^{x_{max}}}_{=0 \text{ dû au conditions de Dirichlet}}+ \langle u,n^2 v \rangle \\
+					&=& \int_{x_{min}}^{x_{max}} u(x) \Delta v(x) dx - \underbrace{\left[\nabla v(x).n u(x)\right]_{x_{min}}^{x_{max}}}_{=0} + \langle u,n^2 v \rangle \\
+					&=& \left\langle u,(\Delta +n^2 Id)v\right\rangle
+\end{eqnarray*}
+
+Cela assure ainsi que les modes propres sont orthogonaux relativement à ce produit scalaire. De plus, si on normalise les normes :
+\begin{equation} \label{eq7} \langle \tilde{U}_k,\tilde{U}_k\rangle = \frac{1}{\beta_k} \end{equation}
+la puissance transmise dans chaque mode propre $k$ est donné par $|C_k|^2$.\\
+Étant donné cette normalisation, une onde sortante $U_L$ (vers $-\infty$) est donnée en posant $C_k=0$ pour tout $k>0$. Ainsi :
+\begin{eqnarray*}
+\beta_k\langle U_L,\tilde{U}_k\rangle &=&\beta_k\sum_{j=1}^\infty C_{-j}e^{-i\beta_j z}\langle \tilde{U}_j,\tilde{U}_k \rangle \\
+				      &=&\beta_k C_{-k} e^{-i\beta_k z} \frac{1}{\beta_k}\\
+				      &=&C_{-k} e^{-i\beta_k z}
+\end{eqnarray*}
+
+De même, une onde entrante $U_I$ est donnée en fixant $C_{-k}=0$ pour tout $k>0$ et $C_k$ est donné par \[C_ke^{i\beta_k z}=\beta_k\langle U_I,\tilde{U}_k\rangle\]
+Enfin, on différencie (\ref{eq6}) pour $U_L$ et $U_I$ pour obtenir les conditions au bord sur les côtés. On obtient ainsi :
+\[\frac{\partial U_L}{\partial z} =\sum_{k=1}^\infty -i \beta_k C_{-k} e^{-i\beta_k z} \tilde{U}_k(x)\]
+\begin{equation} \label{eq8} 
+\frac{\partial U_L}{\partial z}= -i \sum_{k=1}^\infty \beta_k^2 \langle U_L,\tilde{U}_k\rangle \tilde{U}_k(x) \text{ dans }\Omega_L\text{ - condition pour les ondes partant vers }-\infty
+\end{equation}
+De même : 
+\begin{equation} \label{eq9} 
+\frac{\partial U_I}{\partial z}= -i \sum_{k=1}^\infty \beta_k^2 \langle U_I,\tilde{U}_k\rangle \tilde{U}_k(x) \text{ dans }\Omega_L\text{ - condition pour les ondes venant de }-\infty
+\end{equation}
+
+Puisque $U=U_I+U_L$, en replaçant $U_L$ dans (\ref{eq8}) et en utilisant (\ref{eq9}), on obtient : 
+	\[\frac{\partial U}{\partial z}=-i\sum_{k=1}^\infty {\beta_k^{(L)}}^2\left\langle U,\tilde{U}^{(L)}_k\right\rangle \tilde{U}^{(L)}_k + 2i\sum_{k=1}^\infty {\beta_k^{(L)}}^2 \left\langle U_I,\tilde{U}_k^{(L)}\right\rangle\tilde{U}^{(L)}_k \]
+En surmontant le tout de l'exposant $(L)$ pour indiquer que le tout vient de la gauche, ie de $-\infty$.\\
+De même, pour les ondes se propageant vers $+\infty$, et en supposant qu'il n'y a aucune onde venant de là, on obtient :
+\[\frac{\partial U}{\partial z}=i\sum_{k=1}^\infty {\beta_k^{(R)}}^2 \left\langle U,\tilde{U}_k^{(R)} \right\rangle \tilde{U}_k^{(R)} \text{ dans } \Omega_R \text{ - condition pour les ondes allant vers }+\infty\]
+Le problème complet est donc : trouver $U(x,z)$ tel que : 
+\begin{equation} \label{eq10}
+\left\{\begin{array}{r c l r}
+	\Delta U + n^2U&=&0 &\text{pour } (x,z)\in\Omega\\
+	\restriction{U}{\Gamma}&=&0 &\text{(murs réfléchissants)}\\
+	\frac{\partial U}{\partial z}+i\sum_{k=1}^\infty {\beta_k^{(L)}}^2\left\langle U,\tilde{U}^{(L)}_k\right\rangle \tilde{U}^{(L)}_k &=& 2i\sum_{k=1}^\infty {\beta_k^{(L)}}^2 \left\langle U_I,\tilde{U}_k^{(L)}\right\rangle\tilde{U}^{(L)}_k &\text{sur }\Gamma_L\\
+	\frac{\partial U}{\partial z}-i\sum_{k=1}^\infty {\beta_k^{(R)}}^2 \left\langle U,\tilde{U}_k^{(R)} \right\rangle \tilde{U}_k^{(R)}&=&0 &\text{sur } \Gamma_R
+\end{array}\right.
+\end{equation}
+où $\{(\tilde{U}_k^{(L)},\pm\beta_k^{(L)}):k\in\mathbb{N}^*\}$, $\{(\tilde{U}_k^{(R)},\pm\beta_k^{(R)}):k\in\mathbb{N}^*\}$ sont les modes propres dans $\Omega_L$, $\Omega_R$ respectivement.
+
+\section{Formulation du problème d'optimsation}
+En général, nous nous interessons à la forme optimale du taper (ou la distribution des indices de refraction) qui dans un sens maximise la puissance transférée entre l'entrée et la sortie du guide d'onde.\\
+Souvent, pour des raisons pratiques, on suppose que l'onde en entrée est une excitation de l'élément propre fondamental (indicé donc par $1$), et on s'intéresse à la puissance restante dans l'élément propre fondamental $\tilde{U}^{(R)}_1$ de l'onde de sortie (on assume bien évidemment que les deux ondes admettent au moins un mode guidé). Dans la décomposition spectral (\ref{eq6}), l'énergie restante correspond au coefficient $|C_1|^2$. Cela est donné par :
+\begin{equation}\label{eq11} P(n^2)=\beta_1^2|\langle U,\tilde{U}_1^{(R)}\rangle|^2=\beta_1^2\left|\int_{x\in\Gamma_R} U(x,z_R)\tilde{U}_1^{(R)}(x)dx\right|^2\end{equation}
+Intuitivement (et cela se vérifie, comme montré dans \cite{Snyd}), la puissance transférée est maximale (ie $P=1$) quand la longueur du taper tend vers l'infini. Il est donc évident qu'on doit imposer une contrainte supplémentaire sur la longueur finie du taper.
+
+\section{Solution du problème direct}
+À cause des conditions aux bords que nous avons imposé, le système (\ref{eq10}) est en général résolu en utilisant une décomposition spectrale.\\
+On défini $L_t(U)=\frac{\partial^2U}{\partial x^2}+n^2(x,z)U$ l'opérateur 1D de Helmholtz.\\
+Soit $\Omega_z$ la section de la région au point $z$. On définit la base locale $\{(U_k,\beta_k);k\geq 1\}$ à chaque position $z$ par : 
+\begin{equation}
+	\begin{array}{c c c c}
+		L_t(U_k)&=&\beta_k^2U_k &\text{dans } \Omega_z\\
+		\restriction{U_k}{\partial\Omega_z}&=&0
+	\end{array}
+\end{equation}
+Cela est analogue à (\ref{eq5}), donc nous parlerons des solutions $U_k$ comme les fonctions propres locales. Le caractère auto-adjoint de l'opérateur $L_t$ (comme on l'a prouvé précédemment) assez que les $(U_k)$ forme une base orthogonale pour les fonctions $f\in\mathscr{C}(\Omega_z)$ avec $\restriction{f}{\partial\Omega_z}=0$. Ainsi, tout fonction $U$ définie dans une région $\Omega$ avec $\restriction{U}{\partial\Omega_z}=0$ peut être exprimé comme l'unique décomposition $U=\sum_{k=1}^\infty c_k(z)U_k$ où les coefficients (uniques) $c_k$ dépendent exclusivement de $z$.\\
+On s'intéresse maintenant à une formulation qui donne une représentation locale du champ éléctromagnétique en terme de propagation vers $-\infty$ ou $+\infty$ des modes du champ EM. 
+
+\appendix
+\bibliographystyle{plain}
+\bibliography{bibliographie}
+\end{document}
