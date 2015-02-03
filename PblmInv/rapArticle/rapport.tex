@@ -133,16 +133,45 @@ Intuitivement (et cela se vérifie, comme montré dans \cite{Snyd}), la puissanc
 
 \section{Solution du problème direct}
 À cause des conditions aux bords que nous avons imposé, le système (\ref{eq10}) est en général résolu en utilisant une décomposition spectrale.\\
-On défini $L_t(U)=\frac{\partial^2U}{\partial x^2}+n^2(x,z)U$ l'opérateur 1D de Helmholtz.\\
+On définit $L_t(U)=\frac{\partial^2U}{\partial x^2}+n^2(x,z)U$ l'opérateur 1D de Helmholtz.\\
 Soit $\Omega_z$ la section de la région au point $z$. On définit la base locale $\{(U_k,\beta_k);k\geq 1\}$ à chaque position $z$ par : 
-\begin{equation}
+\begin{equation} \label{eq13}
 	\begin{array}{c c c c}
 		L_t(U_k)&=&\beta_k^2U_k &\text{dans } \Omega_z\\
 		\restriction{U_k}{\partial\Omega_z}&=&0
 	\end{array}
 \end{equation}
 Cela est analogue à (\ref{eq5}), donc nous parlerons des solutions $U_k$ comme les fonctions propres locales. Le caractère auto-adjoint de l'opérateur $L_t$ (comme on l'a prouvé précédemment) assez que les $(U_k)$ forme une base orthogonale pour les fonctions $f\in\mathscr{C}(\Omega_z)$ avec $\restriction{f}{\partial\Omega_z}=0$. Ainsi, tout fonction $U$ définie dans une région $\Omega$ avec $\restriction{U}{\partial\Omega_z}=0$ peut être exprimé comme l'unique décomposition $U=\sum_{k=1}^\infty c_k(z)U_k$ où les coefficients (uniques) $c_k$ dépendent exclusivement de $z$.\\
-On s'intéresse maintenant à une formulation qui donne une représentation locale du champ éléctromagnétique en terme de propagation vers $-\infty$ ou $+\infty$ des modes du champ EM. 
+On s'intéresse maintenant à une formulation qui donne une représentation locale du champ éléctromagnétique en terme de propagation vers $-\infty$ ou $+\infty$ des modes du champ EM.
+On choisit donc le développement de notre fonction $U$ solution de (\ref{eq10}) de la forme :
+\begin{equation}\label{eq14}
+\begin{array}{c c l}
+U&=&\sum_{k=1}^\infty (a_k+a_{-k})U_k\\
+\frac{\partial U}{\partial z}&=&\sum_{k=1}^\infty (a_k-a_{-k})i\beta_kU_k
+\end{array}
+\end{equation}
+Ce choix de coefficients nous assure que les $a_k$, $a_{-k}$ correspondent aux champs se propageant vers $+\infty$ ou $-\infty$. On réutilise la normalisation (\ref{eq7}) pour les fonctions propres $U_k$ définies par (\ref{eq13}) :
+\begin{equation}\label{eq15}
+	\int_{\Omega_z} U_k^2ds=\frac{1}{\beta_k}
+\end{equation}
+Cela assure que la puissance contenue dans le $k^{ieme}$ mode de l'onde se propageant de chaque côté est obtenu par $|a_k|^2$ ou $|a_{-k}|^2$ (voir \cite{Snyd} pour plus de détail).\\
+On remarque en particulier que l'énergie contenu dans l'état fondamental à la sortie du guide d'onde est maintenant 
+\begin{equation}\label{eq16} P(n^2)=|a_1|^2\end{equation}
+En référence à l'expression (\ref{eq11}).\\
+En utilisant le fait que la dérivée par rapport à $z$ de $U$ en (\ref{eq14}) doit être identique à la seconde ligne de (\ref{eq14}), et en substituant (\ref{eq14}) dans (\ref{eq3}), on en déduit que les $a_k$ doivent vérifier le système d'EDO suivant :
+\begin{equation} \label{eq17}
+\dot{a}_k(z)-i\beta_ka_k(z)=\sum_{j\neq k,0} r_{kj}(z)a_j(z),\ k\neq 0
+\end{equation}
+avec $\beta_{-k}=-\beta_k$ et \[r_{kj}(z)=\frac{\int_{\Omega_z} \frac{\partial n^2}{\partial z} U_kU_j ds}{2(\beta_k-\beta_j)}\]
+pour tout $j\neq k$, $j,k\neq 0$\\
+Pour démontrer cela, nous allons commencer par poser $U_{-k}=-U_k$. On différencie (\ref{eq14}) et on l'identifie à la seconde ligne, on obtient que $a_k$ vérifie :
+	\[\sum_{k\neq 0} \dot{a}_kU_k + \sum_{k\neq 0} a_k\frac{\partial U_k}{\partial z} = \sum_{k\neq 0} a_ki\beta_k U_k\]
+Par orthogonalité des $U_k$, on projète cette équation sur chaque $U_i$, et cela mène à :
+\begin{equation}\label{eq29}
+	\dot{a}_k+\dot{a}_{-k}=(a_k-a_{-k})i\beta_k-\sum_{j\neq 0} a_j p_{jk}\ \forall k\neq 0
+\end{equation}
+où $p_{jk}=\beta_{|k|}\int_{\Omega_z} \frac{\partial U_j}{\partial z}U_k dx$\\
+(Refaire Appendix D).
 
 \appendix
 \bibliographystyle{plain}
