@@ -164,16 +164,29 @@ En utilisant le fait que la dérivée par rapport à $z$ de $U$ en (\ref{eq14}) 
 \end{equation}
 avec $\beta_{-k}=-\beta_k$ et \[r_{kj}(z)=\frac{\int_{\Omega_z} \frac{\partial n^2}{\partial z} U_kU_j ds}{2(\beta_k-\beta_j)}\]
 pour tout $j\neq k$, $j,k\neq 0$\\
-Pour démontrer cela, nous allons commencer par poser $U_{-k}=-U_k$. On différencie (\ref{eq14}) et on l'identifie à la seconde ligne, on obtient que $a_k$ vérifie :
+Précisons tout d'abord que nous allons noter pour plus de commodité $U_{-k}=-U_k$. Pour démontrer (\ref{eq17}), on différencie (\ref{eq14}) et on l'identifie à la seconde ligne, on obtient que $a_k$ vérifie :
 	\[\sum_{k\neq 0} \dot{a}_kU_k + \sum_{k\neq 0} a_k\frac{\partial U_k}{\partial z} = \sum_{k\neq 0} a_ki\beta_k U_k\]
-Par orthogonalité des $U_k$, on projète cette équation sur chaque $U_i$, et cela mène à :
+Par orthogonalité des $U_k$, on projette cette équation sur chaque $U_i$, et cela mène à :
 \begin{equation}\label{eq29}
 	\dot{a}_k+\dot{a}_{-k}=(a_k-a_{-k})i\beta_k-\sum_{j\neq 0} a_j p_{jk}\ \forall k\neq 0
 \end{equation}
-où $p_{jk}=\beta_{|k|}\int_{\Omega_z} \frac{\partial U_j}{\partial z}U_k dx$\\
-(Refaire Appendix D).
+où $p_{jk}=\beta_{|k|}\int_{\Omega_z} \frac{\partial U_j}{\partial z}U_k dx$ ne sont pas moins que les coefficients du développement de $\frac{\partial U_j}{\partial z}$ dans la base des $(U_k)$.\\
+La première expression de (\ref{eq3}) peut être réécrite \[\frac{\partial^2 U}{\partial z^2}+L_t(U)=0\]
+Et donc, en utilisant (\ref{eq14}) :
+\[\frac{\partial}{\partial z} \left( \sum_{k\neq 0} a_ki\beta_kU_k\right)+L_t\left(\sum_{k\neq 0} a_kU_k\right) = 0\]
+comme $L_t$ est linéaire :
+\begin{eqnarray*}
+\Rightarrow& \frac{\partial}{\partial z} \left( \sum_{k\neq 0} a_ki\beta_kU_k\right)+\sum_{k\neq 0} a_kL_t\left(U_k\right) = 0\\
+\Rightarrow& \sum_{k\neq 0} \frac{d}{dz}(a_ki\beta_k)U_k+\sum_{k\neq 0} a_ki\beta_k\frac{\partial U_k}{\partial z} + \sum_{k\neq 0} a_k\beta_k^2U_k=0
+\end{eqnarray*}
 
-\appendix
+En projetant sur la base des $(U_k)$ :
+\begin{eqnarray*}
+\Rightarrow& \frac{d}{dz} (a_ki\beta_k+a_{-k}i\beta_{-k})\frac{1}{\beta_{|k|}} + \sum_{j\neq 0} a_ji\beta_jp_{jk}+(a_k+a_{-k})\beta_k^2=0\\
+\Rightarrow& \frac{d}{dz} [i\beta_k(a_k+a_{-k})]+\sum_{j\neq 0} a_ji\beta_jp_{jk}+(a_k+a_{-k})\beta_k^2=0
+\end{eqnarray*}
+Revoir dernière implication
+
 \bibliographystyle{plain}
 \bibliography{bibliographie}
 \end{document}
