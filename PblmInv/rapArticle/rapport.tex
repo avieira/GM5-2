@@ -182,10 +182,60 @@ comme $L_t$ est linéaire :
 
 En projetant sur la base des $(U_k)$ :
 \begin{eqnarray*}
-\Rightarrow& \frac{d}{dz} (a_ki\beta_k+a_{-k}i\beta_{-k})\frac{1}{\beta_{|k|}} + \sum_{j\neq 0} a_ji\beta_jp_{jk}+(a_k+a_{-k})\beta_k^2=0\\
-\Rightarrow& \frac{d}{dz} [i\beta_k(a_k+a_{-k})]+\sum_{j\neq 0} a_ji\beta_jp_{jk}+(a_k+a_{-k})\beta_k^2=0
+\Rightarrow& \frac{d}{dz} (a_ki\beta_k+a_{-k}i\beta_{-k})\frac{1}{\beta_{|k|}} + \sum_{j\neq 0} a_ji\frac{\beta_j}{\beta_{|k|}}p_{jk}+(a_k+a_{-k})\frac{\beta_k^2}{\beta_{|k|}}=0\ \forall k>0\\
+\Rightarrow& \frac{d}{dz} (a_ki\beta_k+a_{-k}i\beta_{-k})+ \sum_{j\neq 0} a_ji\beta_jp_{jk}+(a_k+a_{-k})\beta_k^2=0\\
+\Rightarrow& \frac{d}{dz} [i\beta_k(a_k-a_{-k})]+\sum_{j\neq 0} a_ji\beta_jp_{jk}+(a_k+a_{-k})\beta_k^2=0\\
+\Rightarrow& i\dot{\beta}_k(a_k-a_{-k})+i\beta_k(\dot{a}_k-\dot{a}_{-k})+\sum_{j\neq 0} a_ji\beta_jp_{jk}+(a_k+a_{-k})\beta_k^2=0
 \end{eqnarray*}
-Revoir dernière implication
+Avec (\ref{eq29}), on obtient donc :
+\begin{equation} \label{eq30}
+\begin{array}{c c c c}
+	\dot{a}_k+\dot{a}_{-k}&=&(a_k-a_{-k})i\beta_k-\sum_{j\neq 0} a_j p_{jk} &\forall k\neq 0\\
+	\dot{a}_k-\dot{a}_{-k}&=&(a_k+a_{-k})i\beta_k-(a_k-a_{-k})\frac{\dot{\beta}_k}{\beta_k}-\sum_{j\neq 0}a_j\frac{\beta_j}{\beta_k}p_{jk}\ &\forall k\neq 0\\
+\end{array}
+\end{equation}
+On somme et on fait la différence des deux équations de (\ref{eq30}), et on obtient :
+\begin{equation} \label{eq31}
+\begin{array}{c c c}
+\dot{a}_k-i\beta_ka_k&=&-\frac{1}{2}(a_k-a_{-k})\frac{\dot{\beta}_k}{\beta_k}-\frac{1}{2\beta_k}\sum_{j\neq 0}p_{jk}a_j(\beta_k+\beta_j)\\
+\dot{a}_{-k}+i\beta_ka_k&=&-\frac{1}{2}(a_{-k}-a_k)\frac{\dot{\beta}_k}{\beta_k}-\frac{1}{2\beta_k}\sum_{j\neq 0}p_{jk}a_j(\beta_k-\beta_j)\\
+\end{array}\end{equation}
+
+On peut réécrire le tout en une seule équation : 
+\begin{equation}\label{eq32}
+\dot{a}_k-i\beta_ka_k=-\frac{\dot{\beta}_k}{2\beta_k}(a_k-a_{-k})-\frac{1}{2\beta_k}\sum_{j\neq 0}p_{jk}a_j(\beta_k+\beta_j)
+\end{equation}
+On va maintenant exprimer plus précisément $\dot{\beta}$ et $p_{jk}$. On rappelle que par définition :
+\[\frac{\partial U_k}{\partial z}=\sum_{k=1}^\infty p_{kj}U_j\]
+En différentiant en utilisant (\ref{eq13}), on obtient :
+\[L_t\left( \frac{\partial U_k}{\partial z}\right)=\frac{\partial^2}{\partial x^2}\left(\frac{\partial U_k}{\partial z}\right) + n^2\frac{\partial U_k}{\partial z}\]
+\[\frac{\partial }{\partial z}L_t\left( U_k\right)=\frac{\partial^2}{\partial x^2}\left(\frac{\partial U_k}{\partial z}\right) + n^2\frac{\partial U_k}{\partial z}+\frac{\partial n^2}{\partial z} U_k\]
+
+\[\Rightarrow L_t\left( \frac{\partial U_k}{\partial z}\right)= \frac{\partial}{\partial z} L_t(U_k)-\frac{\partial n^2}{\partial z}U_k=\frac{\partial}{\partial z} (\beta_k^2U_k)-\frac{\partial n^2}{\partial z}U_k\]
+\[\Rightarrow L_t\left( \frac{\partial U_k}{\partial z}\right)= \beta_k^2\frac{\partial U_k}{\partial z} + \frac{\partial}{\partial z}(\beta_k^2-n^2)U_k\]
+
+On a donc, en reprenant la décomposition spectrale de $\frac{\partial U_k}{\partial z}$ et par linéarité de $L_t$ :
+\begin{eqnarray*}
+&L_t\left( \sum_{j=1}^\infty p_{kj}U_j\right)=\beta_k^2\sum_{j=1}^\infty p_{kj}U_j + \frac{\partial}{\partial z}(\beta_k^2-n^2)U_k\\
+\Rightarrow& \sum_{j=1}^\infty p_{kj}(\beta_j^2-\beta_k^2)U_j=\frac{\partial}{\partial z}(\beta_k^2-n^2)U_k\\
+\Rightarrow& p_{kj}(\beta_j^2-\beta_k^2)=\beta_j\int_{\Omega_z}\frac{\partial}{\partial z}(\beta_k^2-n^2)U_kU_j dx
+\end{eqnarray*}
+en projetant sur $U_k$. Si $j\neq k$, en utilisant l'orthogonalité des fonctions propres, on a :
+\begin{equation}\label{eq33}
+	p_{kj}=\frac{\beta_j}{(\beta_k^2-\beta_j^2)}\int_{\Omega_z}\frac{\partial}{\partial z}(\beta_k^2-n^2)U_kU_j dx
+\end{equation}
+Si $j=k$, le membre de gauche s'annule, et on a donc une condition sur les $\beta_k$ :
+\begin{equation}\label{eq34}
+	\frac{\partial \beta_k}{\partial z}=\frac{1}{2}\int_{\Omega_z} \frac{\partial n^2}{\partial z}U_kU_j dx
+\end{equation}
+$p_{kk}$ est déterminé par la normalisation des $U_k$ :
+\[p_{kk}=\beta_k\int_{\Omega_z} \frac{\partial U_k}{\partial z}U_kdx=\frac{\beta_k}{2}\int_{\Omega_z} \frac{\partial U_k^2}{\partial z}=\frac{\beta_k}{2}\frac{\partial}{\partial z}\int_{\Omega_z} U_k^2dx = \frac{\beta_k}{2}\frac{\partial \beta_k^{-1}}{\partial z}=-\frac{1}{2\beta_k}\frac{\partial \beta_k}{\partial z}\]
+Donc : \begin{equation}\label{eq35} p_{kk}=-\frac{\dot{\beta}_k}{2\beta_k} \end{equation}
+À présent, dans (\ref{eq32}), on remplace tous les $p$ en utilisant (\ref{eq33}) et (\ref{eq35}) et on remplace le terme $\dot{\beta}$ en utilisant (\ref{eq34}). Le terme $j=k$ dans la somme se simplifie avec le premier terme dans le membre de droite, et on peut réécrire (\ref{eq32}) comme :
+\[
+\dot{a}_k-i\beta_ka_k=\frac{a_{-k}}{4\beta_k}\int_{\Omega_z}\frac{\partial n^2}{\partial z}U_k^2dx + \sum_{j\neq 0,k} a_j\frac{1}{2(\beta_k-\beta_j)}\int_{\Omega_z}\frac{\partial n^2}{\partial z}U_kU_jdx\ \forall k\neq 0
+\]
+Finalement, on inclut les termes les termes $a_{-k}$ comme le terme $-k$ de la somme et nous arrivons à l'équation (\ref{eq17}).
 
 \bibliographystyle{plain}
 \bibliography{bibliographie}
