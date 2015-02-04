@@ -1,0 +1,58 @@
+//Paramètres du problème
+real a=0, b=1;
+int N=8;
+
+//func f=sin(10*x*cos(x));
+func real f(real x) {return sin(10*x*cos(x));};
+
+//Discrétisation
+real h=(b-a)/N;
+real[int] xx(a:h:b);
+int n=xx.n;
+real[int] yy(n);
+
+for(int i=0;i<n;i++)
+	yy(i)=f(xx(i));
+
+//Fichier de sortie
+{ofstream fout("data_ex3.dat");
+
+//Redirection pour affichage
+for(int i=0;i<n;i++)
+	fout<<xx(i)<<" "<<yy(i)<<endl;
+fout<<endl<<endl;
+
+//Calcul des différences divisées
+real[int] c(n);
+for(int k=0;k<n;k++)
+	c(k)=yy(k);
+
+for(int p=1;p<n;p++){
+	for(int k=n-1;k>=p;k--)
+		c(k)=(c(k)-c(k-1))/(xx(k)-xx(k-p));
+}
+
+//Points de prédiction
+real[int] xP(a:h/2:b);
+int xpn=xP.n;
+real[int] fxP(xpn);
+real xTil;
+
+for(int i=0;i<xpn;i++){
+	xTil=xP(i);
+	fxP(i)=c(n-1);
+	for(int k=n-2;k>=0;k--)
+		fxP(i)=(xTil-xP(k))*fxP(i)+c(k);
+}
+
+cout<<"fxP :"<<fxP<<endl;
+cout<<"yy :"<<yy<<endl;
+
+//Écriture du résultat dans le fichier
+for(int i=0;i<xpn;i++)
+	fout<<xP(i)<<" "<<fxP(i)<<endl;
+}
+
+//Affichage
+exec("gnuplot -p plotTP2.gnu");
+
