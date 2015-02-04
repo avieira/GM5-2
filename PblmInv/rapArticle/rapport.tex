@@ -132,6 +132,7 @@ Souvent, pour des raisons pratiques, on suppose que l'onde en entrée est une ex
 Intuitivement (et cela se vérifie, comme montré dans \cite{Snyd}), la puissance transférée est maximale (ie $P=1$) quand la longueur du taper tend vers l'infini. Il est donc évident qu'on doit imposer une contrainte supplémentaire sur la longueur finie du taper.
 
 \section{Solution du problème direct}
+\subsection{Recherche d'une représentation locale}
 À cause des conditions aux bords que nous avons imposé, le système (\ref{eq10}) est en général résolu en utilisant une décomposition spectrale.\\
 On définit $L_t(U)=\frac{\partial^2U}{\partial x^2}+n^2(x,z)U$ l'opérateur 1D de Helmholtz.\\
 Soit $\Omega_z$ la section de la région au point $z$. On définit la base locale $\{(U_k,\beta_k);k\geq 1\}$ à chaque position $z$ par : 
@@ -141,7 +142,7 @@ Soit $\Omega_z$ la section de la région au point $z$. On définit la base local
 		\restriction{U_k}{\partial\Omega_z}&=&0
 	\end{array}
 \end{equation}
-Cela est analogue à (\ref{eq5}), donc nous parlerons des solutions $U_k$ comme les fonctions propres locales. Le caractère auto-adjoint de l'opérateur $L_t$ (comme on l'a prouvé précédemment) assez que les $(U_k)$ forme une base orthogonale pour les fonctions $f\in\mathscr{C}(\Omega_z)$ avec $\restriction{f}{\partial\Omega_z}=0$. Ainsi, tout fonction $U$ définie dans une région $\Omega$ avec $\restriction{U}{\partial\Omega_z}=0$ peut être exprimé comme l'unique décomposition $U=\sum_{k=1}^\infty c_k(z)U_k$ où les coefficients (uniques) $c_k$ dépendent exclusivement de $z$.\\
+Cela est analogue à (\ref{eq5}), donc nous parlerons des solutions $U_k$ comme les fonctions propres locales. Le caractère auto-adjoint de l'opérateur $L_t$ (comme on l'a prouvé précédemment) assure que les $(U_k)$ forment une base orthogonale pour les fonctions $f\in\mathscr{C}(\Omega_z)$ avec $\restriction{f}{\partial\Omega_z}=0$. Ainsi, toute fonction $U$ définie dans une région $\Omega$ avec $\restriction{U}{\partial\Omega_z}=0$ peut être exprimé comme l'unique décomposition $U=\sum_{k=1}^\infty c_k(z)U_k$ où les coefficients (uniques) $c_k$ dépendent exclusivement de $z$.\\
 On s'intéresse maintenant à une formulation qui donne une représentation locale du champ éléctromagnétique en terme de propagation vers $-\infty$ ou $+\infty$ des modes du champ EM.
 On choisit donc le développement de notre fonction $U$ solution de (\ref{eq10}) de la forme :
 \begin{equation}\label{eq14}
@@ -155,7 +156,7 @@ Ce choix de coefficients nous assure que les $a_k$, $a_{-k}$ correspondent aux c
 	\int_{\Omega_z} U_k^2ds=\frac{1}{\beta_k}
 \end{equation}
 Cela assure que la puissance contenue dans le $k^{ieme}$ mode de l'onde se propageant de chaque côté est obtenu par $|a_k|^2$ ou $|a_{-k}|^2$ (voir \cite{Snyd} pour plus de détail).\\
-On remarque en particulier que l'énergie contenu dans l'état fondamental à la sortie du guide d'onde est maintenant 
+On remarque en particulier que l'énergie contenue dans l'état fondamental à la sortie du guide d'onde est maintenant 
 \begin{equation}\label{eq16} P(n^2)=|a_1|^2\end{equation}
 En référence à l'expression (\ref{eq11}).\\
 En utilisant le fait que la dérivée par rapport à $z$ de $U$ en (\ref{eq14}) doit être identique à la seconde ligne de (\ref{eq14}), et en substituant (\ref{eq14}) dans (\ref{eq3}), on en déduit que les $a_k$ doivent vérifier le système d'EDO suivant :
@@ -164,6 +165,7 @@ En utilisant le fait que la dérivée par rapport à $z$ de $U$ en (\ref{eq14}) 
 \end{equation}
 avec $\beta_{-k}=-\beta_k$ et \[r_{kj}(z)=\frac{\int_{\Omega_z} \frac{\partial n^2}{\partial z} U_kU_j ds}{2(\beta_k-\beta_j)}\]
 pour tout $j\neq k$, $j,k\neq 0$\\
+\subsection{Démonstration}
 Précisons tout d'abord que nous allons noter pour plus de commodité $U_{-k}=-U_k$. Pour démontrer (\ref{eq17}), on différencie (\ref{eq14}) et on l'identifie à la seconde ligne, on obtient que $a_k$ vérifie :
 	\[\sum_{k\neq 0} \dot{a}_kU_k + \sum_{k\neq 0} a_k\frac{\partial U_k}{\partial z} = \sum_{k\neq 0} a_ki\beta_k U_k\]
 Par orthogonalité des $U_k$, on projette cette équation sur chaque $U_i$, et cela mène à :
@@ -206,7 +208,7 @@ On peut réécrire le tout en une seule équation :
 \dot{a}_k-i\beta_ka_k=-\frac{\dot{\beta}_k}{2\beta_k}(a_k-a_{-k})-\frac{1}{2\beta_k}\sum_{j\neq 0}p_{jk}a_j(\beta_k+\beta_j)
 \end{equation}
 On va maintenant exprimer plus précisément $\dot{\beta}$ et $p_{jk}$. On rappelle que par définition :
-\[\frac{\partial U_k}{\partial z}=\sum_{k=1}^\infty p_{kj}U_j\]
+\[\frac{\partial U_k}{\partial z}=\sum_{j=1}^\infty p_{kj}U_j\]
 En différentiant en utilisant (\ref{eq13}), on obtient :
 \[L_t\left( \frac{\partial U_k}{\partial z}\right)=\frac{\partial^2}{\partial x^2}\left(\frac{\partial U_k}{\partial z}\right) + n^2\frac{\partial U_k}{\partial z}\]
 \[\frac{\partial }{\partial z}L_t\left( U_k\right)=\frac{\partial^2}{\partial x^2}\left(\frac{\partial U_k}{\partial z}\right) + n^2\frac{\partial U_k}{\partial z}+\frac{\partial n^2}{\partial z} U_k\]
@@ -226,16 +228,78 @@ en projetant sur $U_k$. Si $j\neq k$, en utilisant l'orthogonalité des fonction
 \end{equation}
 Si $j=k$, le membre de gauche s'annule, et on a donc une condition sur les $\beta_k$ :
 \begin{equation}\label{eq34}
-	\frac{\partial \beta_k}{\partial z}=\frac{1}{2}\int_{\Omega_z} \frac{\partial n^2}{\partial z}U_kU_j dx
+	\frac{\partial \beta_k}{\partial z}=\frac{1}{2\beta_k}\int_{\Omega_z} \frac{\partial n^2}{\partial z}U_k^2 dx
 \end{equation}
 $p_{kk}$ est déterminé par la normalisation des $U_k$ :
-\[p_{kk}=\beta_k\int_{\Omega_z} \frac{\partial U_k}{\partial z}U_kdx=\frac{\beta_k}{2}\int_{\Omega_z} \frac{\partial U_k^2}{\partial z}=\frac{\beta_k}{2}\frac{\partial}{\partial z}\int_{\Omega_z} U_k^2dx = \frac{\beta_k}{2}\frac{\partial \beta_k^{-1}}{\partial z}=-\frac{1}{2\beta_k}\frac{\partial \beta_k}{\partial z}\]
+\[p_{kk}=\beta_k\int_{\Omega_z} \frac{\partial U_k}{\partial z}U_kdx=\frac{\beta_k}{2}\int_{\Omega_z} \frac{\partial U_k^2}{\partial z}dx=\frac{\beta_k}{2}\frac{\partial}{\partial z}\int_{\Omega_z} U_k^2dx = \frac{\beta_k}{2}\frac{\partial \beta_k^{-1}}{\partial z}=-\frac{1}{2\beta_k}\frac{\partial \beta_k}{\partial z}\]
 Donc : \begin{equation}\label{eq35} p_{kk}=-\frac{\dot{\beta}_k}{2\beta_k} \end{equation}
 À présent, dans (\ref{eq32}), on remplace tous les $p$ en utilisant (\ref{eq33}) et (\ref{eq35}) et on remplace le terme $\dot{\beta}$ en utilisant (\ref{eq34}). Le terme $j=k$ dans la somme se simplifie avec le premier terme dans le membre de droite, et on peut réécrire (\ref{eq32}) comme :
-\[
-\dot{a}_k-i\beta_ka_k=\frac{a_{-k}}{4\beta_k}\int_{\Omega_z}\frac{\partial n^2}{\partial z}U_k^2dx + \sum_{j\neq 0,k} a_j\frac{1}{2(\beta_k-\beta_j)}\int_{\Omega_z}\frac{\partial n^2}{\partial z}U_kU_jdx\ \forall k\neq 0
-\]
+\begin{eqnarray*}
+\forall k\neq 0,\ \dot{a}_k-i\beta_ka_k&=&-\frac{\dot{\beta}_k}{2\beta_k}(a_k-a_{-k})-\frac{1}{2\beta_k}\sum_{j\neq 0}p_{jk}a_j(\beta_k+\beta_j)\\
+		&=&-\frac{\dot{\beta}_k}{2\beta_k}(a_k-a_{-k})+\frac{1}{2\beta_k}a_k2\beta_k\frac{\dot{\beta}_k}{2\beta_k}-\frac{1}{2\beta_k}\sum_{j\neq 0,k}p_{jk}a_j(\beta_k+\beta_j)\\
+		&=&\frac{\dot{\beta}_k}{2\beta_k}a_{-k}-\frac{1}{2\beta_k}\sum_{j\neq 0,k}p_{jk}a_j(\beta_k+\beta_j)\\
+		&=&\frac{a_{-k}}{4\beta_k}\int_{\Omega_z}\frac{\partial n^2}{\partial z}U_k^2dx-\frac{1}{2\beta_k}\sum_{j\neq 0,k}\frac{\beta_k}{\beta_j^2-\beta_k^2}(\beta_k+\beta_j)a_j\int_{\Omega_z}\frac{\partial n^2}{\partial z}U_kU_jdx\\
+		&=&\frac{a_{-k}}{4\beta_k}\int_{\Omega_z}\frac{\partial n^2}{\partial z}U_k^2dx + \sum_{j\neq 0,k} a_j\frac{1}{2(\beta_k-\beta_j)}\int_{\Omega_z}\frac{\partial n^2}{\partial z}U_kU_jdx\ 
+\end{eqnarray*}
 Finalement, on inclut les termes les termes $a_{-k}$ comme le terme $-k$ de la somme et nous arrivons à l'équation (\ref{eq17}).
+
+\subsection{Équation d'évolution de l'amplitude}
+Pour compléter l'équation (\ref{eq17}), on a également des conditions au début ($z=0$) et à la fin du guide d'onde ($z=z_R$), qui se traduisent par :
+\begin{equation}\label{eq18}
+\begin{array}{c c c}
+	a_k(0)=A_k; & a_{-k}(z_R)=0 & \forall k>0
+\end{array}
+\end{equation}
+où les $A_k$ sont les coefficients correspondant au champ d'entrée $U_I$.\\
+L'équation (\ref{eq17}) peut se réécrire, on notant $\gamma_k(z)=e^{-i\int \beta_k(z)dz}a_k(z)$ :
+\begin{equation}\label{eq19}
+	 \dot{\gamma}_k(z)=\sum_{j\neq 0,k} r_{kj}(z)e^{i\int_0^z (\beta_j(z)-\beta_k(z))dz}\gamma_j(z)
+\end{equation}
+C'est l'équation d'évolution des amplitudes $\gamma_k(z)$. Notons que :
+\begin{enumerate}
+\item Le membre de droit ne dépend pas de $\gamma_k$, ce qui signifie que l'équation décrit le couplage entre les différents modes
+\item Dans un guide d'onde de section constante, $r_{kj}=0$, donc $\gamma_k(z)$ est constant, comme attendu.
+\item Une borne supérieure pour le couplage est donné par $r_{kj}\leq \frac{\int_{\Omega_z} \left|\frac{\partial n^2}{\partial z}\right|ds}{2|\beta_k-\beta_j|}$, et donc le couplage tent à être plus fort avec les voisins immédiats, pour lesquels $|\beta_k-\beta_j$ est petit.
+\end{enumerate}
+
+\subsection{Précisions sur les conditions aux bords}
+Les conditions aux bords (\ref{eq4}) sont en un sens "artificielles". Si nous utilisions plutôt des conditions plus vraisemblables, les modes locaux seraient divisé en un ensemble discret de modes guidés et en une continuité de modes dû à la radiation. Les équations (\ref{eq14}) auraient alors une composante intégrale, ce qui est difficile à analyser analytiquement et numériquement.\\
+C'est pour cela que des "murs" sont utilisés ici. Comme on l'a vu, on obtient ainsi un ensemble discret de modes guidés, qui ne sont pratiquement pas affectés par cette approximation puisqu'ils décroient exponentiellement vers 0 à l'extérieur du taper, et un ensemble discret de modes dû à la radiation. Bien évidemment, toute radiation du taper sera réfléchi par le bord et pourrait se coupler avec les modes guidés dans le taper. Cela affecterait donc la puissance que nous cherchons justement à optimiser ! Cependant, cet effet sera négligeable si le ration entre la distance entre le bord et le taper et la longueur totale du taper est assez grande pour empêcher le champ réfléchi d'atteindre le c\oe ur du taper avant sa fin.
+
+\section{Solution numérique du problème d'optimisation}
+\subsection{Choix de la discrétisation}
+Le problème posé précédent a été discrétisé de la manière suivante : la paramétrisation du profil du taper a été divisé en $N$ sous-sections équidistantes. L'indice de réfraction dans chaque sous-section est contrôlé par un nombre fini de paramètres. Les paramètres à optimiser ici sont les hauteurs du guide d'onde $\{w_1,...,w_N\}$ (voir figure \ref{fig:numOpti}).
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.25]{images/numOpti.png}
+	\caption{Profil du taper : discrétisation pour le problème d'optimisation}
+	\label{fig:numOpti}
+\end{figure}
+
+\bigskip
+Cette discrétisation impose une régularité très faible pour le profil du taper. On pourrait en effet obtenir des solution avec un profil totalement discontinu. Le champ est calculé grâce à l'analyse faite sur les modes locaux. Les guides d'onde en entrée et en sortie sont choisis tels qu'ils aient au moins un mode guidé. Les dérivées requises sont calculées via un schmé de type différences finies, avec $N=13$ ou $48$ et une solution initiale qui est une droite comme montrée figure \ref{fig:numOpti}.
+
+\subsection{Résultats et interprétation physique}
+Les résultats sont assez étonnants : en effet, on pense en général que le profil devrait plutôt ressembler à une courbe assez lisse. Cependant, comme on peut le voir figure \ref{fig:result48}, le résultat n'est pas vraiment ce à quoi on s'attendait. 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.25]{images/result48.png}
+	\caption{Profil du taper : résultat avec $N=48$. (a) Forme initial du taper (b) Forme optimale (c) Perte d'énergie en fonction du nombre d'itérations.}
+	\label{fig:result48}
+\end{figure}
+Ces résultats ont été obtenus en 2900 itérations.\\
+On remarque dans la figure \ref{fig:powMode} que le mécanisme d'optimisation repose surtout sur une résonnance entre les modes.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.25]{images/powMode.png}
+	\caption{L'énergie est préservée grâce à la resonnance avec les autres modes}
+	\label{fig:powMode}
+\end{figure}
+On remarque que le profil est fait de petits pics qui se répètent tous les $10µm$. Cela fait que l'énergie reste presque entièrement dans les deux premiers modes. Après un passage assez plat, le saut final juste avant la fin réintroduit toute la puissance du mode 2 dans le mode 1. La perte d'énergie totale est de seulement 0.5\% en 80µm, tandis qu'un taper plus classique aurait besoin, pour avoir la même efficacité, d'être au moins 5 fois plus long.\\
+On ne sait pas, bien sûr, si c'est la solution optimale, mais cette perte d'énergie faible est bien plus importante.\\
+Cependant, ces résultats soulèvent une autre problématique : le problème est mal posé.
+
+\subsection{Un problème mal posé}
 
 \bibliographystyle{plain}
 \bibliography{bibliographie}
