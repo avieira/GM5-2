@@ -1,0 +1,32 @@
+\part{Conditions d'optimalité}
+\[\min_{u\in\mathcal{U}_{ad}} J(u)\]
+$\mathcal{U}_{ad}\subset\mathbb{R}^n$ est l'ensemble (non vide) admissible.
+On suppose $\mathcal{U}_{ad}$ fermé convexe, et $J$ convexe.
+
+\Theo{}{Si $J$ est coercive ou si $\mathcal{U}_{ad}$ est borné, alors il existe un point de minimum.}
+
+\section{Une condition nécessaire générale d'optimalité}
+\Def{Cône tangent}{On dit que $d\in\mathbb{R}^n$ est une tangente à $X$ en $\bar{x}$ si $\exists x_k\to\bar{x}$ avec $(x_k\subset X$, $t_k\to 0$, $t_k>0$ tel que :
+	\[\frac{x_k-\bar{x}}{t_k}\to d\]
+L'ensemble de toutes les directions tangentes est appelé le cône tangent et est noté $T_{\bar{x}}X$.}
+
+\Def{équivalente}{$d\in T_{\bar{x}}X$ si $\exists t_k>0$, $t_k\to 0$ et $\exists d_k\in X$, $d_k\to d$ tel que $\bar{x}+t_kd_k\in X$.}
+
+\Propo{}{$T_{\bar{x}}X$ est un cône fermé. Il est convexe si $X$ est convexe.}
+
+\Propo{}{Soient $X$ un ensemble convexe et $\bar{x}\in X$. Alors \[T_{\bar{x}}X=\overline{cone}(X-\bar{x})=\overline{\mathbb{R}_+(X-\bar{x})}\]}
+
+\Def{}{Soient $X\subset\mathbb{R}^n$, $\bar{x}\in X$.\\
+On dit que $p$ est une direction normale à $X$ en $\bar'x}$ si \[\langle p,d\rangle\leq 0\ \forall d\in T_{\bar{x}}X\]
+L'ensemble des normales est appelé le cône normal, noté $\mathcal{N}_{\bar{x}}X$.}
+
+\Rem{}{$\mathcal{N}_{\bar{x}}X=\left(T_{\bar{x}}X\right)^-=-\left(T_{\bar{x}}X\right)^*$\\
+$\mathcal{N}_{\bar{x}}X$ est donc un cône convexe.}
+
+\Theo{}{Soit $\mathcal{U}_{ad}$ un ensemble convexe fermé non vide, $J:\mathbb{R}^n\to\mathbb{R}$ une fonction convexe, et $\bar{u}\in\mathcal{U}_{ad}$. Les assertions suivantes sont équivalentes :
+\begin{enumerate}
+	\item $\bar{u}$ minimise $J$ sur $\mathcal{U}_{ad}$
+	\item $J'(\bar{u},u-\bar{u})\geq 0$ $\forall u\in \mathcal{U}_{ad}$
+	\item $J'(\bar{u},d)\geq 0$ $\forall d\in T_{\bar{u}}\mathcal{U}_{ad}$
+	\item $0\in\partial J(\bar{u}) + \mathcal{N}_{\bar{u}}\mathcal{U}_{ad}$.
+\end{enumerate}}
