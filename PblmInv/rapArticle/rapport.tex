@@ -24,6 +24,7 @@ Dans un premier temps, l'article met en place un premier problème direct pour l
 Des exemples numériques basés sur cette méthode montre que si la discrétisation devient trop fine, la convergence ralentit et la solution devient de plus en plus instable. Le problème vient du fait qur le problème d'optimisation est mal posé. L'article présente donc une méthode pour maximiser l'énergie résultante basée sur un problème inverse non linéaire, ainsi que des résultats numériques coroborant leur idée. 
 
 \section{Formulation du problème direct en 2D}
+\subsection{Dérivation des équations}
 Les équations homogènes de Maxwell dans un milieu continu avec la permitivité linéaire $\varepsilon$ et la perméabilité magnétique $\mu_0$ sont :
 \begin{equation}\label{MaxEq}
 \begin{array}{c c c}
@@ -125,7 +126,7 @@ Le problème complet est donc : trouver $U(x,z)$ tel que :
 \end{equation}
 où $\{(\tilde{U}_k^{(L)},\pm\beta_k^{(L)}):k\in\mathbb{N}^*\}$, $\{(\tilde{U}_k^{(R)},\pm\beta_k^{(R)}):k\in\mathbb{N}^*\}$ sont les modes propres dans $\Omega_L$, $\Omega_R$ respectivement.
 
-\section{Formulation du problème d'optimsation}
+\subsection{Formulation du problème d'optimsation}
 En général, nous nous interessons à la forme optimale du taper (ou la distribution des indices de refraction) qui dans un sens maximise la puissance transférée entre l'entrée et la sortie du guide d'onde.\\
 Souvent, pour des raisons pratiques, on suppose que l'onde en entrée est une excitation de l'élément propre fondamental (indicé donc par $1$), et on s'intéresse à la puissance restante dans l'élément propre fondamental $\tilde{U}^{(R)}_1$ de l'onde de sortie (on assume bien évidemment que les deux ondes admettent au moins un mode guidé). Dans la décomposition spectral (\ref{eq6}), l'énergie restante correspond au coefficient $|C_1|^2$. Cela est donné par :
 \begin{equation}\label{eq11} P(n^2)=\beta_1^2|\langle U,\tilde{U}_1^{(R)}\rangle|^2=\beta_1^2\left|\int_{x\in\Gamma_R} U(x,z_R)\tilde{U}_1^{(R)}(x)dx\right|^2\end{equation}
@@ -345,11 +346,83 @@ On en vient donc aux remarques suivantes :
 \item Puisque les fonctions objectifs et les contraintes sur les deux problèmes d'optimisation précédents dépendent explicitement et continuement du champ $U$, et non de l'indice de réfraction $n^2$, de petites variations dans le champ impliquent de petites variation dans les contraintes et les fonctions objectifs. Donc, si $n^2$ est une solution optimale, alors il existe $n_1^2$ aussi éloigné de $n^2$ que l'on veut qui minimise la fonction objectif et qui satisfait également les contraintes à une précision arbitraire.
 \item Tout schéma d'optimisation qui utilise d'une quelconque manière la linéarisation précédente pour trouver une direction locale de descente rencontrera des instabilités si on n'ajoute aucune présomption sur l'espace dans lequel on recherche la solution, c'est-à-dire si on cherche une solution optimale $n^2$ dans tout $\mathscr{C}^0(\Omega)$.
 \item D'un point de vue physique, ce caractère mal-posé du problème vient du fait que la puissance transmise n'est pas sensible à de grands changements de l'indice de réfraction sur un petit intervalle (comme un pic). En effet, l'onde $U$ "ne voit pas" les variations dans l'indice de réfraction qui sont plus petites que la longueur d'onde de $U$.
-\item On pourrait gagner en stabilité en limitant notre recherche à un espace de fonction plus petit. Par exemple, on pourrait chercher la solution optimale $n^2$ dans un sous-ensemble borné de $\mathscr{C}^1(\Omega)$, ce qui éviterait les pics sus-mentionnés. L'équation (\ref{eq22}) deviendrait alors une fonction $K : \mathscr{C}^1(\Omega)\to K(\mathscr{C}^1(\Omega)$ qui aurait un inverse (s'il existe) dans $\mathcal{C}^0(\Omega)$ dû à la compacité de $\mathscr{C}^0(\Omega)$ dans $\mathscr{C}^1(\Omega)$. Si cet inverse n'existe pas, on peut toujours considérer l'inverse généralisé et calculer de manière stable en troncant les valeurs singulières (voir \cite{engl96regu}). Ces considérations seront la base de l'algorithme alternatif décrit juste après.
+\item On pourrait gagner en stabilité en limitant notre recherche à un espace de fonction plus petit. Par exemple, on pourrait chercher la solution optimale $n^2$ dans un sous-ensemble borné de $\mathscr{C}^1(\Omega)$, ce qui éviterait les pics sus-mentionnés. L'équation (\ref{eq22}) deviendrait alors une fonction $K : \mathscr{C}^1(\Omega)\to K(\mathscr{C}^1(\Omega))$ qui aurait un inverse (s'il existe) dans $\mathscr{C}^0(\Omega)$ dû à la compacité de $\mathscr{C}^0(\Omega)$ dans $\mathscr{C}^1(\Omega)$. Si cet inverse n'existe pas, on peut toujours considérer l'inverse généralisé et calculer de manière stable en troncant les valeurs singulières (voir \cite{engl96regu}). Ces considérations seront la base de l'algorithme alternatif décrit juste après.
 \end{enumerate}
 
 Pour terminer cette discussion, nous allons discuter le role que joue le fait que ce problème soit mal posé dans ce problème.\\
-On considère le problème d'optimisation qui est de trouver une (et pas la) distribution des indices de refraction remplissant un certain nombre de critères. Dans un tel problème, l'uncité n'est pas importante, ni même la stabilité de la solution optimale, puisqu'on souhaite principalement remplir les critères d'optimalité. A contrario, on pourrait aussi considérer le problème inverse, qui est d'identifier la distribution des indices de réfraction provenant d'une certaine mesure. Ce problème inverse est un problème d'identification de paramètre pour une équation aux dérivées partielle et donc mal-posé dans le sens que pour aucune norme disons raisonnable, sa solution (si elle est unique) ne sera pas stable au regard des perturbations sur les données (voir \cite{engl96regu}). Mathématiquement, les deux problèmes sont équivalents - seuls la manière de voir le problème est différent. 
+On considère le problème d'optimisation qui est de trouver une (et pas la) distribution des indices de refraction remplissant un certain nombre de critères. Dans un tel problème, l'uncité n'est pas importante, ni même la stabilité de la solution optimale, puisqu'on souhaite principalement remplir les critères d'optimalité. A contrario, on pourrait aussi considérer le problème inverse, qui est d'identifier la distribution des indices de réfraction provenant d'une certaine mesure. Ce problème inverse est un problème d'identification de paramètre pour une équation aux dérivées partielle et donc mal-posé dans le sens que pour aucune norme disons raisonnable, sa solution (si elle est unique) ne sera pas stable au regard des perturbations sur les données (voir \cite{engl96regu}). Mathématiquement, les deux problèmes sont équivalents - seule la manière de voir le problème est différent. 
+On pourrait donc penser que le fait que ce soit mal-posé n'est pas important. Cependant, tout optimiseur digne de ce nom utilisera l'information donnée par le gradient. Comme montré avant, le problème linéarisé à partir duquel on récupère le gradient est en fait mal posé puisqu'il peut être décrit comme une équation intégrale du premier ordre avec un opérateur compact. 
+C'est une propriété lié à notre linéarisation, peu importe la manière dont on la résoud, c'est-à-dire même si on n'utilise pas l'intégrale dans notre simulation. Et cela est bien retrouvé dans les simulations !\\
+(À voir si on garde...)
+
+\section{L'approche par problème inverse}
+Cette approche est basée sur la conservation de la puissance pour (\ref{eq10}), ie :
+	\[\mathrm{Im}\int_{z\in\Omega_z} U\frac{\partial \tilde{U}}{\partial z} dx\]
+est conservé le long du guide d'onde. Donc la puissance totale doit être la puissance totale à la sortie plus la puissance réfléchie à l'entrée :
+\[\begin{array}{l c r}
+1=\sum_{k\in RB} |a_{-k}(0)|^2 + \sum_{k\in RB} |a_k(z_R)|^2 &\text{ avec }& RB=\{k\in \mathbb{Z}^* | \beta_k^2>0\}
+\end{array}\]
+ce qui correspond à la somme sur tous les modes guidés. La seconde somme contient les coefficients de la décomposition spectrale de $U(x,z_r)$ à la sortie du taper :
+	\[U(x,z_R)=\sum_{k=1}^\infty a_k(z_R)U_k^{(R)}(x)\]
+qui sont déterminés de façon unique par (\ref{eq17}) et (\ref{eq18}) pour un indice de réfraction donné $n$ : dans (\ref{eq18}), tous les coefficients représentant l'onde revenant en arrière ont déjà été mis à 0. Il en suit que la puissance transmise dans le mode fondamental, $|a_1(z_R)|^2$ est toujours plus petit que $1$, et on a égalité uniquement quand :
+\begin{equation}\label{eq23}
+	\begin{bmatrix} |a_1(z_R)| \\ |a_2(z_R)| \\ |a_3(z_R)| \\ \vdots \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{bmatrix}
+\end{equation}
+On a donc réexprimé le problème d'optimisation mal posé de minimiser $P(n^2)$ en résolvant (\ref{eq23}) pour l'indice de réfraction inconnu $n$. La dépendance de $U(x,z_R)$ par rapport à $n$ n'est pas linéaire, et il n'existe pas nécessairement de solution de (\ref{eq23}), puisqu'il n'existe pas forcément de profil de longueur finie assurant $P=1$ à la sortie. Cependant, cette formulation a l'avantage numérique qu'on prend également en compte $a_2$, $a_3$,... en plus de $a_1$. Même si ce n'est pas nécessaire, cela devrait aider numériquement à "attirer" ces coefficients vers les bonnes valeurs en résolvant (\ref{eq23}) au sens des moindes carrés. On utilisera pour cela une approche du type méthode de Newton.\\
+On réécrit (\ref{eq23}) $\mathbf{a}(n)=\mathbf{a}_1$ avec \[\mathbf{a}_1=\begin{bmatrix} 1\\0\\0\\ \vdots \end{bmatrix} \ \mathbf{a}(n)=\begin{bmatrix} |a_1(z_R)| \\ |a_2(z_R)| \\ |a_3(z_R)| \\ \vdots \end{bmatrix}\]
+Pour simplifier l'écriture, on va omettre les carrés sur $n^2$ et $\delta n^2$. Une étape dans la méthode de Newton donnant la prochaine itération $n+\delta n$ depuis $n$ est donné par le problème linéaire :
+\begin{equation}\label{eq24}
+	\restriction{\frac{\partial\mathbf{a}}{\partial n}}{n}\delta n=\mathbf{a}_1-\mathbf{a}(n)
+\end{equation}
+En paramétrisant $n$ pour les $N$ sous-sections, $\restriction{\frac{\partial\mathbf{a}}{\partial n}}{n}$ est une matrice $M\times N$, où $M$ est l'indice du dernier mode retenu.\\
+Ce jacobien a été calculé en utilisant un schéma de type différences finies. Notons que selon le choix de $M$ et $N$, le système peut être sous- ou sur-déterminé, mais il sera de toute façon résolu au sens des moindres carrés. Cependant, plus on augmente $M$, plus la solution sera instable, étant donné qu'il s'agit de la discrétisation d'un problème mal-posé. On pourrait utiliser pour régler ce problème des méthodes de régularisation de la théorie des problèmes inverses (voir \cite{engl96regu}), mais il a été choisi ici d'utiliser une méthode heuristique de régularisation basé une troncature des valeurs singulières.\\
+Résoudre (\ref{eq24}) par les moindres carrés peut être fait un faisant une décomposition en valeurs singulières du Jacobien ;
+	\[\restriction{\frac{\partial\mathbf{a}}{\partial n}}{n}=UDV^T\]
+où $U$ et $V$ sont des matrices unitaires et $D$ une matrice diagonale avec les valeurs singulières en diagonale suivie de zéros. On note $d_k$, $k\leq \min(M,N)$ ces valeurs singulières, et on les suppose rangées : $d_1\geq d_2\geq \cdots \geq d_k$. Étant donné qu'on part d'une disrétisation, on s'attend à ce que les plus petites valeurs singulières décroissent vers 0 si la dimension de la matrice augmente.\\
+La régularisation consiste en la troncature des petites valeurs singulières : on choisit un paramètre de régularisation $0<\alpha<1$ et on pose :
+	\[r:=\max\{i | d_i\geq \alpha d_1\}\]
+Et :
+	\[D_{red}=diag(d_1,...,d_r,0,...,0)\]
+d'inverse généralisé :
+	\[D_{red}^\dagger = diag\left( \frac{1}{d_1},...,\frac{1}{d_r},0,...,0\right) \]
+L'étape $\delta n$ est donc choisi comme : \begin{equation}\label{eq26}
+	\delta n=VD_{red}^\dagger U^\dagger [\mathbf{a}_1-\mathbf{a}(n)]
+\end{equation}
+
+(Revoir direction de descente)
+
+\section{Simulation numérique utilisant l'approche problème inverse}
+L'algorithme utilisé est le suivant : étant donné une étape $n_k$ donné, la prochaine itération est donné par (\ref{eq26}). On cherche ensuite à minimiser :
+	\[F(\lambda)=\|\mathbf{a}_1-\mathbf{a}(n_k+\lambda\delta n\|_2^2\]
+et on pose
+	\[n_{k+1}=n_k+\lambda_{min}\delta n\]
+On répète ce processus jusqu'à ce que $\|\mathbf{a}_1-\mathbf{a}(n)\|_2$ arrête de décroître.\\
+Pour comparer les deux algorithmes (entre la méthode directe et l'approche problème inverse), les deux algorithmes sont lancés avec le même nombre d'itérations, et la puissance à la fin de ces itérations est enfin comparée.\\
+On remarque d'abord une forte variation en fonction du paramètre de régularisation $\alpha$ choisi. Il semble y avoir, pour $N=13$ et $N=48$ à chaque fois une région pour $\alpha$ où l'algorithme semble mieux fonctionner. Cela se comprend aisément :
+\begin{itemize}
+	\item Si le paramètre est trop proche de 1, seuls les valeurs singulières trop hautes sont retenues, et donc la correction $\delta n$ sera toujours d'autant plus douce. Cependant, comme on peut le voir sur les simulations, la solution semble bien être très irrégulière. La convergence semble donc être ralentie par les corrections trop faibles apportées à chaque fois.
+	\item A contrario, un paramètre trop proche de zéro retiendra des valeurs singulières très petite, et augmentera d'autant plus l'instabilité numérique.
+\end{itemize}
+
+Dueixème chose : pour un choix raisonnable du paramètre $\alpha$, les deux algorithmes donnent des résultats similaires dans le cas d'une discrétisation assez grossière, mais la méthode en problème inverse devient plus intéressant pour des discrétisations plus fines (comme on peut le voir figure \ref{fig:accConv}). Cela montre que la régularisation peut en effet accélérer la convergence et nous permettre d'obtenir des résultats en un temps raisonnable, ce qui ne serait pas réalisable avec la l'algorithme direct. 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.35]{images/convAlgo13.png}
+	\includegraphics[scale=0.35]{images/convAlgo48.png}
+	\caption{Convergence des deux algorithmes : premier cas avec 13 sous-sections et 10 modes, deuxième cas avec 48 sous-sections et 15 modes}
+	\label{fig:accConv}
+\end{figure}
+
+\section{Algorithme en cascade}
+Malgré le fait que le problème soit mal posé, on peut tout de même utiliser le problème direct et le même optimiseur pour trouver une solution intéressante.\\
+L'idée est simple : on commence avec une discrétisation grossière pour avoir un optimum approché. On redivise ensuite le profil en subdivisions plus fines, et on prend comme solution initiale celle trouvée précédemment (en interpolant quelque peu les données pour correspondre à ce nouveau maillage). On note d'ailleurs qu'on peut même augmenter la vitesse de calcul en limitant (du moins pour les premières recherches d'optimum) le nombre de modes, puis qu'ils ne serviront qu'à avoir une solution initiale à l'itération d'après. Notons également que si on utilise l'agorithme par la méthode inverse, il faudra également décroître le paramètre $\alpha$ à chaque rafinement.\\
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.35]{images/cascade.png}
+	\caption{(a) Solution initiale (b) Solution grossière (c) Rafinement et interpolation de la solution grossière (d) Solution avec le rafinement}
+	\label{fig:cascade}
+\end{figure}
+L'exemple montré figure \ref{fig:cascade} utilise ce procédé. Il fallait maximiser la puissance transmise par un guide d'onde où la sortie (beaucoup plus petite) est placée à une certaine distance (non nulle) du guide d'onde, et séparé par un milieu vide. La solution ressemble à une lentille, ce qui est attendu. 
 
 \bibliographystyle{plain}
 \bibliography{bibliographie}
