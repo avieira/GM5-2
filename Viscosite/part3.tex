@@ -1,0 +1,120 @@
+\section{Extension au cas parabolique}
+\begin{equation} \label{EDPP} \tag{EDP-P} 
+\left\{ \begin{array}{r c c c}
+	u_t+F(x,t,u,Du,D^2u)&=&0 &\text{ sur } [0,T]\times\Omega\\
+	u(0,x)&=&u_0(x) &\text{ sur } \Omega\\
+	u(t,x)&=&g(t,x) &\text{ sur } [0,T]\times\partial\Omega
+\end{array}\right.
+\end{equation}
+
+Les hypothèses sont les suivantes : \begin{description}
+	\item[\label{MonoP} (M-P)] : monotonie : $\exists\gamma\in\mathbb{R}$; $\forall x\in\Omega$, $\forall r,s\in\mathbb{R}$, $r\geq s$, $\forall t\in[0,T]$, $\forall p\in\mathbb{R}^N$, $\forall X\in S^N$ : 
+\[F(x,r,p,X)-F(x,s,p,X)\geq \gamma(r-s)\]
+	\item[\label{CS2P} (CS2-P)] : $\forall t\in [0,T]$, $F(\bullet, t, \bullet, \bullet, \bullet)$ vérifie \nameref{CS2} uniformément en $t$ ($w_R$ ne dépend pas de $t$).
+\end{description}
+
+\Def{Sous-différentiel parabolique}{\begin{eqnarray*}
+\mathscr{P}^-u(x,t)&=&\left\{(a,p,X)\in\mathbb{R}\times\mathbb{R}^N\times S^N; \forall y\in\Omega, \forall s\in[0,T],\right.\\
+		&	&	\left. u(y,s)\geq u(x,t)+a(s-t)+p(y-x)+\frac{1}{2}X(y-x)(y-x)+o(|t-s|+|y-x|^2)\right\}
+\end{eqnarray*}
+On définit de la même manière $\mathscr{P}^+u(x,t)$, $\overline{\mathscr{P}}^-u(x,t)$, $\overline{\mathscr{P}}^+u(x,t)$
+}
+
+\Def{}{$\utilde{u}$ est sous-solution barrière de (\ref{EDPP}) si : 
+\begin{itemize}
+	\item $\utilde{u}$ est sous-solution de l'équation
+	\item $\utilde{u}=g$ continuement sur $\partial\Omega\times[0,T]$
+	\item $\utilde{u}(0,x)\leq u_0(x)$ dans $\Omega$
+\end{itemize}
+$\tilde{u}$ est sur-solution barrière de (\ref{EDPP}) si : 
+\begin{itemize}
+	\item $\tilde{u}$ est sur-solution de l'équation
+	\item $\tilde{u}=g$ continuement sur $\partial\Omega\times[0,T]$
+	\item $\tilde{u}(0,x)\geq u_0(x)$ dans $\Omega$
+\end{itemize}}
+
+\Theo{}{Soit $\Omega$ un ouvert borné, $g\in\mathscr{C}^0$, $u_0\in\mathscr{C}^0$. On suppose qu'il existe une sous et une sur-solution barrière et que $F$ est continue vérifiant \nameref{MonoP} et \nameref{CS2P}.\\
+Alors il existe une solution $u$ telle que $\utilde{u}\leq u\leq\tilde{u}$.\\
+De plus, on a un principe de comparaison : $u$ scs sous-solution et $v$ sci sur-solution, alors $u\leq v$ dans $\Omega\times[0,T]$.}
+
+\subsection{Construction de $\tilde{\tilde{u}}$}
+$\tilde{u}_1=u_0(x)+ct$
+\begin{eqnarray*}
+(\tilde{u}_1)_t+F(x,t,\tilde{u}_1,D\tilde{u}_1,D^2\tilde{u}_1)&=&c+F(x,t,u_0+ct,Du_0,D^2u_0)\\
+			&\geq&0 \text{ pour } C\geq\sup_{x,t}|F(x,t,u_0(x)+ct,Du_0,D^2u_0)|
+\end{eqnarray*}
+
+$\tilde{u}_1(x,0)=u_0(x)$\\
+$x\in\partial\Omega$, \[\tilde{u}_1(x,0)=u_0(x)=g(x,0)\]
+Si $c\geq\left\| \frac{\partial g}{\partial t}\right\|_\infty$
+	\[\tilde{u}_1(x,t)\geq g(x,t)\]
+
+On pose $\tilde{\tilde{u}}=\min(\tilde{u}, \tilde{u_1})$
+\begin{itemize}
+	\item $\tilde{\tilde{u}}$ sur-solution de (\ref{EDPP})
+	\item $\tilde{\tilde{u}}(x,0)=u_0(x)$
+	\item $\tilde{\tilde{u}}(x,0)=g(x,t)$ $\forall(x,t)\in\partial\Omega\times[0,T]$
+\end{itemize}
+
+\section{Contrôle optimal déterministe}
+\subsection{Principe de programmation dynamique}
+On fixe $T>0$.\\
+On considère
+\[\left\{\begin{array}{r c l c}
+	y'(s)&=&f(y(s),\alpha(s)), & s\in[0,T]\\
+	y(0)&=&x
+\end{array}\right.\]
+
+$f$ continue, $\alpha$ mesurable à valeurs dans $A$. On note $\mathscr{A}$ l'ensemble des applications mesurables de $[0,T]\to A$.\\
+On suppose $f$ lipsctizienne par rapport à sa première variable et bornée par rapport à la deuxième : $\exists C>0$
+\[|f(y,\alpha)-f(z,\alpha)|\leq C|y-z|\ \forall y,z\in\mathbb{R}^n\]
+\[|f(y,\alpha)|\leq C\ \forall \alpha\in\mathscr{A}\]
+
+On cherche à minimiser le coût :
+\[J(t,x,\alpha)=\int_0^t L(y(s),\alpha(s))ds + h(y(t))\]
+
+qui vérifie : 
+\[\begin{array}{c c c c}
+	|L(y,\alpha)-L(z,\alpha)|&\leq& C |y-z|\\
+	|L(y,\alpha)|&\leq& C & \forall y,z\in\mathbb{R}^n\\
+	|h(y)-h(z)|&\leq& C|y-z| & \forall \alpha\in\mathscr{A}\\
+	|h(y)|&\leq& C
+\end{array}\]
+
+On cherche à minimiser le coût : 
+	\[\inf_{\alpha\in\mathscr{A}} J(t,x,\alpha)=u(t,x)\]
+
+\Lem{}{Soit $\alpha\in\mathscr{A}$.\\
+Alors $\exists ! y_\alpha$ solution de \[\left\{\begin{array}{r c l c}
+	y'(s)&=&f(y(s),\alpha(s)), & s\in[0,T]\\
+	y(0)&=&x
+\end{array}\right.\]
+De plus, on a : \[|y(s)|\leq |x| + cs \text{ avec } c=\sup_{\{x,\alpha\}\in\mathbb{R}^N\times\mathscr{A}} |f(x,\alpha)|\]
+Si $\tilde{y}$ est une solution avec $\tilde{y}(0)=\tilde{x}$ alors \[|y(s)-\tilde{y}(s)|\leq |x-\tilde{x}| e^{Ls}\]}
+
+\Theo{Principe de programmation dynamique}{Soit $s\in[0,t]$, on a :
+\[u(t,x)=\inf_{\alpha\in\mathscr{A}[0,s]} \left\{\int_0^s L(y(u),\alpha(u))du + u(t-s,y(s)) \right\}\]}
+
+\Propo{Régularité de la fonction valeur}{$u$ bornée et lipschitzienne}
+
+\Theo{}{$u$ est l'unique solution de :
+\begin{equation}\label{HJB}\tag{HJB}
+\left\{\begin{array}{c c c c}
+	u_t+H(x,Du)&=&0 &\text{ dans } [0,T]\times\mathbb{R}^N\\
+	u(0,x)&=&h(x)
+\end{array}\right.
+\end{equation}
+avec $H(x,p)=\sup_\alpha \{-p.f(x,\alpha)-L(x,\alpha)\}$}
+
+\subsection{Contrôle en feedback}
+On va construire des contrôles $U:[0,T]\times\mathbb{R}^N\to A$ qui dépendent de la trajectoire.
+\Def{}{$U(\bullet,\bullet)$ est un contrôle en feedback optimal si $\alpha(t)=U(t,y(t))$ avec $y$ solution de \[\left\{\begin{array}{r c l c}
+	y'(s)&=&f(y(s),\alpha(s)), & s\in[0,T]\\
+	y(0)&=&x
+\end{array}\right.\]
+est optimal.}
+
+\Theo{}{Soit $U$ solution de (\ref{HJB}) qu'on suppose $\mathscr{C}^1$.\\
+On suppose que $\forall(t,x)\in[0,T]\times\mathbb{R}^N$, $\exists U(t,x)\in A$ solution de :
+	\[\sup_{\alpha\in\mathscr{A}}\{-L(x,\alpha)-\nabla U(t,x).f(x,\alpha)\}\]
+Alors $U$ est un contrôle optimal en feedback.}
