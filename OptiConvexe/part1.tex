@@ -1,13 +1,105 @@
 \part{Ensembles convexes}
 \section{Définitions et premières propriétés}
+\Def{Ensemble affine}{Soit $E$ un espace vectoriel réel. Un sous-ensemble $A$ de $E$ est affine si
+ \[\forall x\in A; y\in A; \forall \alpha \in \mathbb{R}, \alpha x+(1-\alpha)y\in A\]
+Autrement dit, un ensemble affine contient toujours la droite passant par deux de ses points $x$ et $y$}
+
+\Def{Ensemble affine}{Soit $E$ un espace vectoriel réel. Un sous-ensemble $C$ de $E$ est convexe si
+ \[\forall x\in C; y\in C; \forall \alpha \in [0,1], \alpha x+(1-\alpha)y\in C\]
+Autrement dit, un ensemble affine contient toujours le segment $[x,y]$. }
+
+\Def{Simplexe}{On appelle simplexe de $\mathbb{R}^n$ le sous-ensemble
+\[\Delta_n=\left\{\alpha\in\mathbb{R}^n; \alpha_i\geq 0, i=1,...,n, \sum_{i=1}^n \alpha_i=1\right\}\]}
+
+\Def{Combinaison convexe}{On appelle combinaison convexe de $n$ points $\{x_i\}_{i=1}^n$ tout point $y$ s’écrivant
+	\[y=\sum_{i=1}^n \alpha_i x_i \text{ avec } \alpha\in\Delta_n\]}
+
+\Theo{}{Un sous ensemble $C$ de $E$ est convexe si et seulement s'il contient toutes les combinaisons convexes de ses éléments.}
+
+\Propo{Opérations conservant la convexité}{\begin{itemize}
+	\item Si $(C_i)_{i\in I}$ est une famille quelconque de convexes de $E$, alors l’intersection $\cap_{i\in I} C_i$ est encore un convexe.
+	\item Pour $a\in E$, le translaté $a+C=\{a+x;x\in C\}$ est convexe
+	\item Le produit cartésien de $C\in E$ et $C'\in E'$, ie $C\times C'=\{(x;y);x\in C; y\in C'\}$ est un sous ensemble convexe de $E\times E'$
+	\item La somme $C_1+C_2=\{x_1+x_2; x_1\in C_1; x_2\in C_2\}$ de deux ensembles convexes $C_1$ et $C_2$ est convexe.
+	\item L’union de sous-ensembles convexes n’est en général pas convexe, mais l’union croissante de convexes est convexe.
+\end{itemize}}
+
+\Def{}{Soit $C$ un ensemble convexe. Une partie convexe $F$ de $C$ est appelée face (ou partie extrémale) de $C$ si la propriété suivante est vérifiée
+\[\left.\begin{array}{c}
+(x,y)\in C\times C \text{ et }\\
+\exists \alpha\in ]0,1[ \text{ tel que } \alpha x+(1-\alpha) y \in F
+\end{array}\right\} \Rightarrow [x,y]\in F\]
+On appelle point extrémal une face réduite à un seul point. En d’autres termes, $\bar{x}\in C$ est un point extrémal de $C$ s’il n’est pas possible d’avoir $\bar{x}=\alpha y+ (1-\alpha)z$ avec $y$ et $z$ deux points distincts de $C$ et $\alpha\in]0,1[$. On note $Ext(C)$ l’ensemble des points extrémaux de $C$.}
+
 \section{Enveloppe affine et enveloppe convexe}
+\Def{Enveloppe affine}{Soit $A$ une partie de $E$. L’enveloppe affine de $A$, notée $Aff(A)$, est l’intersection de tous les espaces affines contenant $A$.}
+
+\Propo{}{Soit $A$ une partie de $E$. On a :
+\[Aff(A)=\left\{ \sum_{i=1}^n \alpha_i x_i; n\geq 1, x_i\in A, \alpha_i\in \mathbb{R}, \sum_{i=1}^n \alpha_i=1\right\}\]}
+
+\Def{Enveloppe convexe}{Soit $A$ une partie de $E$. L’enveloppe convexe de $A$, notée $conv(A)$, est l’intersection de tous les espaces convexes contenant $A$}
+
+\Propo{}{Soit $A$ une partie de $E$. On a :
+\[Conv(A)=\left\{ \sum_{i=1}^n \alpha_i x_i; n\geq 1, x_i\in A, \alpha_i\geq 0, \sum_{i=1}^n \alpha_i=1\right\}\]}
+
+\Theo{Carathéodory}{Soit $A$ une partie d’un espace vectoriel $E$ de dimension $n$. Alors tout élément de $conv(A)$ peut s’écrire comme une combinaison convexe de $n+ 1$ éléments de $A$.}
+
+
 \section{Propriétés topologiques des convexes}
 \subsection{Ouverture et fermeture des convexes}
+\Theo{}{Soit $C$ un ensemble convexe. Alors son intérieur $int(C)$ et son adhérence $\overline{C}$ sont aussi convexes.}
+
 \subsection{Intérieur relatif}
+En analyse convexe, on rencontre souvent des ensembles convexes dont l’intérieur est vide : c’est le cas d’un segment dans $\mathbb{R}^2$. Il est donc utile d’introduire la notion d’intérieur relatif.
+
+\Def{Intérieur relatif}{Soit $P$ une partie d’un espace vectoriel $E$. L’intérieur relatif de $P$, noté $ri(P)$, est son intérieur dans son enveloppe affine $Aff(P)$,munie de la topologie induite de celle de $E$, i.e.
+\[ri(P)=\{x\in P; \exists r>0; (B(x,r)\cap Aff(P))\subset P\}\]}
+
+\Theo{}{Soient $E$ un espace vectoriel de dimension finie et $C$ un convexe non vide de $E$. Alors $ri(C)$ est non vide.}
+
+\Lem{}{Soient $E$ un espace vectoriel de dimension finie et $C$ un convexe non vide. Alors
+	\[x\in ri(C) \text{ et } y\in \overline{C} \Rightarrow [x;y[\subset ri(C)\]
+Ainsi, un point $x\in E$ est dans l’intérieur relatif de $C$ si et seulement si pour tout $y\in C$ (ou $y\in Aff(C)$), il existe $\alpha>1$ tel que $(1-\alpha) y +\alpha x\in C$}
 
 \section{Opérations sur les ensembles convexes}
 \subsection{Projection sur un convexe fermé}
+\Theo{Projection sur un convexe fermé}{Soient $H$ un espace de Hilbert et $x$ un élément de $H$. Soit également $C$ un sous-ensemble convexe fermé de $H$. Il existe un unique point $y\in C$ tel que
+\[\|y-x\|=\min_{z\in C} \|z-x\|\]
+Cet élément $y$ est appelé la projection de $x$ sur $C$ et sera noté $P_C(x)$. Il est caractérisé par l’inéquation suivante 
+	\[\forall z\in C, \langle x-P_c(x), z-P_C(x)\rangle \leq 0\]}
+
+\Prop{de la projection}{L’application projection : $x\mapsto P_C(x)$ sur un convexe fermé non vide $C$ possède les propriétés suivantes :
+\begin{enumerate}
+	\item $\forall x_1, x_2\in H$, $\langle P_C(x_2)-P_C(x_1), x_2 - x_1\rangle \geq \|P_C(x_2)-P_C(x_1)\|^2$
+	\item elle est monotone : $\forall x_1, x_2\in H$, $\langle P_C(x_2)-P_C(x_1), x_2-x_1\rangle\geq 0$
+	\item elle est Lipschitzienne de constante $1$ : \[\forall x_1, x_2\in H, \|P_C(x_2)-P_C(x_1)\|\leq \|x_2-x_1\|\]
+\end{enumerate}}
+
 \subsection{Séparation des ensembles convexes}
+Un outil essentiel en analyse convexe est le théorème de Hahn-Banach sur la séparation des ensembles convexes. Etant donné un espace de Hilbert $H$,la séparation de deux convexes se fait géométriquement dans $H$ en utilisant un hyperplan affine $K$ de la forme \[K=\{x\in H, \langle \xi, x\rangle =\alpha\}\]
+où $\xi\in H$ est non nul et $\alpha\in\mathbb{R}$. 
+
+\Def{}{On dit qu’un hyperplan $K:=\{x\in H; \langle \xi,x\rangle = \alpha\}$ sépare deux convexes $C_1$ et $C_2$ si l’on a
+	\[\forall x_1\in C_1, \forall x_2\in C_2, \langle \xi, x_1\rangle\leq \alpha\leq \langle \xi, x_2\rangle\]
+On dit qu’un hyperplan $K:=\{x\in H; \langle \xi,x\rangle = \alpha \}$ sépare strictement deux convexes $C_1$ et $C_2$ s'il existe deux scalaires $\alpha_1$ et $\alpha_2$ tels que $\alpha_1<\alpha<\alpha_2$ et 
+	\[\forall x_1\in C_1, \forall x_2\in C_2, \langle \xi, x_1\rangle\leq \alpha_1 < \alpha_2\leq \langle \xi, x_2\rangle\]
+}
+
+\Rem{}{Une condition nécessaire et suffisante pour que $C_1$ et $C_2$ puisse être séparé par un hyperplan est qu’il existe un $\xi\in H$ non nul tel que 
+	\[\sup_{x_1\in C_1} \langle \xi, x_1\rangle \leq \inf_{x_2\in C_2} \langle \xi, x_2\rangle\]
+Une condition nécessaire et suffisante pour que $C_1$ et $C_2$ puisse être séparé strictement par un hyperplan est qu’il existe un $\xi\in H$ tel que 
+	\[\sup_{x_1\in C_1} \langle \xi, x_1\rangle < \inf_{x_2\in C_2} \langle \xi, x_2\rangle\]
+}
+
+\Theo{Séparation d'un convexe et d'un point}{Soient $H$ un espace de Hilbert, $C$ un sous-ensemble convexe fermé de $H$ et $x\not\in C$. Alors il existe $r\in H$ tel que
+	\[sup_{z\in C} \langle r,z \rangle < \rangle r,x \langle \]}
+
+\Theo{Séparation de deux convexes}{Soient $H$ un espace de Hilbert et $C_1$ et $C_2$ deux convexes non vides disjoints de $H$, l’un étant fermé et l’autre étant compact. Alors on peut séparer strictement $C_1$ et $C_2$.}
+
+\Theo{Séparation de deux convexes en dimension finie}{Soient $H$ un espace de Hilbert de dimension finie et $C_1$ et $C_2$ deux convexes non vides disjoints de $H$. Alors on peut séparer $C_1$ et $C_2$ au sens large, i.e., il existe $\xi\in H$ non nul tel que 
+	\[\sup_{x_1\in C_1} \rangle \xi, x_1\langle \leq \inf_{x_2\in C_2} \rangle \xi, x_2\langle\]
+}
+
 \subsection{Enveloppe convexe fermée}
 L'enveloppe convexe d'un fermé n'est pas nécessairement fermée.\\
 \textit{Exemple :} Dans $\mathbb{R}^2$, $C=\{xy\geq 1\}\cup\{0\}$ : fermé.\\
