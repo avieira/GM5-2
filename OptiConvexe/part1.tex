@@ -1,0 +1,366 @@
+\part{Ensembles convexes}
+\section{Définitions et premières propriétés}
+\Def{Ensemble affine}{Soit $E$ un espace vectoriel réel. Un sous-ensemble $A$ de $E$ est affine si
+\[\forall x\in A; y\in A; \forall \alpha \in \mathbb{R}, \alpha x+(1-\alpha)y\in A\]
+Autrement dit, un ensemble affine contient toujours la droite passant par deux de ses points $x$ et $y$}
+
+\Def{Ensemble affine}{Soit $E$ un espace vectoriel réel. Un sous-ensemble $C$ de $E$ est convexe si
+\[\forall x\in C; y\in C; \forall \alpha \in [0,1], \alpha x+(1-\alpha)y\in C\]
+Autrement dit, un ensemble affine contient toujours le segment $[x,y]$. }
+
+\Def{Simplexe}{On appelle simplexe de $\mathbb{R}^n$ le sous-ensemble
+\[\Delta_n=\left\{\alpha\in\mathbb{R}^n; \alpha_i\geq 0, i=1,...,n, \sum_{i=1}^n \alpha_i=1\right\}\]}
+
+\Def{Combinaison convexe}{On appelle combinaison convexe de $n$ points $\{x_i\}_{i=1}^n$ tout point $y$ s’écrivant
+\[y=\sum_{i=1}^n \alpha_i x_i \text{ avec } \alpha\in\Delta_n\]}
+
+\Theo{}{Un sous ensemble $C$ de $E$ est convexe si et seulement s'il contient toutes les combinaisons convexes de ses éléments.}
+
+\Propo{Opérations conservant la convexité}{\begin{itemize}
+\item Si $(C_i)_{i\in I}$ est une famille quelconque de convexes de $E$, alors l’intersection $\cap_{i\in I} C_i$ est encore un convexe.
+\item Pour $a\in E$, le translaté $a+C=\{a+x;x\in C\}$ est convexe
+\item Le produit cartésien de $C\in E$ et $C'\in E'$, ie $C\times C'=\{(x;y);x\in C; y\in C'\}$ est un sous ensemble convexe de $E\times E'$
+\item La somme $C_1+C_2=\{x_1+x_2; x_1\in C_1; x_2\in C_2\}$ de deux ensembles convexes $C_1$ et $C_2$ est convexe.
+\item L’union de sous-ensembles convexes n’est en général pas convexe, mais l’union croissante de convexes est convexe.
+\end{itemize}}
+
+\Def{}{Soit $C$ un ensemble convexe. Une partie convexe $F$ de $C$ est appelée face (ou partie extrémale) de $C$ si la propriété suivante est vérifiée
+\[\left.\begin{array}{c}
+(x,y)\in C\times C \text{ et }\\
+\exists \alpha\in ]0,1[ \text{ tel que } \alpha x+(1-\alpha) y \in F
+\end{array}\right\} \Rightarrow [x,y]\in F\]
+On appelle point extrémal une face réduite à un seul point. En d’autres termes, $\bar{x}\in C$ est un point extrémal de $C$ s’il n’est pas possible d’avoir $\bar{x}=\alpha y+ (1-\alpha)z$ avec $y$ et $z$ deux points distincts de $C$ et $\alpha\in]0,1[$. On note $Ext(C)$ l’ensemble des points extrémaux de $C$.}
+
+
+\section{Enveloppe affine et enveloppe convexe}
+\Def{Enveloppe affine}{Soit $A$ une partie de $E$. L’enveloppe affine de $A$, notée $Aff(A)$, est l’intersection de tous les espaces affines contenant $A$.}
+
+\Propo{}{Soit $A$ une partie de $E$. On a :
+\[Aff(A)=\left\{ \sum_{i=1}^n \alpha_i x_i; n\geq 1, x_i\in A, \alpha_i\in \mathbb{R}, \sum_{i=1}^n \alpha_i=1\right\}\]}
+
+\Def{Enveloppe convexe}{Soit $A$ une partie de $E$. L’enveloppe convexe de $A$, notée $conv(A)$, est l’intersection de tous les espaces convexes contenant $A$}
+
+\Propo{}{Soit $A$ une partie de $E$. On a :
+\[Conv(A)=\left\{ \sum_{i=1}^n \alpha_i x_i; n\geq 1, x_i\in A, \alpha_i\geq 0, \sum_{i=1}^n \alpha_i=1\right\}\]}
+
+\Theo{Carathéodory}{Soit $A$ une partie d’un espace vectoriel $E$ de dimension $n$. Alors tout élément de $conv(A)$ peut s’écrire comme une combinaison convexe de $n+ 1$ éléments de $A$.}
+
+
+\section{Propriétés topologiques des convexes}
+\subsection{Ouverture et fermeture des convexes}
+\Theo{}{Soit $C$ un ensemble convexe. Alors son intérieur $int(C)$ et son adhérence $\overline{C}$ sont aussi convexes.}
+
+\subsection{Intérieur relatif}
+En analyse convexe, on rencontre souvent des ensembles convexes dont l’intérieur est vide : c’est le cas d’un segment dans $\mathbb{R}^2$. Il est donc utile d’introduire la notion d’intérieur relatif.
+\Def{Intérieur relatif}{Soit $P$ une partie d’un espace vectoriel $E$. L’intérieur relatif de $P$, noté $ri(P)$, est son intérieur dans son enveloppe affine $Aff(P)$,munie de la topologie induite de celle de $E$, i.e.
+\[ri(P)=\{x\in P; \exists r>0; (B(x,r)\cap Aff(P))\subset P\}\]}
+
+\Theo{}{Soient $E$ un espace vectoriel de dimension finie et $C$ un convexe non vide de $E$. Alors $ri(C)$ est non vide.}
+
+\Lem{}{Soient $E$ un espace vectoriel de dimension finie et $C$ un convexe non vide. Alors
+\[x\in ri(C) \text{ et } y\in \overline{C} \Rightarrow [x;y[\subset ri(C)\]
+Ainsi, un point $x\in E$ est dans l’intérieur relatif de $C$ si et seulement si pour tout $y\in C$ (ou $y\in Aff(C)$), il existe $\alpha>1$ tel que $(1-\alpha) y +\alpha x\in C$}
+
+\section{Opérations sur les ensembles convexes}
+\subsection{Projection sur un convexe fermé}
+\Theo{Projection sur un convexe fermé}{Soient $H$ un espace de Hilbert et $x$ un élément de $H$. Soit également $C$ un sous-ensemble convexe fermé de $H$. Il existe un unique point $y\in C$ tel que
+\[\|y-x\|=\min_{z\in C} \|z-x\|\]
+Cet élément $y$ est appelé la projection de $x$ sur $C$ et sera noté $P_C(x)$. Il est caractérisé par l’inéquation suivante
+\[\forall z\in C, \langle x-P_c(x), z-P_C(x)\rangle \leq 0\]}
+
+\Prop{de la projection}{L’application projection : $x\mapsto P_C(x)$ sur un convexe fermé non vide $C$ possède les propriétés suivantes :
+\begin{enumerate}
+\item $\forall x_1, x_2\in H$, $\langle P_C(x_2)-P_C(x_1), x_2 - x_1\rangle \geq \|P_C(x_2)-P_C(x_1)\|^2$
+\item elle est monotone : $\forall x_1, x_2\in H$, $\langle P_C(x_2)-P_C(x_1), x_2-x_1\rangle\geq 0$
+\item elle est Lipschitzienne de constante $1$ : \[\forall x_1, x_2\in H, \|P_C(x_2)-P_C(x_1)\|\leq \|x_2-x_1\|\]
+\end{enumerate}}
+
+\subsection{Séparation des ensembles convexes}
+Un outil essentiel en analyse convexe est le théorème de Hahn-Banach sur la séparation des ensembles convexes. Etant donné un espace de Hilbert $H$,la séparation de deux convexes se fait géométriquement dans $H$ en utilisant un hyperplan affine $K$ de la forme \[K=\{x\in H, \langle \xi, x\rangle =\alpha\}\]
+où $\xi\in H$ est non nul et $\alpha\in\mathbb{R}$.
+\Def{}{On dit qu’un hyperplan $K:=\{x\in H; \langle \xi,x\rangle = \alpha\}$ sépare deux convexes $C_1$ et $C_2$ si l’on a
+\[\forall x_1\in C_1, \forall x_2\in C_2, \langle \xi, x_1\rangle\leq \alpha\leq \langle \xi, x_2\rangle\]
+On dit qu’un hyperplan $K:=\{x\in H; \langle \xi,x\rangle = \alpha \}$ sépare strictement deux convexes $C_1$ et $C_2$ s'il existe deux scalaires $\alpha_1$ et $\alpha_2$ tels que $\alpha_1<\alpha<\alpha_2$ et
+\[\forall x_1\in C_1, \forall x_2\in C_2, \langle \xi, x_1\rangle\leq \alpha_1 < \alpha_2\leq \langle \xi, x_2\rangle\]
+}
+
+\Rem{}{Une condition nécessaire et suffisante pour que $C_1$ et $C_2$ puisse être séparé par un hyperplan est qu’il existe un $\xi\in H$ non nul tel que
+\[\sup_{x_1\in C_1} \langle \xi, x_1\rangle \leq \inf_{x_2\in C_2} \langle \xi, x_2\rangle\]
+Une condition nécessaire et suffisante pour que $C_1$ et $C_2$ puisse être séparé strictement par un hyperplan est qu’il existe un $\xi\in H$ tel que
+\[\sup_{x_1\in C_1} \langle \xi, x_1\rangle < \inf_{x_2\in C_2} \langle \xi, x_2\rangle\]
+}
+
+\Theo{Séparation d'un convexe et d'un point}{Soient $H$ un espace de Hilbert, $C$ un sous-ensemble convexe fermé de $H$ et $x\not\in C$. Alors il existe $r\in H$ tel que
+\[sup_{z\in C} \langle r,z \rangle < \rangle r,x \langle \]}
+
+\Theo{Séparation de deux convexes}{Soient $H$ un espace de Hilbert et $C_1$ et $C_2$ deux convexes non vides disjoints de $H$, l’un étant fermé et l’autre étant compact. Alors on peut séparer strictement $C_1$ et $C_2$.}
+
+\Theo{Séparation de deux convexes en dimension finie}{Soient $H$ un espace de Hilbert de dimension finie et $C_1$ et $C_2$ deux convexes non vides disjoints de $H$. Alors on peut séparer $C_1$ et $C_2$ au sens large, i.e., il existe $\xi\in H$ non nul tel que
+\[\sup_{x_1\in C_1} \rangle \xi, x_1\langle \leq \inf_{x_2\in C_2} \rangle \xi, x_2\langle\]
+}
+
+\subsection{Enveloppe convexe fermée}
+L'enveloppe convexe d'un fermé n'est pas nécessairement fermée.\\
+\textit{Exemple :} Dans $\mathbb{R}^2$, $C=\{xy\geq 1\}\cup\{0\}$ : fermé.\\
+conv$(C)=\{x>0, y>0\}\cup\{0\}$ : non fermé.
+
+\Def{}{$A\subset E$. On définit l'enveloppe convexe fermée, noté $\overline{conv}(A)$, comme l'intersection de tous les convexes fermés contenant $A$.}
+
+\Prop{}{\begin{itemize}
+\item $A_1\subset A_2$ $\Rightarrow$ $\overline{conv}(A_1)\subset\overline{conv}(A_2)$
+\item $A\subset conv(A)\subset conv(\bar{A})\subset \convBar(A)$ et $\convBar(A)=\convBar(\bar{A})=\overline{conv(A)}$
+\end{itemize}}
+
+\Def{}{Soit $H$ un Hilbert.\\
+Un demi-espace fermé de $H$ est un ensemble de la forme : \[H^-(\xi,\alpha)=\{x\in H; (x,\xi)\leq \alpha\}\]
+où $\xi\in H\neq\{0\}$ et $\alpha\in\mathbb{R}$}
+\Propo{}{$\convBar(A)$ est l'intersection de tous les demi-espaces fermés contenant $A$.}
+
+\Coro{}{Soit $C$ un ensemble convexe.\\
+Alors l'intersection de tous les demi-espaces fermés contenant $C$ est $\overline{C}$.}
+
+\Coro{}{$C$ convexe fermés $\Leftrightarrow$ $C$ est l'intersection de tous les demi-espaces fermés contenant $C$.}
+
+\Theo{}{Soient $H$ de dimension finie et $A$ un compact de $H$. Alors $conv(A)$ est compact.}
+
+\section{Cônes convexes}
+\Def{Cône}{Un ensemble $C$ est un cône si $\lambda\in\mathbb{R}_+$, $\forall x\in C$, $\lambda x\in C$}
+
+\Def{Enveloppe conique}{Soit $A\subset E$. L'enveloppe conique $A$, notée $cone(A)$, est l'intersection de tous les coônes convexes contenant $A$.}
+
+\Def{Combinaison conique}{On appelle combinaison conique d'élements de $A$ un point $x$ tel que $x=\sum_{i=1}^n \lambda_ix_i$, $\lambda_i\geq 0$, $x_i\in A$}
+
+\Propo{}{\begin{itemize}
+\item $C$ est un cône convexe si et seulement s'il contient toutes les combinaisons coniques de ses éléments.
+\item \[cone(A)=\left\{\sum_{i=1}^n \lambda_ix_i, n\in\mathbb{N}^*,\lambda_i\geq °, x_i\in A\right\}\]
+\end{itemize}}
+
+\Def{Enveloppe conique fermée}{On définit l'enveloppe conique fermée de $A$, notée $\coneBar{A}$, comme étant l'intersection de tous les cônes convexes fermés contenant $A$.}
+
+\Prop{}{\begin{itemize}
+\item $A\subset B$ $\Rightarrow$ $\coneBar(A)\subset\coneBar(B)$
+\item $A\subset cone(A)\subset cone(\bar{A})\subset \coneBar(A)$ et $\coneBar(A)=\coneBar(\bar{A})=\overline{cone(A)}$
+\end{itemize}}
+
+\subsection{Cône normal}
+\Def{}{Soient $H$ de Hilbert, $C\subset H$, $x\in C$.\\
+On définit le cône normal à $C$ en $x$, noté $\mathscr{N}_xC$ ou $\mathscr{N}_C(x)$ par :
+\[\mathscr{N}_C(x)=\{d\in H; (d,y-x)\leq 0 \forall y\in C\}\]
+Les éléments de $\mathscr{N}_xC$ sont appelés les normales à $C$ en $x$.}
+
+\Propo{}{Soit $H$ de Hilbert de dimension fnie.\\
+Si $C\subset H$ et $x\in\partial C$, alors $\mathscr{N}_xC$ contient au moins un élément non nul.}
+\textbf{Remarque : } Le résultat reste vrai en dimension infini si $\ring{C}$ est non vide.
+
+\subsection{Cône dual}
+\Def{Cône dual, bidual, polaire}{Soit $P\subset H$. On appelle cône dual de $P$, noté $P^*$, l'ensemble :
+\[P^*=\{x\in H; (x,y)\geq 0\ \forall y\in P\}\]
+On appelle cône bidual de $P$ : $P^{**}=(P^*)^*$\\
+On appelle cône polaire (ou dual négatif) $P^-$ l'ensemble
+\[P^-=\{x\in H; (x,y)\leq 0\ \forall y\in P\}=-P^*\]
+}
+
+\Propo{}{$P^*$ est un cône convexe fermé non vide.}
+
+\section{Hyperplan d'appui}
+\Def{}{Un hyperplan d'affine d'équation $(s,x)=r$ est appelé hyperplan d'appui à $C$ en $\bar{x}$ si : \[(s,x)\leq r\ \forall x\in C\] \[(s,\bar{x})=r\]}
+\Theo{}{Soit $C$ un ensemble convexe d'un Hilbert $H$. On suppose soit que $H$ est de dimension finie soit que $\ring{C}\neq\emptyset$. Soit $\bar{x}\in\partial C$. Alors il existe un hyperplan d'appui à $C$ en $\bar{x}$.}
+
+\section{Lemme de Farkas}
+\Lem{}{Soient $H$ un espace de Hilbert, $(\xi_j)_{j\in J}\subset H$ et $(\alpha_j)_{j\in J}\subset\mathbb{R}$. On suppoer que le système \[(\xi_j,x)\leq\alpha_j\ \forall j\in J\] admet au moins une solution.\\
+Soit $(s,\beta)\in H\times\mathbb{R}$. On a équivalence entre les 2 propositions :
+\begin{enumerate}
+\item \[\forall x\in H, \left[ \forall j\in J,\ (\xi_j,x)\leq \alpha_j \Rightarrow (s,x)\leq \beta\right]\]
+\item \[(s,\beta)\in\coneBar\left( (\xi_j,\alpha_j)_{j\in J}\cup (0,1)\right)\subset H\times \mathbb{R}\]
+\end{enumerate}}
+
+\Coro{}{Sous les mêmes hypothèses avec $\alpha_j=0$ $\forall j\in J$. On a pour $s\in H$ :
+\begin{enumerate}
+\item \[\forall x\in H, \left[ \forall j\in J,\ (\xi_j,x)\leq 0 \Rightarrow (s,x)\leq 0\right]\]
+\item \[s\in\coneBar\left( (\xi_j)_{j\in J}\right)\]
+\end{enumerate}}
+
+\Lem{}{Si $C$ est un cône convexe fermé, alors $C^{**}=C$.}
+
+\part{Fonctions convexes}
+\section{Définitions et propriétés}
+$f:H\to\overline{\mathbb{R}}=\mathbb{R}\bigcup\{+\infty\}$
+\Def{}{\[Dom(f)=\{x\in H;f(x)<+\infty\}\]
+\[epi(f)=\{(\alpha,x)\in\mathbb{R}\times H, \alpha\geq f(x)\}\]
+\[epi_S(f)=\{(\alpha,x)\in\mathbb{R}\times H, \alpha>f(x)\}\]
+\noindent On dit que $f$ est propre si $f$ n'est pas identiquement égal à $+\infty$.\\
+On dit que $f$ est convexe si $epi(f)$ est convexe.\\
+On dit que $f$ est concave si $-f$ est convexe.\\
+}
+
+\Propo{}{Si $f$ est convexe, alors $Dom(f)$ est convexe.\\
+De plus, $f$ est convexe si et seulement si : $\forall x,y\in Dom(f)$, $\forall \lambda\in[0,1]$, \[f(\lambda x+(1-\lambda)y)\leq \lambda f(x)+(1-\lambda)f(y)\]}
+
+\Def{}{On dit que $f$ est strictement convexe si $\forall x,y\in Dom(f)$, $x\neq y$, $\forall\lambda\in]0,1[$ \[f(\lambda x+(1-\lambda)y)< \lambda f(x)+(1-\lambda)f(y)\]}
+
+\Def{}{On dit que $f$ est fortement convexe de module $\alpha$ si $\forall x,y\in Dom(f)$, $\forall\lambda\in]0,1[$ \[\frac{\alpha}{2}\lambda(1-\lambda)\|x-y\|^2+f(\lambda x+(1-\lambda)y)< \lambda f(x)+(1-\lambda)f(y)\]}
+
+\Prop{opérations conservant la convexité}{\begin{enumerate}
+\item Pour $(f_i)_{i\in I}$ une famille quelconque de fonctions convexes, $\sup_{i\in I} f_i$ est convexe.
+\item $\alpha\geq 0$, si $f$ convexe, alors $\alpha f$ est convexe
+\item Si $f_1$ et $f_2$ convexes, alors $f_1+f_2$ convexes.
+\end{enumerate}}
+
+\Def{}{Soit $f:H\to\overline{\mathbb{R}}$ et $\alpha\in\overline{\mathbb{R}}$.\\
+On appelle sous ensemble de niveau de $f$ au niveau $\alpha$ noté $\Gamma_{\alpha}(f)$ l'ensemble
+\[\Gamma_\alpha(f)=\{x\in H; f(x)<\alpha\}\]}
+
+\textbf{Remarque : } $f$ convexe $\Rightarrow$ $\Gamma_\alpha(f)$ convexe $\forall \alpha\in\overline{\mathbb{R}}$\\
+Si $\Gamma_\alpha(f)$ est convexe $\forall\alpha\in\mathbb{R}$, alors on dit que $f$ est quasi-convexe.
+
+\Def{}{Soit $P\subset H$. On appelle fonction indicatrice de $P$ la fonction : \[\mathbb{1}_P(x)=\left\{ \begin{array}{c c c}
+0 &\text{si}& x\in P\\
++\infty &\text{ sinon}
+\end{array}\right.\]}
+
+\textbf{Remarque : } Si $P$ convexe, alors $\mathbb{1}_P$ est convexe.\\
+Si $\alpha>0$, $\alpha\in\mathbb{R}$, alors $\Gamma_{\alpha}(\mathbb{1}_P)=P$ donc $\mathbb{1}_P$ caractérise $P$.
+
+\section{Fonctions d'appui}
+\Def{}{Soit $S\subset H$.\\
+On appelle fonction d'appui à $S$ et on note $\sigma_S$ la fonction définie par : \[\sigma_S(d)=\sup_{s\in S} (s,d)\]}
+
+\textbf{Remarque : } $\sigma_S$ est toujours convexe (même si $S$ ne l'est pas).
+
+\Theo{}{Soit $S$ un sous-ensemble non vide de $H$. Alors $s\in\convBar(S)$ si et seulement si \[\forall d\in H,\ (s,d)\leq \sigma_S(d)\]
+De plus, $\sigma_S=\sigma_{\convBar(S)}$}
+
+\textbf{Remarque : } Soient $S_1$ et $S_2$ 2 convexes fermés. $S_1=S_2$ $\Leftrightarrow$ $\sigma_{S_1}=\sigma_{S_2}$.
+
+\Prop{}{Soient $S_1$ et $S_2$ deux sous-ensembles de $H$ non vides.
+\begin{enumerate}
+\item $\sigma_{S_1+S_2}=\sigma_{S_1}+\sigma_{S_2}$
+\item $\sigma_{S_1\cup S_2}=\max\{\sigma_{S_1},\sigma_{S_2}\}$
+\end{enumerate}}
+
+\section{Transformée de Fenchel}
+On va chercher les fonctions affines minorantes : \[\langle p,x\rangle + \alpha\leq f(x)\]
+\[-\alpha\geq \langle p,x\rangle -f(x)\]
+On va prendre $-\alpha=\sup_{x\in H} \{\langle p,x\rangle -f(x)\}=f^*(p)$.
+
+\Def{Transformée de Fenchel}{Soit $H$ un Hilbert et $f:H\to\overline{\mathbb{R}}$. On définit la transformée de Fenchel de $f$, notée $f^*:H\to\overline{\mathbb{R}}$ par :
+\[f^*(p)=\sup_{x\in H}\{\langle p,x\rangle -f(x)\}\]}
+
+\Prop{Inégalité de Young}{\[\forall p,x\in H,\ f^*(p)+f(x)\geq\langle p,x\rangle\]}
+
+\Propo{Semi-continue inférieurement}{Soit $f:H\to\mathbb{R}$. On dit que $f$ est semi-continue inférieurement (sci) si l'une des deux propositions équivalentes suivantes est vérifiée :
+\begin{enumerate}
+\item $\forall x\in H,\ \forall x_n\to x$, $\liminf_{n\to+\infty} f(x_n)\geq f(x)$
+\item $epi(f)$ est fermé.
+\end{enumerate}}
+
+\Propo{}{Soit $(f_i)_{i\in I}$ une famille de fonctions sci. Alors $\sup_{i\in I} f_i$ est sci.}
+
+\Coro{}{$f^*$ est sci et convexe.}
+
+\Def{Biconjuguée}{La biconjuguée de $f$, notée $f^{**}$ est définie par : \[f^{**}(x)=\sup_{p\in H}\{\langle p,x\rangle -f^*(p)\}\]}
+
+\Prop{}{\begin{itemize}
+\item $f^{**}(x)+f^*(p)\geq\langle p,x\rangle$
+\item $f(x)\geq f^{**}(x)$
+\end{itemize}}
+
+\Propo{}{Si $f$ est convexe, sci et propre, alors $f^*$ est convexe, sci et propre.}
+
+\Theo{Fenchel-Moreau}{Soit $f:H\to\overline{\mathbb{R}}$ une fonction propre. alors $f$ est convexe et sci si et seulement si $f=f^{**}$}
+
+\Rem{}{On peut définir la transformée de Fenchel sur un espace normé $E$ refléxif :
+\[f^*:\begin{array}{c c c} E'&\to&\mathbb{R}\\ p&\mapsto&\sup_{x\in E} \{\langle p,x\rangle_{E'E} -f(x)\}\end{array}\]
+Dans ce cas, les propositions précédentes et le théorème de Fenchel-Moreau restent vraies.}
+
+\Coro{}{Soit $f$ propre. alors $f$ est convexe et sci si et seulement si $f$ est l'eneoppe supérieure de ses minorantes affines.}
+
+\section{Continuité des fonctions convexes}
+\Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. On suppose qu'il existe une boule ouverte sur laquelle $f$ est bornée. Alors $f$ est continue sur l'intérieur de son domaine qui est non vide.}
+
+\Rem{}{Si $f$ est continue en un point, alors $f$ est bornée sur une boule, et donc $f$ est continue sur l'intérieur de son domaine.}
+
+\Coro{}{Si $f:H\to\overline{\mathbb{R}}$ est convexe et propre avec $H$ de dimension finie, alors $f$ restreinte à l'intérieur relatif de son domaine est continue.}
+
+\textbf{Remarque :} Si $f:H\to\mathbb{R}$, alors $f$ continue sur $H$.
+
+\section{Différentiabilité des fonctions convexes}
+\subsection{Dérivées directionnelles des fonctions convexes}
+\Theo{}{Soient $f:H\to\overline{\mathbb{R}}$, $x\in Dom(f)$, $d\in H$.
+\begin{enumerate}
+\item $\varepsilon\in\mathbb{R}^*_+\mapsto\frac{f(x+\varepsilon d)-f(x)}{\varepsilon}$ est croissante
+\item $f'(x,d)$ existe toujours et vaut éventuellement $\pm \infty$. De plus, $f'(x,d)=+\infty$ si et seulement si $x+\varepsilon d\not\in Dom(F)$ pour tout $\varepsilon$ petit, et :
+\[f'(x,d)=\inf_{\varepsilon\in\mathbb{R}^*_+} \frac{f(x+\varepsilon d)-f(x)}{\varepsilon}\]
+\[f'(x,d)\leq f(x+d)-f(x)\]
+\item $f'(x,d)\geq -f'(x,-d)$
+\end{enumerate}}
+
+\subsection{Reconnaître une fonction convexe à l'aide de ses dérivées}
+\Theo{}{Soit $f:H\to\overline{\mathbb{R}}$ une fonction propre. On suppose que $f$ est différentiable sur un ouvert $\Omega$ de $Dom(f)\subset H$. On a équivalence entre les propositions suivantes :
+\begin{enumerate}
+\item $f$ est convexe (resp. strictement convexe) sur $\Omega$
+\item $\forall x,y\in \Omega$, $f(y)\geq f(x)+f'(x,y-x)$ (resp. $f(y)> f(x)+f'(x,y-x)$)
+\item $\forall x,y\in \Omega$, $(f'(y)-f'(x))(y-x)\geq 0$ (resp. $(f'(y)-f'(x))(y-x)> 0$)
+\end{enumerate}}
+
+\Theo{}{Soit $f:H\to\overline{\mathbb{R}}$ propre et 2 fois différentiable sur un ouvert $\Omega\subset Dom(f)$.\\
+Alors $f$ est convexe si et seulement si $D^2f(d,d)\geq 0$ $\forall d\in H$.\\
+De plus, si $D^2f(d,d)>0$, alors $f$ est strictement convexe (réciproque fausse : penser à $f(x)=x^4$)}
+
+\section{Sous-différentiabilité des fonctions convexes}
+\subsection{Définitions et premières propriétés}
+\Def{Fonction affine}{$a$ est affine si $\forall x,y\in H$, $\forall t\in \mathbb{R}$, \[a(tx+(1-t)y)=ta(x)+(1-t)a(y)\]
+Pour toute fonction affine, il existe $x^*$ (la pente) et $\alpha$ (l'ordonnée) telles que $a(x)=\langle x^*,x\rangle +\alpha$.}
+
+\Def{Minorante affine}{On dit que $a$ est une minorante affine de $f$ si $a$ est affine et si : \[\forall x\in H,\ f(x)\geq a(x)\]
+On dit qu'une minorante affine est exacte en $x_0$ si $f(x_0)=a(x_0)$. Dans ce cas, \[a(x)=\langle x^*,x-x_0\rangle +f(x)\]}
+
+\Theo{Existence d'une minorante affine}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. Alors $f$ admet une minorante affine.\\
+De plus, celle-ci peut être choisie exacte en un point de $ri(Dom(f))$, ie : si $x\in ri(Dom(f))$, \[\exists x^*\in H;\ f(y)\geq \langle x^*,y-x\rangle +f(x)\]}
+
+\Def{Sous-différentiable}{On dit que $f$ convexe et propre est sous-différentiable en $x$ s'il existe $x^*\in H$ tel que : \[\forall y\in H,\ f(y)\geq \langle x^*,y-x\rangle + f(x)\]
+Les éléments $x^*$ sont appelés les sous-gradients de $f$ en $x$, et on note $\partial f(x)$ l'ensemble des sous-gradients de $f$ en $x$.\\
+Par convention, si $x\not\in Dom(f)$, alors $\partial f(x)=\emptyset$}
+
+\Propo{Sur l'optimalité}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. Alors $f$ atteint un minimum en $x$ si et seulement si $0\in\partial f(x)$.}
+
+\Propo{}{Sous les mêmes hypothèses : \[\partial f(x)=\{x^*\in H;\ f'(x,d)\geq \langle x^*,d\rangle,\ \forall d\in H\}\]}
+
+\Theo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre, et soit $x\in Dom(f)$. Les assertions suivantes sont équivalentes : \begin{enumerate}
+\item $\partial f(x)\neq \emptyset$
+\item $\exists y\in ri(Dom(f))$; $f'(x,y-x)>-\infty$
+\item $f'(x,\bullet)\neq-\infty$
+\end{enumerate}}
+
+\Coro{}{Si $f$ est convexe et propre et si $f$ est continue en $x\in Dom(f)$, alors $\partial f(x)\neq \emptyset$}
+
+\Propo{}{Soit $f$ convexe et propre tel que $f$ est continue en $x$. Alors \[f'(x,d)=\sigma_{\partial f(x)}(d)=\sup_{p\in\partial f(x)}\langle d,p\rangle\]}
+
+\subsection{Sous-différentiabilité et transformée de Fenchel}
+\Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. Alors \[\partial f(x)=\{p\in H;\ f(x)+f^*(p)=\langle p,x\rangle\}\]}
+On définit de la même manière : \[\partial f^*(p)=\{x\in H;\ f^{**}(x)+f^*(p)=\langle p,x\rangle\}\]
+
+\Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe, propre et sci. \[x\in\partial f^*(p)\Leftrightarrow p\in\partial f(x)\]}
+
+\subsection{Liens avec la différentiabilité}
+\Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe, sci et propre. On suppose que $f$ est continue en $x$.
+\begin{enumerate}
+\item Si $f$ est Gâteaux-différentiable en $x$, alors \[\partial f(x)=\{\nabla f(x)\}\]
+\item Réciproquement, si $\partial f(x)$ est réduit à un seul élément, alors $f$ est Gâteaux-différentiable en $x$ et $\partial f(x)=\{\nabla f(x)\}$
+\end{enumerate}}
+
+\subsection{Quelques règles de calcul}
+Dans toute la suite, on supposera la dimension de $H$ finie.
+\Def{Homogène et sous linéaire}{$f'(x,\bullet)$ est dite homogène de degré $n\in\mathbb{R}^*$ si : \[\forall \lambda\in\mathbb{R},\ f'(x,\lambda d)=\lambda^n f'(x,d)\]
+$f'(x,\bullet)$ est dite sous-linéaire si : \[\forall d\in H,\ \exists L>0;\ |f'(x,d)|\leq L\|d\|\]}
+
+\Propo{}{Soient $f:H\to\mathbb{R}$ une fonction convexe et propre et $x\in H$. Alors $f'(x,\bullet)$ est convexe, homogène de degré 1 et sous-linéaire.}
+
+\Coro{}{Sous les mêmes hypothèses, $\partial f(x)$ est un convexe compact non vide.}
+
+\Propo{}{Soient $f_1,f_2:H\to\mathbb{R}$ deux fonctions convexes, et $t_1,t_2>0$. Alors \[\partial(t_1f_1+t_2f_2)(x)=t_1\partial f_1(x)+t_2\partial f_2(x)\]}
+
+\Propo{}{Soient $A:\mathbb{R}^n\to\mathbb{R}^m$ une fonction affine ($Ax=A_0x+b$, $A_0\in\mathcal{M}_{m\times n}$, $b\in\mathbb{R}^m$)\\
+et $g:\mathbb{R}^n\to\mathbb{R}$ une fonction convexe.\\
+\[\partial(g\circ A)(x)=A_0^*\partial g(Ax)\]}
+
