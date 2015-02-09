@@ -92,12 +92,12 @@ Une condition nécessaire et suffisante pour que $C_1$ et $C_2$ puisse être sé
 }
 
 \Theo{Séparation d'un convexe et d'un point}{Soient $H$ un espace de Hilbert, $C$ un sous-ensemble convexe fermé de $H$ et $x\not\in C$. Alors il existe $r\in H$ tel que
-	\[sup_{z\in C} \langle r,z \rangle < \rangle r,x \langle \]}
+	\[\sup_{z\in C} \langle r,z \rangle < \langle r,x \rangle \]}
 
 \Theo{Séparation de deux convexes}{Soient $H$ un espace de Hilbert et $C_1$ et $C_2$ deux convexes non vides disjoints de $H$, l’un étant fermé et l’autre étant compact. Alors on peut séparer strictement $C_1$ et $C_2$.}
 
 \Theo{Séparation de deux convexes en dimension finie}{Soient $H$ un espace de Hilbert de dimension finie et $C_1$ et $C_2$ deux convexes non vides disjoints de $H$. Alors on peut séparer $C_1$ et $C_2$ au sens large, i.e., il existe $\xi\in H$ non nul tel que 
-	\[\sup_{x_1\in C_1} \rangle \xi, x_1\langle \leq \inf_{x_2\in C_2} \rangle \xi, x_2\langle\]
+	\[\sup_{x_1\in C_1} \langle \xi, x_1\rangle \leq \inf_{x_2\in C_2} \langle \xi, x_2\rangle\]
 }
 
 \subsection{Enveloppe convexe fermée}
@@ -121,7 +121,7 @@ où $\xi\in H\neq\{0\}$ et $\alpha\in\mathbb{R}$}
 \Coro{}{Soit $C$ un ensemble convexe.\\
 Alors l'intersection de tous les demi-espaces fermés contenant $C$ est $\overline{C}$.}
 
-\Coro{}{$C$ convexe fermés $\Leftrightarrow$ $C$ est l'intersection de tous les demi-espaces fermés contenant $C$.}
+\Coro{}{$C$ convexe fermé $\Leftrightarrow$ $C$ est l'intersection de tous les demi-espaces fermés contenant $C$.}
 
 \Theo{}{Soient $H$ de dimension finie et $A$ un compact de $H$. Alors $conv(A)$ est compact.}
 
@@ -166,7 +166,7 @@ On appelle cône polaire (ou dual négatif) $P^-$ l'ensemble
 \Propo{}{$P^*$ est un cône convexe fermé non vide.}
 
 \section{Hyperplan d'appui}
-\Def{}{Un hyperplan d'affine d'équation $(s,x)=r$ est appelé hyperplan d'appui à $C$ en $\bar{x}$ si : \[(s,x)\leq r\ \forall x\in C\] \[(s,\bar{x})=r\]}
+\Def{}{Un hyperplan affine d'équation $(s,x)=r$ est appelé hyperplan d'appui à $C$ en $\bar{x}$ si : \[(s,x)\leq r\ \forall x\in C\] \[(s,\bar{x})=r\]}
 
 \Theo{}{Soit $C$ un ensemble convexe d'un Hilbert $H$. On suppose soit que $H$ est de dimension finie soit que $\ring{C}\neq\emptyset$. Soit $\bar{x}\in\partial C$. Alors il existe un hyperplan d'appui à $C$ en $\bar{x}$.}
 
@@ -280,7 +280,7 @@ On va prendre $-\alpha=\sup_{x\in H} \{\langle p,x\rangle -f(x)\}=f^*(p)$.
 	\[f^*:\begin{array}{c c c} E'&\to&\mathbb{R}\\ p&\mapsto&\sup_{x\in E} \{\langle p,x\rangle_{E'E} -f(x)\}\end{array}\]
 Dans ce cas, les propositions précédentes et le théorème de Fenchel-Moreau restent vraies.}
 
-\Coro{}{Soit $f$ propre. alors $f$ est convexe et sci si et seulement si $f$ est l'eneoppe supérieure de ses minorantes affines.}
+\Coro{}{Soit $f$ propre. alors $f$ est convexe et sci si et seulement si $f$ est l'enveloppe supérieure de ses minorantes affines.}
 
 \section{Continuité des fonctions convexes}
 \Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. On suppose qu'il existe une boule ouverte sur laquelle $f$ est bornée. Alors $f$ est continue sur l'intérieur de son domaine qui est non vide.}
@@ -307,7 +307,7 @@ Dans ce cas, les propositions précédentes et le théorème de Fenchel-Moreau r
 \begin{enumerate}
 	\item $f$ est convexe (resp. strictement convexe) sur $\Omega$
 	\item $\forall x,y\in \Omega$, $f(y)\geq f(x)+f'(x,y-x)$ (resp. $f(y)> f(x)+f'(x,y-x)$)
-	\item $\forall x,y\in \Omega$, $(f'(y)-f'(x))(y-x)\geq 0$ (resp. $(f'(y)-f'(x))(y-x)\geq 0$)
+	\item $\forall x,y\in \Omega$, $(f'(y)-f'(x))(y-x)\geq 0$ (resp. $(f'(y)-f'(x))(y-x)> 0$)
 \end{enumerate}}
 
 \Theo{}{Soit $f:H\to\overline{\mathbb{R}}$ propre et 2 fois différentiable sur un ouvert $\Omega\subset Dom(f)$.\\
