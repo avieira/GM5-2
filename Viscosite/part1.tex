@@ -14,7 +14,7 @@ $D^2u$ est la matrice hessienne.\\
 $g:\partial\Omega\to\mathbb{R}$
 
 \bigskip
-On note $S^n$ l'ensemble des matrices carrées sumétriques de taille $n$.\\
+On note $S^n$ l'ensemble des matrices carrées symétriques de taille $n$.\\
 Si $u\in\mathscr{C}^2$, $D^2u\in S^2$.\\
 $S^n$ est muni d'un ordre naturel :
 	\[X\geq Y \Leftrightarrow X-Y\geq 0\]
@@ -79,7 +79,7 @@ $F(x,r,p,X)=-tr(X)-f(x)$
 $a(x)$ symétrique positive, $c(x)\geq 0$. \\
 \textit{Exercice :} Montrez que $\mathscr{L}$ est propre. \textit{Montrer au préalable :} \[A,B\geq 0 \Rightarrow tr(AB)\geq 0\]
 
-\item[Equation linéaire sous forme divergentielle :] $\mathscr{L}'u=f$ avec $\mathscr{L}'u=-\div(a(x)Du)+b(x)Du+c(x)u$\\
+\item[Equation linéaire sous forme divergentielle :] $\mathscr{L}'u=f$ avec $\mathscr{L}'u=-div(a(x)Du)+b(x)Du+c(x)u$\\
 $\mathscr{L}'$ est elleiptique si $a\in\mathscr{C}^1(\Omega,S^n)$ avec $a\geq 0$ et propre si $c\geq 0$
 
 \item[Equation d'Hamilton-Jacobi d'ordre 1 : ] $H(x,u,\nabla u)=0$\\
@@ -99,7 +99,7 @@ Alors $F(\bar{x}, u(\bar{x}), Du(\bar{x}), D^2u(\bar{x}))\geq F(\bar{x}, v(\bar{
 \begin{dem}
 \[u(\bar{x})\geq v(\bar{x})\]
 \[D(u-v)(\bar{x})=0 \Rightarrow Du(\bar{x})=Dv(\bar{x}) \text{ car on atteint un maximum}\]
-\[D^2(u-v)(\bar{x})\leq0 \Rightarrow D^2u(\bar{x})\leq Dv(\bar{x})\]
+\[D^2(u-v)(\bar{x})\leq0 \Rightarrow D^2u(\bar{x})\leq D^2v(\bar{x})\]
 
 Comme $F$ est propre : \[F(\bar{x}, u(\bar{x}), Du(\bar{x}), D^2u(\bar{x}))\geq F(\bar{x}, v(\bar{x}), Dv(\bar{x}), D^2v(\bar{x}))\]
 \end{dem}
@@ -141,19 +141,19 @@ On considère le problème :
 	u(-1)=u(1)=0
 \end{array}\right.\]
 
-D'après Rolle, il n'y a pas de solution classique. IL y a par contre une infinité de solution $\mathscr{C}^1$ par morceaux.
+D'après Rolle, il n'y a pas de solution classique. Il y a par contre une infinité de solution $\mathscr{C}^1$ par morceaux.
 Par exemple : \[u^+=\left\{ \begin{array}{c c c}
 	1+x &\text{ si } x\leq 0\\
 	1-x &\text{ si } x\geq 0
 \end{array}\right.\]
-et également $u^+=u^-$.\\
+et également $u^-=-u^+$.\\
 On considère le problème pour $\varepsilon>0$ :
 \[\left\{ \begin{array}{c}
 	-\varepsilon u''+|u'|=1 \text{ sur } \Omega=]-1,1[\\
 	u(-1)=u(1)=0
 \end{array}\right.\]
 
-Le théorème de Safranov nous montre qu'il existe une unique solution $u^\varepsilon\in\mathscr{C}^2(\Omega)\cap\mathscr{C}^0(\overline{\Omega})$ tel que :
+Le théorème de Safranov nous montre qu'il existe une unique solution $u^\varepsilon\in\mathscr{C}^2(\Omega)\cap\mathscr{C}^0(\overline{\Omega})$ telle que :
 \[u_\varepsilon(x)=\left\{ \begin{array}{c c c}
 	1+x-\varepsilon\left(\exp\left(\frac{x}{\epsilon}\right)-\exp\left(\frac{1}{\varepsilon}\right)\right) &\text{ si } x\leq 0\\
 	u_\varepsilon(-x) &\text{ si } x\geq 0
