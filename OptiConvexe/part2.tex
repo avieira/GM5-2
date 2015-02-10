@@ -30,3 +30,58 @@ $\mathcal{N}_{\bar{x}}X$ est donc un cône convexe.}
 	\item $J'(\bar{u},d)\geq 0$ $\forall d\in T_{\bar{u}}\mathcal{U}_{ad}$
 	\item $0\in\partial J(\bar{u}) + \mathcal{N}_{\bar{u}}\mathcal{U}_{ad}$.
 \end{enumerate}}
+
+\section{Cas où les contraintes sont explicites}
+\[\mathcal{U}_{ad}=\left\{\begin{array}{c l r}
+	u; & \langle a_i, u\rangle = b_i & i=1,...,m\\
+	   & c_j(u)\leq 0 		 & j=1,...,p
+\end{array}\right\} \]
+
+$a_i\in\mathbb{R}^n$, $b_i\in\mathbb{R}$, $c_j:\mathbb{R}^n\to\mathbb{R}$ convexe.\\
+$\mathcal{U}_{ad}$ est convexe.\\
+On note \[\begin{array}{l c c c}
+A : & \mathbb{R}^n &\to& \mathbb{R}^m\\
+    &       u    &\mapsto&     \left( \langle a_i,u\rangle \right)_{i=1}^m
+\end{array} \]
+
+\[b=\left( b_i \right)_{i=1}^m \]
+\[\{\langle a_i,u\rangle=b_i,\ i=1,...,m\} = \{u; Au=b\}\]
+
+On note $(a,b,c)$ les contraintes de manière générique.
+
+\Lem{}{Pour $u\in\mathcal{U}_{ad}$, on définit l'ensemble $\Lambda(u)$ par :
+	\[\Lambda(u)=\{\lambda\in\mathbb{R}^p; \lambda_i\geq 0, \lambda_i c_i(u)=0\ \forall j=1,...,p\}\]
+On définit le cône :
+	\[\mathscr{N}_{(a,b,c)}(u)=\{A^*\mu+\sum_{j=1}^p \lambda_j s_j,\ \mu\in\mathbb{R}^n,\ \lambda\in\Lambda(u),\ s_j\in\partial c_j(u)\}\]
+avec $A^*\mu=\sum_{i=1}^m \mu_i a_i$\\
+Alors
+	\[\mathscr{N}_{(a,b,c)}(u)\subset \mathscr{N}_{\mathcal{U}_{ad}}(u)\]
+}
+
+\Theo{}{Soit $J:\mathbb{R}^n\to\mathbb{R}$ une fonction convexe, et $\bar{u}\in\mathcal{U}_{ad}$. 
+\begin{enumerate}
+	\item $\bar{u}$ minimise $J$ sur $\mathcal{U}_{ad}$
+	\item $0\in\partial J(\bar{u}) + \mathcal{N}_{\bar{u}}\mathcal{U}_{ad}$.
+	\item $\exists \mu\in\mathbb{R}^n$, $\exists \lambda\in\Lambda(\bar{u})$; $0\in \partial J(\bar{u}) + \sum_{i=1}^m a_i\mu_i + \sum_{j=1}^p \lambda_j\partial c_j(\bar{u})$
+\end{enumerate}
+Alors $(3)\Rightarrow (1) \Leftrightarrow (2)$}
+
+\subsection{Qualification des contraintes}
+Les contraintes sont qualifiées si :
+	\[\mathscr{N}_{(a,b,c)}(u)=\mathscr{N}_{\mathcal{U}_{ad}}(u) \text{ et alors } (3)\Leftrightarrow(1)\]
+
+\Lem{}{Si les contraintes $c_j$ sont affines et si $\mathcal{U}_{ad}$ est non vide, alors 
+	\[\mathscr{N}_{(a,b,c)}(u)= \mathscr{N}_{\mathcal{U}_{ad}}(u)\]
+}
+
+\Lem{}{Si $s_1,...,s_m\in\mathbb{R}^n$, alors $cone(s_1,...,s_m)$ est fermé.}
+
+On oublie le cas affine :
+\Theo{}{On fait l'hypothèse dite de Slatter : 
+\[\exists u_0;\ \left\{ \begin{array}{l r}
+	Au_0=b\\
+	c_j(u_0)<0 & \forall j=1,...,p
+\end{array}\right.\]
+$\bar{u}$ minimise $J$ sur $\mathcal{U}_{ad}$ si et seulement si :
+	\[\exists \mu\in\mathbb{R}^n, \exists \lambda\in\Lambda(\bar{u}); 0\in \partial J(\bar{u}) + \sum_{i=1}^m a_i\mu_i + \sum_{j=1}^p \lambda_j\partial c_j(\bar{u})\]
+}
