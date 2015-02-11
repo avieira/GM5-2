@@ -39,9 +39,9 @@ for(int i=1;i<N-1;i++){
 A(N-1,N-1)=1;
 
 matrix M=A;
-//set(M,solver=UMFPACK);
+set(M,solver=UMFPACK);
 //set(M,solver=CG);
-set(M,solver=GMRES);
+//set(M,solver=GMRES);
 
 real[int] Q(N);
 Q(0)=alpha;
@@ -66,4 +66,4 @@ for(int i=0;i<N;i++)
 {ofstream ferr("erreur.dat");
 ferr<<pas<<" "<<err.max<<endl;}
 
-//exec("gnuplot -p plotTP1.gnu");
+exec("gnuplot -p plotTP1.gnu");

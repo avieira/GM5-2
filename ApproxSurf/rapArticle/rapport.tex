@@ -15,6 +15,41 @@ Soient $H$ une sous-espace borné de $\mathbb{R}^+\backslash\{0\}$ pour lequel $
 \begin{equation} \label{eq5} \tilde{V}_h \text{ est un sous-espace de dimension fini de } H^m\left(\tilde{\Omega}\right)\cap C^k\left(\overline{\tilde{\Omega}}\right) \end{equation}
 (voir fig. \ref{fig2})
 \input{domOmega}\\
-De plus, pour étudier la convergence de l'approximation, on suppose qu'il existe une famille d'opérateurs linéaires continus $(\tilde{\Pi}_h)_{h\in H}$ de $H^m(\Omega)$ dans $\tilde{V}_h$.
+De plus, pour étudier la convergence de l'approximation, on suppose qu'il existe une famille d'opérateurs linéaires continus $(\tilde{\Pi}_h)_{h\in H}$ de $H^m(\Omega)$ dans $\tilde{V}_h$ satisfaisant :
+\begin{equation} \label{eq6.1}
+	\exists C>0;\ \forall h\in H,\ \forall l=0,...,m-1,\ \forall v\in H^m(\tilde{\Omega}),\ \left| v-\tilde{\Pi}_h v\right|_{l,\tilde{\Omega}}\leq Ch^{m-1}|v|_{m,\tilde{\Omega}}
+\end{equation}
+\begin{equation} \label{eq6.2}
+	\forall v\in H^m(\tilde{\Omega}), \lim_{h\to 0} \left|v-\tilde{\Pi}_h v \right|_{m,\tilde{\Omega}}=0
+\end{equation}
+Ces conditions n'ont pas besoin de l'hypothèse classique de régularité de la méthode des éléments finis $H^m(\tilde{\Omega})\hookrightarrow C^s(\tilde{\Omega})$, où $s$ est l'ordre maximal des dérivés apparaissant dans la définition des degrés de liberté de l'élément fini générique de $(\tilde{V}_h)_{h\in H}$, mais on assume que :
+\begin{equation} \label{eq7} \text{la famille } (\tilde{\mathscr{T}}_h)_{h\in H} \text{ est régulière} \end{equation}
+Comme expliqué dans \cite{ciarlet72gal}, une famille est dite régulière si, en notant $h_K$ le diamètre de $K$ et $\rho_K$ le supremum du diamètre des sphères inscrites dans $K$ :
+	\[\exists \alpha>0;\ \forall K\in\tilde{\mathscr{T}}_h,\ h_K\leq \alpha \rho_K\]
+De plus, les conditions (\ref{eq6.1})-(\ref{eq6.2}) demandent l'hypothèse suivante : l'élément fini générique $(K,P_K,\Sigma_K)$ de la famille $(\tilde{V}_h)_{h\in H}$ statisfait l'équation $P_m(K)\subset P_K$ où $P_n(K)$ définit l'ensemble des polynômes de degré inférieur ou égal à $n$ définis sur $K$.
 
+\bigskip
+À présent, pour tout $h\in H$, on considère le sous-ensemble $\Omega_h$ (voir figure \ref{fig2}) définie par :
+	\begin{equation} \label{eq8} \Omega_h \text{ est l'intérieur de l'union des rectangles } K \text{ de } \mathscr{T}_h \text{ tel que } K\cap\Omega\neq\emptyset \end{equation}
+Il est clair que la famille $(\Omega_h)_{h\in H}$ satisfait les relations (en notant $\mu$ une mesure sur $\tilde{\Omega}$) :
+\begin{eqnarray}
+	\label{eq9} \forall h\in H, \Omega\subset\Omega_h\subset\tilde{\Omega}\\
+	\label{eq10} \lim_{h\to 0} \mu(\Omega_h\backslash\overline{\Omega})=0
+\end{eqnarray}
+Pour tout $h\in H$, on définit :
+	\begin{equation}\label{eq11} V_h=\{\restriction{\phi}{\Omega_h}| \phi\in\tilde{V}_h\}\end{equation}
+Pour tout $\varepsilon>0$, on considère le problème de minimisation suivant : trouver $\sigma_{\varepsilon,h}^\eta\in V_h$ satisfaisant :
+	\begin{equation} \label{eq12} \forall v_h\in V_h,\ J_{\varepsilon, h}^\eta (\sigma_{\varepsilon, h}^\eta)\leq J_{\varepsilon, h}^\eta (v_h) \end{equation}
+où $J_{\varepsilon, h}^\eta$ est la fonctionnelle définie par :
+	\[J_{\varepsilon, h}^\eta=\ell^\eta \left[(v_h-f)^2\right]+\varepsilon |v_h|^2_{m,\Omega_h}\]
+On considère ensuite le problème variationnel suivant : trouver $\sigma_{\varepsilon,h}^\eta\in V_h$ satisfaisant :
+	\begin{equation} \label{eq13} \forall v_h\in V_h,\ \ell^\eta (\sigma_{\varepsilon, h}^\eta v_h)+ \varepsilon \left(\sigma_{\varepsilon, h}^\eta,v_h\right)=\ell^\eta(fv_h) \end{equation}
+où $(u,v)_{m,\Omega_h}=\sum_{|\alpha|=m} \int_{\Omega_h} \partial^\alpha u(x) \partial^\alpha v(x) dx$.\\
+
+\begin{theorem}
+On suppose que $\Omega$, $\omega$, $m$ et $f$ sont définis comme dans la section précédente et que les hypothèses (\ref{eq4}), (\ref{eq5}), (\ref{eq8}) et (\ref{eq11}) sont vérfiées. Alors, pour tout $\varepsilon>0$, tout $h\in H$, il existe $\eta_0>0$ tel que pour tout $\eta\in E$, $\eta\leq\eta_0$, les problèmes (\ref{eq12}) et (\ref{eq13}) admettent une même unique solution.
+\end{theorem}
+
+\bibliographystyle{plain}
+\bibliography{bib}
 \end{document}
