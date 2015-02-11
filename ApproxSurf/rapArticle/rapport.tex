@@ -1,0 +1,20 @@
+\documentclass{article}
+
+\input{../../../preambule}
+\usetikzlibrary{arrows}
+\definecolor{wwqqtt}{rgb}{0.4,0,0.2}
+\definecolor{zzttqq}{rgb}{0.6,0.2,0}
+\definecolor{uququq}{rgb}{0.25,0.25,0.25}
+
+\newtheorem{theorem}{Théorème}[subsection]
+
+\hypersetup{colorlinks=true, urlcolor=bleu, linkcolor=red}
+
+\begin{document}
+Soient $H$ une sous-espace borné de $\mathbb{R}^+\backslash\{0\}$ pour lequel $0$ est un point d'accumulation, $\tilde{\Omega}$ un polygone ouvert de $\mathbb{R}^n$ tel que $\Omega\subset\tilde{\Omega}$ et, pour tout $h\in H$, on note $\tilde{\mathscr{T}}_h$ une triangulation sur $\tilde{\Omega}$ au moyen d'éléments $K$ dont le diamètre $h_K$ sont inférieurs ou égal à $h$ et soit $\tilde{V}_h$ un espace d'éléments finis construit sur $\tilde{\mathscr{T}}_h$ tel que :
+\begin{equation} \label{eq5} \tilde{V}_h \text{ est un sous-espace de dimension fini de } H^m\left(\tilde{\Omega}\right)\cap C^k\left(\overline{\tilde{\Omega}}\right) \end{equation}
+(voir fig. \ref{fig2})
+\input{domOmega}\\
+De plus, pour étudier la convergence de l'approximation, on suppose qu'il existe une famille d'opérateurs linéaires continus $(\tilde{\Pi}_h)_{h\in H}$ de $H^m(\Omega)$ dans $\tilde{V}_h$.
+
+\end{document}
