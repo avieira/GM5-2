@@ -50,6 +50,62 @@ où $(u,v)_{m,\Omega_h}=\sum_{|\alpha|=m} \int_{\Omega_h} \partial^\alpha u(x) \
 On suppose que $\Omega$, $\omega$, $m$ et $f$ sont définis comme dans la section précédente et que les hypothèses (\ref{eq4}), (\ref{eq5}), (\ref{eq8}) et (\ref{eq11}) sont vérfiées. Alors, pour tout $\varepsilon>0$, tout $h\in H$, il existe $\eta_0>0$ tel que pour tout $\eta\in E$, $\eta\leq\eta_0$, les problèmes (\ref{eq12}) et (\ref{eq13}) admettent une même unique solution.
 \end{theorem}
 
+\begin{dem}
+En utilisant un argument de compacité (voir \cite{necas67mthd}), on montre, sous la relation :
+	\[\forall p\in P_{m-1}(\tilde{\Omega}_h),\ \restriction{p}{\omega}=0\Rightarrow p\equiv 0\]
+que la fonction $[|\bullet|]_h$ définie sur $H^m(\Omega_h)$ par :
+	\[[|v|]_h=\left(\|v\|^2_{0,\omega}+|v|_{m,\Omega_h}^2\right)^\frac{1}{2}\]
+est une norme sur $H^m(\Omega_h)$ équivalente à la norme usuelle
+	\[\|v\|_{m,\Omega_h}=\left( \sum_{|\alpha|\leq m} \int_{\Omega_h} (\partial^\alpha v)^2\right)^\frac{1}{2}\]
+En conséquence de la définition de $\ell^\eta$, la forme bilinéaire symétrique :
+	\[(u_h,v_h)\mapsto \ell^\eta(u_hv_h)+\varepsilon (u_h,v_h)_{m,\Omega_h}\]
+est continue sur $V_h\times V_h$. Ainsi, la forme est $V_h$-elliptique pour tout $\eta$ assez petit car en utilisant (\ref{eq4}), on a :
+\begin{equation}\label{eq14}
+\begin{array}{c c l}
+	\ell^\eta(v_h^2)+\varepsilon |v_h|^2_{m,\Omega_h} &\geq& \|v_h\|_{0,\omega}^2-C\eta^t \|v_h\|^2_{m,\Omega} + \varepsilon |v_h|^2_{m,\Omega_h}\\
+							&\geq& \min(1,\varepsilon)\|v_h\|_h^2-C\eta^t \|v_h\|^2_{m,\Omega} \\
+							&\geq& (C'\min(1,\varepsilon)-C\eta^t)\|v_h\|^2_{m,\Omega_h}
+\end{array}
+\end{equation}
+où $C'$ est une constante liée à l'équivalence des normes.\\
+Supposons (voir \cite{arcang04multidim} pour plus de détail) qu'il existe $\beta>0$ tel que, $\forall \varepsilon>0$, $\forall \eta\in E$, $\frac{\eta^t}{\min(1,\varepsilon)}<\beta$. En prenant $\beta=\frac{C'}{C}$, il existe $C''>0$ tel que \[\ell^\eta(v_h^2)+\varepsilon |v_h|^2_{m,\Omega_h}\geq C''\|v_h\|^2_{m,\Omega_h}\]
+La forme est donc bilinéaire symétrique $V_h$-elliptique : le théorème de Lax-Milgram s'applique donc, et l'unicité de la solution est assurée.
+\end{dem}
+
+\begin{rmq}
+En notant $M$ la dimension de $V_h$ et $(\phi_j)_{1\leq j\leq M}$ une base de $V_h$, on pose :
+	\[\sigma_{\varepsilon, h}^\eta=\sum_{j=1}^M \alpha_j \phi_j\]
+avec $\alpha_j\in\mathbb{R}$, $1\leq j\leq M$. On introduit les matrices :
+	\[\mathcal{A}=\left(\ell^\eta (\phi_i\phi_j)\right)_{1\leq i,j\leq M}\] 
+	\[\mathcal{R}=\left((\phi_i, \phi_j)_{m,\Omega_h}\right)_{1\leq i,j\leq M}\]
+	\[\mathcal{F}=\left(\ell^\eta(f\phi_i)\right)_{1\leq i\leq M}\]
+On voit que (\ref{eq13}) est équivalent au problème :
+	\[\text{Trouver } (\alpha=(\alpha_1,...,\alpha_M)\in\mathbb{R}^M \text{ solution de } (\mathcal{A}+\varepsilon\mathcal{R})\alpha=\mathcal{F}\]
+On peut enfin prendre comme approximation de $f$ la fonction $\Phi=\restriction{\sigma_{\varepsilon,h}^\eta}{\Omega}$ qui, en utilisant les hypothèses (\ref{eq5}), (\ref{eq8}) et (\ref{eq11}), appartient à $H^m(\Omega)\cap C^k(\overline{\Omega})$.\\
+On cherche à savoir en quel sens $\Phi$ est une approximation de $f$.
+\end{rmq}
+
+\begin{theorem}
+Sous les mêmes hypothèses, si on suppose de plus que (\ref{eq6}) est vérifié, alors la solution $\sigma_{\varepsilon,h}^\eta$ de (\ref{eq12}) et (\ref{eq13}) satifont :
+\begin{enumerate}
+	\item \[\lim_{\substack{\varepsilon\to 0\\ \frac{h^{2m}}{\varepsilon}\to 0 \\ \frac{\eta^t}{\varepsilon}\to 0}} \|\sigma^\eta_{\varepsilon, h}-\sigma\|_{m,\Omega}=0\]
+où $\sigma$ est la solution de (\ref{eq1}) et où $\beta$ a été introduit dans le théorème précédent
+	\item Il existe une constante positive $C$ telle que :
+		\[\|\sigma_{\varepsilon, h}^\eta - f\|_{0,\omega}^2\leq C\left(h^{2m}+\eta^t o(1)+\varepsilon\right) \text{ où } \varepsilon\to 0, \frac{h^{2m}}{\varepsilon}\to 0, \frac{\eta^t}{\varepsilon}<\beta\]
+\end{enumerate}
+\end{theorem}
+
+\begin{dem}
+Soit $\sigma$ l'unique solution de (\ref{eq1}). On a $\restriction{\sigma}{\omega}=\restriction{f}{\omega}$ et
+	\[\|\sigma_{\varepsilon,h}^\eta -f\|_{0,\omega}^2=\|\sigma_{\varepsilon,h}^\eta -\sigma\|_{0,\omega}^2\]
+On a, en utilisant (\ref{eq4}) : 
+\begin{equation} \label{eq15} \|\sigma_{\varepsilon,h}^\eta -f\|_{0,\omega}^2\leq \ell^\eta \left( \left(\sigma_{\varepsilon, h}^\eta -\sigma\right)^2\right) + C\eta^t \|\sigma_{\varepsilon, h}^\eta -\sigma\|_{m,\Omega}^2 \end{equation}
+D'où, de (\ref{eq12}), on a :
+
+\begin{equation} \label{eq16} \forall v_h\in V_h,\ \ell^\eta\left( \left(\sigma_{\varepsilon, h}^\eta -\sigma\right)^2\right) + \varepsilon |\sigma^\eta_{\varepsilon, h}|^2_{m,\Omega_h}\leq \ell^\eta \left( \left(v_h -\sigma\right)^2\right) + \varepsilon |v_h|^2_{m,\Omega_h} \end{equation}
+
+\end{dem}
+
 \bibliographystyle{plain}
 \bibliography{bib}
 \end{document}
