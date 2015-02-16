@@ -15,4 +15,76 @@ de dimension $2d$}
 
 \Def{Espace cotangent}{On appelle l'espace cotangent le dual d'un espace tangent : \[T_q^*Q=(T_qQ)^*\]}
 
+\section{Rappels}
+\subsection{Calcul différentiel}
+\Def{Crochet de Lie}{Soit $f,g\in V^{\infty}(X)$. On définit : \[[f,g](p)=\restriction{\frac{\partial}{\partial t} (\gamma_{-t}^f)_* g(p)}{t=0}=Dg(x).f(x)-DF(x).g(x)\]}
 
+\Propo{}{\[\forall p\in X,\ \forall t,s\in\mathbb{R},\  \gamma_s^{-g}\circ\gamma_t^{-f}\circ\gamma_s^g\circ\gamma_t^f(p)=p \Leftrightarrow [f,g]\equiv 0\]}
+
+\Propo{}{\begin{enumerate}
+	\item Soit $\gamma_t$ le flot de $\dot{x}=f(x)$. Alors $\sigma_t$, le flot de $\dot{y}=(\phi_*f)(y)$ est : \[\sigma_t=\phi\circ\gamma_t\circ\phi^{-1}\]
+	\item Soient $f,g\in V^{\infty}(X)$ et $\phi$ un difféomorphisme. Alors : \[\phi_*[f,g]=[\phi_*f,\phi_*g]\]
+	\item $\left(\gamma_t^f\right)_* f=f$
+\end{enumerate}}
+
+\Def{Distribution}{Une distribution sur $X$, une variété de dimension $n$, est une application $p\in X \mapsto \mathcal{D}(p)\subset T_p X$.\\
+$\mathcal{D}(p)$ étant un sous-espace linéaire, une distribution est donc un champ de sous-espaces.
+Soient $f_1,...,f_k\in V^{\infty}(X)$. On pose \[\mathcal{D}(p)=vect\{f_1(p),...,f_k(p)\}\]
+On dit alors que $\mathcal{D}$ est de rang constant $(=k)$.}
+
+\Def{}{$\mathcal{D}$ est dite intégrale si $\forall p\in X$, $\exists S$ une variété, $p\in S$ tel que \[T_q S=\mathcal{D}(q),\ \forall q\in S\]}
+
+\Def{Involutive}{$f\in V^{\infty}(X)$. On dit $f\in \mathcal{D}$ si $\forall p\in X$, $f(p)\in \mathcal{D}(p)$.\\
+$\mathcal{D}$ est dite involutive si $f,g\in \mathcal{D}\Rightarrow [f,g]\in\mathcal{D}$.}
+
+\Theo{Frobenius}{Soit $\mathcal{D}$ une distribution de rang constant $k$. Alors les conditions suivants sont équivalentes : 
+\begin{enumerate}
+	\item $\mathcal{D}$ intégrable
+	\item $\mathcal{D}$ involutive
+	\item localement, autour de chaque point $p\in X$, \[\exists (x_1,...,x_k,...,x_n); \mathcal{D}=span\{\frac{\partial}{\partial x_1},...,\frac{\partial}{\partial x_k}\}\]
+\end{enumerate}}
+
+\subsection{Rappel sur les formes différentielles}
+Soit $E$ un espace vectoriel, $e_1,...,e_n$ sa base. On a également $E^*$ son dual, et $e^1,...,e^n$ sa base duale.\\
+\[e^j(e_i)=\delta_i^j\]
+$T:E\times ... \times E\to \mathbb{R}$ $k$-linéaire est dit un $k$-tenseur (ensemble noté $T^k(E)$).\\
+$A^k(E)$ : k-tenseur antisymétriques, ie :
+\begin{eqnarray*}
+	& T(v_1,...,v_i,...,v_j,...,v_k)=-T(v_1,...,v_j,...,v_i,...,v_k)\\
+\Leftrightarrow & T(...,v_i,v_{i+1},...)=-T(...,v_{i+1},v_i,...)\\
+\Leftrightarrow & T(v_{\sigma(1)},...,v_{\sigma(k)})=sgn(\sigma)T(v_1,...,v_k)
+\end{eqnarray*}
+
+$f(p)\in E=T_pX$ champ vecteur, $w(p)\in T^*_p X$ une 1-forme différentielle.
+\[f(x)=\sum_{i=1}^n f^i(x) \derPar{}{x^i} \hspace{3em} w(p)=\sum_{j=1}^n w_j(x) dx^j\]
+\[w(f)=\sum_{j=1}^n w_j(x)f^j(x)\]
+
+De même, une $k$-forme différentielle $\mathcal{C}^\infty$ : $w\in\Lambda^k(X)$
+\[w(x)=\sum_{1\leq i_1<...<i_k\leq n} w_{i_1...i_k}(x)dx^{i_1}\wedge...\wedge dx^{i_k}\]
+
+\subsubsection{Comment définir une distribution ?}
+\begin{enumerate}
+	\item On choisit $f_1,...,f_m\in V^\infty(X)$, et on pose $\mathcal{D}=span\{f_1,...,f_m\}$
+	\item $p\in X\mapsto \mathscr{E}(p)\subset T_p^* X$ est une codistribution. On pose :
+\[\mathcal{D}=\mathscr{E}^\perp = Ker\mathscr{E}=\{f\in V^\infty(X); \langle w,f\rangle =0,\ \forall w\in\mathscr{E}\}\]
+Réciproquement, si $\mathcal{D}$ est une distribution, on pose :
+\[\mathscr{E}=\mathcal{D}^\perp=ann\mathscr{E}=\{w\in\Lambda^k(X); \langle w,f\rangle =0,\ \forall f\in\mathcal{D}\}\]
+\end{enumerate}
+
+\textbf{Remarque :} Si rg$\mathcal{D}$=cste (ou rg$\mathscr{E}$=cste) :
+\begin{enumerate}
+	\item rg $\mathcal{D}$ +rg$\mathscr{E}$= $n$
+	\item $\rangle w,f\langle=0$ peut être considéré point par poinr ou globalement
+\end{enumerate}
+
+\subsubsection{Différentielle extérieure}
+
+Soit $w\in\Lambda^k(X)$.\\
+Si $k=0$, $\Lambda^0(X)=\mathscr{C}^\infty(X)$ \\
+Si $k\geq 1$, $w(x)=\sum_{1\leq i_1<...<i_k\leq n} w_{i_1...i_k}(x)dx^{i_1}\wedge...\wedge dx^{i_k}$ et
+\[dw=\sum_{1\leq i_1<...<i_k\leq n} dw_{i_1...i_k}\wedge dx^{i_1}\wedge...\wedge dx^{i_k}\]
+Ainsi :
+\[\Lambda^0(X)\xrightarrow{d}\Lambda^1(X)\xrightarrow{d}...\xrightarrow{d}\Lambda^n(X)\xrightarrow{d} 0\]
+
+\Propo{}{Soit $w\in\Lambda^1(X)$, soient $f,g\in V^\infty(X)$. On a :
+\[dw=L_fw(g)-L_gw(f)-w([f,g])\]}
