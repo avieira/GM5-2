@@ -119,3 +119,53 @@ est optimal.}
 On suppose que $\forall(t,x)\in[0,T]\times\mathbb{R}^N$, $\exists U(t,x)\in A$ solution de :
 	\[\sup_{\alpha\in\mathscr{A}}\{-L(x,\alpha)-\nabla U(t,x).f(x,\alpha)\}\]
 Alors $U$ est un contrôle optimal en feedback.}
+
+\section{Introduction à l'homogénéisation au 1\ier{} ordre}
+\begin{equation}\label{EDPeps} \tag{$EDP_\varepsilon$}
+\left\{ \begin{array}{r c l l}
+	F\left(\frac{x}{\varepsilon},x, u^\varepsilon, Du^\varepsilon\right)&=&0 &\text{ sur } \Omega\\
+	u^\varepsilon &=& 0 &\text{ sur }\partial\Omega
+\end{array}\right.
+\end{equation}
+
+On suppose : \begin{itemize}
+\item $F$ continue
+\item $F(\bullet, x, r, p)$ est $Y$-périodique où $Y=[0,1]^N$
+\item $\lim_{|p|\to+\infty}F(y,x,r,p)=+\infty$ uniformément en $L$ $\forall y\in\mathbb{R}^N$, $\forall x\in\Omega$, $\forall r\in[-L,L]$
+\item $\exists \mu>0$; $\forall y,x,r,s,p$ avec $r\leq s$ : \[F(y,x,r,p)-F(y,x,s,p)\leq \mu(r-s)\]
+\item $\exists u^\varepsilon\in\mathscr{C}^0$ solution de (\ref{EDPeps})
+\item $F$ lipschitzienne
+\end{itemize}
+
+On va montrer que $u^\varepsilon \to u^0$ solution de :
+\[\left\{ \begin{array}{r c l l}
+	\overline{F}\left(x, u^0, Du^0 \right)&=&0 &\text{ sur } \Omega\\
+	u^0 &=& 0 &\text{ sur }\partial\Omega
+\end{array}\right.\]
+
+$\overline{F}$ est appelé l'hamiltonien effectif.\\
+On s'intéresse au problème :
+\begin{equation}\label{EC} \tag{EC}
+\left\{ \begin{array}{c}
+	F\left(y,x, u, p+D_y v\right)=0 y\in\mathbb{R}^N\\
+	v\ Y\text{-périodique}
+\end{array}\right.
+\end{equation}
+
+\Propo{}{Soit $(x,u,p)\in\Omega\times\mathbb{R}\times\mathbb{R}^N$.\\
+$\exists !\lambda=\overline{F}(x,u,p)$ tel que $\exists v$ solution de (\ref{EC}).}
+
+\textbf{Remaruque :} $v$ n'est pas unique. On l'appelle le correcteur.
+
+\Lem{}{\begin{enumerate}
+	\item $\lim_{|p|\to+\infty}\overline{F}(x,u,p)=+\infty$ uniformément dans $\Omega\times\overline{B(0,L)}$
+	\item $r\mapsto F(x,r,p)-\mu r$ est croissante $\forall x,p$
+	\item $\overline{F}$ est lipschitzienne sur $\Omega\times B(0,L)\times B(0,L)$ $\forall L>0$
+\end{enumerate}
+On a ainsi un principe de comparaison à la limite.}
+
+\Theo{}{$u$ est l'unique solution de :
+\[\left\{ \begin{array}{r c l l}
+	\overline{F}\left(x, u^0, Du^0 \right)&=&0 &\text{ sur } \Omega\\
+	u^0 &=& 0 &\text{ sur }\partial\Omega
+\end{array}\right.\]}
