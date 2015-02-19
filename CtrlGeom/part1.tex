@@ -88,3 +88,42 @@ Ainsi :
 
 \Propo{}{Soit $w\in\Lambda^1(X)$, soient $f,g\in V^\infty(X)$. On a :
 \[dw=L_fw(g)-L_gw(f)-w([f,g])\]}
+
+\Rap{}{$\eta\in\Lambda^k(M)$, $\omega\in\Lambda^l(M)$.
+\[\eta\wedge\omega(v_1,...,v_{k+l})=\frac{1}{k!l!}\sum_{\sigma\in S_{k+l}} sgn(\sigma)\eta(v_{\sigma(1)},...,v_{\sigma(k)}).\omega(v_{\sigma(k+1)},...,v_{\sigma(k+l)})\in \Lambda^{k+l}(M)\]}
+
+Soit $g$ indépendant en chaque point $p\in M$ de $f_1$ et $f_2$.
+\[dw\wedge \omega(f_1,f_2,g)=d\omega (f_1,f_2)\omega(g)\]
+$d\omega\wedge\omega\neq 0 \Leftrightarrow d\omega(f_1,f_2)=-\omega([f_1,f_2])\neq 0$\\
+2 cas possibles :
+\begin{enumerate}
+	\item $\mathcal{D}=span\{f_1,f_2\}$ involutive
+	\item $\mathcal{D}=span\{f_1,f_2\}$ non involutive
+\end{enumerate}
+
+Dans le premier cas, on a un système de coordonnées locales qui redresse le plan. Est-ce de même pour le deuxième cas ? Sachant qu'ils sont bien plus courants, et stable : même s'il est perturbé, le tout reste $\neq 0$ !
+
+\Propo{dans $\mathbb{R}^3$, rg$\mathcal{D}=2$}{Les conditions suivantes sont équivalentes localement autour de $p\in M$
+\begin{enumerate}
+	\item $[f,g](p)\not\in\mathcal{D}=span\{f,g\}$
+	\item $d\omega\wedge\omega(p)\neq 0$, où $\mathcal{D}^\perp=span\{\omega\}$
+	\item $\exists \phi(x,y,z)$ des coordonnées locales autour de $p$ tel que $\phi_*\mathcal{D}=span\left\{\derPar{}{x},\derPar{}{y}, \derPar{}{z}\right\}$
+	\item $\mathcal{D}^\perp=span\{dz-xdy\}$
+\end{enumerate}}
+
+\Propo{}{La condition $d\omega\wedge\omega\equiv 0$ ne dépend pas du choix de $\omega$.}
+
+\Theo{de Frobenius pour les formes différentielles}{Les conditions suivantes sont équivalentes :
+\begin{enumerate}
+	\item $\mathcal{D}$ involutive
+	\item $\exists \alpha_j^i\in\Lambda^1(M)$, $1\leq i,j\leq k$ tel que $d\omega_i=\sum_{i=1}^k \alpha_i^j \wedge \omega_j$, $1\leq i\leq k$
+	\item $d\omega_i=0\mod I$ où $I$ est l'idéal dans $\bigcup_{p\geq 0} \Lambda^p(M)$ engendré par $\omega_1,...,\omega_k$ ie :
+	\[i\in I\Leftrightarrow i=i\wedge \omega_j\]
+	\[d\omega_i\wedge \omega_1\wedge...\wedge \omega_k\equiv 0\]
+\end{enumerate}}
+
+On pose $\mathcal{D}_0=\mathcal{D}$, $\mathcal{D}_{i+1}=\mathcal{D}_i+[\mathcal{D}_0,\mathcal{D}_i]$
+\Def{Vecteur de croissance}{Le vecteur de croissance de $\mathcal{D}$ en $p$ est la suite $(d_i(p)_{i\geq 0}$, où $d_i(p)=dim \mathcal{D}_i(p)$.}
+
+\textbf{Remarque :} Si on n'indique pas $p$, $d_i$ est constant.
+

@@ -1,6 +1,8 @@
 \documentclass{article}
 
 \input{../../../preambule}
+\def\tnd{\left\|\!\left|}
+\def\tng{\right|\!\right\|}
 \usetikzlibrary{arrows}
 \definecolor{wwqqtt}{rgb}{0.4,0,0.2}
 \definecolor{zzttqq}{rgb}{0.6,0.2,0}
@@ -11,7 +13,7 @@
 \hypersetup{colorlinks=true, urlcolor=bleu, linkcolor=red}
 
 \begin{document}
-Soient $H$ une sous-espace borné de $\mathbb{R}^+\backslash\{0\}$ pour lequel $0$ est un point d'accumulation, $\tilde{\Omega}$ un polygone ouvert de $\mathbb{R}^n$ tel que $\Omega\subset\tilde{\Omega}$ et, pour tout $h\in H$, on note $\tilde{\mathscr{T}}_h$ une triangulation sur $\tilde{\Omega}$ au moyen d'éléments $K$ dont le diamètre $h_K$ sont inférieurs ou égal à $h$ et soit $\tilde{V}_h$ un espace d'éléments finis construit sur $\tilde{\mathscr{T}}_h$ tel que :
+Soient $H$ un sous-espace borné de $\mathbb{R}^+\backslash\{0\}$ pour lequel $0$ est un point d'accumulation, $\tilde{\Omega}$ un polygone ouvert de $\mathbb{R}^n$ tel que $\Omega\subset\tilde{\Omega}$ et, pour tout $h\in H$, on note $\tilde{\mathscr{T}}_h$ une triangulation sur $\tilde{\Omega}$ au moyen d'éléments $K$ dont le diamètre $h_K$ sont inférieurs ou égal à $h$ et soit $\tilde{V}_h$ un espace d'éléments finis construit sur $\tilde{\mathscr{T}}_h$ tel que :
 \begin{equation} \label{eq5} \tilde{V}_h \text{ est un sous-espace de dimension fini de } H^m\left(\tilde{\Omega}\right)\cap C^k\left(\overline{\tilde{\Omega}}\right) \end{equation}
 (voir fig. \ref{fig2})
 \input{domOmega}\\
@@ -86,7 +88,7 @@ On cherche à savoir en quel sens $\Phi$ est une approximation de $f$.
 \end{rmq}
 
 \begin{theorem}
-Sous les mêmes hypothèses, si on suppose de plus que (\ref{eq6}) est vérifié, alors la solution $\sigma_{\varepsilon,h}^\eta$ de (\ref{eq12}) et (\ref{eq13}) satifont :
+Sous les mêmes hypothèses, si on suppose de plus que (\ref{eq6.1})-(\ref{eq6.2}) est vérifié, alors la solution $\sigma_{\varepsilon,h}^\eta$ de (\ref{eq12}) et (\ref{eq13}) satifont :
 \begin{enumerate}
 	\item \[\lim_{\substack{\varepsilon\to 0\\ \frac{h^{2m}}{\varepsilon}\to 0 \\ \frac{\eta^t}{\varepsilon}\to 0}} \|\sigma^\eta_{\varepsilon, h}-\sigma\|_{m,\Omega}=0\]
 où $\sigma$ est la solution de (\ref{eq1}) et où $\beta$ a été introduit dans le théorème précédent
@@ -100,10 +102,100 @@ Soit $\sigma$ l'unique solution de (\ref{eq1}). On a $\restriction{\sigma}{\omeg
 	\[\|\sigma_{\varepsilon,h}^\eta -f\|_{0,\omega}^2=\|\sigma_{\varepsilon,h}^\eta -\sigma\|_{0,\omega}^2\]
 On a, en utilisant (\ref{eq4}) : 
 \begin{equation} \label{eq15} \|\sigma_{\varepsilon,h}^\eta -f\|_{0,\omega}^2\leq \ell^\eta \left( \left(\sigma_{\varepsilon, h}^\eta -\sigma\right)^2\right) + C\eta^t \|\sigma_{\varepsilon, h}^\eta -\sigma\|_{m,\Omega}^2 \end{equation}
-D'où, de (\ref{eq12}), on a :
+De plus, de (\ref{eq13}), on a :
 
 \begin{equation} \label{eq16} \forall v_h\in V_h,\ \ell^\eta\left( \left(\sigma_{\varepsilon, h}^\eta -\sigma\right)^2\right) + \varepsilon |\sigma^\eta_{\varepsilon, h}|^2_{m,\Omega_h}\leq \ell^\eta \left( \left(v_h -\sigma\right)^2\right) + \varepsilon |v_h|^2_{m,\Omega_h} \end{equation}
+Soit $\tilde{\sigma}$ un prolongement $\mathscr{C}^m$ de $\sigma$ sur $\tilde{\Omega}$, en prenant (via (\ref{eq6.1})) $v_h=\tilde{\Pi}_h\tilde{\sigma}\in H^m(\tilde{\Omega})$, on obtient :
+	\begin{equation} \label{eq17} \ell^\eta \left( \left(\sigma_{\varepsilon, h}^\eta -\sigma\right)^2\right)\leq \ell^\eta \left(\left(\tilde{\Pi}_h\tilde{\sigma}-\sigma\right)^2\right) + \varepsilon |\tilde{\Pi}_h\tilde{\sigma}|^2_{m,\Omega_h} \end{equation}
+Cependant, par (\ref{eq6.2}), il existe $h_0\in H$ tel que : 
+	\begin{equation} \label{eq18} \forall h\leq h_0,\ \left| \tilde{\Pi}_h\tilde{\sigma}\right|^2_{m,\Omega_h}\leq \left|\tilde{\Pi}_h\tilde{\sigma}\right|^2_{m,\tilde{\Omega}}\leq C|\tilde{\sigma}|^2_{m,\tilde{\Omega}}\leq C\|\sigma\|^2_{m,\Omega} \end{equation}
 
+De plus, en utilisant (\ref{eq4}), on a :
+\[\ell^\eta \left(\left(\tilde{\Pi}_h\tilde{\sigma}-\sigma\right)^2\right)\leq \left\| \tilde{\Pi}_h\tilde{\sigma} -\sigma\right\|^2_{0,\omega}+C\eta^t \left\| \tilde{\Pi}_h\tilde{\sigma} -\sigma\right\|^2_{m,\Omega}\]
+Et avec (\ref{eq6.1}) :
+\[\left\| \tilde{\Pi}_h\tilde{\sigma} -\sigma\right\|_{0,\omega}\leq \left\| \tilde{\Pi}_h\tilde{\sigma} -\tilde{\sigma}\right\|_{0,\tilde{\Omega}}\leq Ch^m |\tilde{\sigma}|_{m,\tilde{\Omega}}\]
+D'où, en utilisant (\ref{eq6.1}) :
+\begin{equation} \label{eq19} \ell^\eta \left(\left( \tilde{\Pi}_h\tilde{\sigma}-\sigma\right)^2\right) \leq Ch^{2m}|\tilde{\sigma}|^2_{m,\tilde{\Omega}} +C\eta^t o(1)\ h\to 0 \end{equation}
+De (\ref{eq17}) et (\ref{eq19}), on déduit que :
+\begin{equation}\label{eq20}  \ell^\eta \left( \left( \sigma_{\varepsilon,h}^\eta-\sigma\right)^2\right)\leq Ch^{2m}|\tilde{\sigma}|_{m,\tilde{\Omega}} + C\eta^to(1)+\varepsilon \left|\tilde{\Pi}_h\tilde{\sigma}\right|^2_{m,\Omega_h}\ h\to 0 \end{equation}
+Et donc, en utilisant (\ref{eq15}) :
+\begin{equation}\label{eq21}
+\begin{array}{c c l}
+	\|\sigma_{\varepsilon, h}^\eta - \sigma\|^2_{0,\omega}&\leq& Ch^{2m}|\tilde{\sigma}|_{m,\tilde{\Omega}} + C\eta^t o(1) + \varepsilon \left|\tilde{\Pi}_h\tilde{\sigma}\right|^2_{m,\Omega_h} + C\eta^t \|\sigma_{\varepsilon, h}^\eta - \sigma\|^2_{m,\Omega}\\
+&\leq& C(h^{2m} + \eta^t o(1)) + \varepsilon \left|\tilde{\Pi}_h\tilde{\sigma}\right|^2_{m,\Omega_h} + C\eta^t\|\sigma_{\varepsilon, h}^\eta - \sigma\|^2_{m,\Omega}
+\hspace{3em} h\to 0
+\end{array}
+\end{equation}
+
+De même, les relations (\ref{eq16}) avec $v_h=\tilde{\Pi}_h\tilde{\sigma}$, (\ref{eq18}) et (\ref{eq19}) implique que :
+\begin{equation}\label{eq22}
+|\sigma_{\varepsilon, h}^\eta - \sigma|^2_{m,\Omega}\leq C\left(\frac{h^{2m}}{\varepsilon} + \frac{\eta^t}{\varepsilon} o(1) + \|\sigma\|^2_{m,\Omega}\right)
+\hspace{3em} h\to 0
+\end{equation}
+Finalement, en utilisant (\ref{eq21}) et (\ref{eq22}), on obtient :
+\begin{equation}\label{eq23}
+\tnd \sigma_{\varepsilon, h}^\eta - \sigma\tng^2_{0,\Omega}\leq C(\varepsilon+1)\left(\frac{h^{2m}}{\varepsilon} + \frac{\eta^t}{\varepsilon} o(1) + \|\sigma\|^2_{m,\Omega}\right)+C\eta^t \left\| \sigma_{\varepsilon, h}^\eta -\sigma\right\|^2_{m,\Omega} \hspace{3em} h\to 0
+\end{equation}
+où $\tnd\bullet\tng$ est défini dans (\ref{eq2}). Puisque cette norme est équivalente à la norme usuelle dans $H^m(\Omega)$, on déduit de (\ref{eq23}) que :
+\[(1-C\eta^t)\left\|\sigma^\eta_{\varepsilon, h}-\sigma\right\|_{m,\Omega}^2\leq C(\varepsilon+1)\left(\frac{h^{2m}}{\varepsilon} + \frac{\eta^t}{\varepsilon} o(1) + \|\sigma\|^2_{m,\Omega}\right) \hspace{3em} h\to 0\]
+Soit $\eta'$ une constante positive inférieure à $\left( \frac{1}{C}\right)^\frac{1}{t}$. Ainsi, la famille $(\sigma^\eta_{\varepsilon, h})_{\eta,\varepsilon, h}$ est bornée dans $H^m(\Omega)$ si :
+\begin{equation} \label{eq24}
+\begin{array}{c c c c}
+	\varepsilon\to 0,& \frac{h^{2m}}{\varepsilon}\to 0,& \eta\leq \eta' & \frac{\eta^t}{\varepsilon}\leq \beta
+\end{array}
+\end{equation}
+Cela implique donc que $H^m(\Omega)$ contient une suite  $(\sigma^{\eta_n}_{\varepsilon_n, h_n})_{n\in\mathbb{N}^*}$ extraite de la famille $(\sigma^\eta_{\varepsilon, h})_{\eta,\varepsilon, h}$ et une fonction $\sigma^*\in H^m(\Omega)$ tel que :
+\begin{equation} \label{eq25} 
+\sigma^{\eta_n}_{\varepsilon_n, h_n}\rightharpoonup \sigma^* \hspace{3em} \text{ dans } H^m(\Omega)
+\end{equation}
+\[\text{avec } \lim_{n\to +\infty} \varepsilon_n = \lim_{n\to +\infty} \frac{h_n^{2m}}{\varepsilon_n}=0, \hspace{1em} (\eta_n)\subset (0,\eta'),\hspace{1em} \left(\frac{\eta^t_n}{\varepsilon_n}\right)\subset (0,\beta)\]
+
+On doit maintenant montrer que $\sigma^*=\sigma$. En considérant (\ref{eq20}) et (\ref{eq22}) appliqué à la suite $(\sigma^{\eta_n}_{\varepsilon_n, h_n})_{n\in\mathbb{N}^*}$ :
+\[\exists C>0\]
+\begin{equation}\label{eq26}  \ell^{\eta_n} \left( \left( \sigma^{\eta_n}_{\varepsilon_n, h_n}-\sigma\right)^2\right)\leq Ch_n^{2m}|\tilde{\sigma}|_{m,\tilde{\Omega}} + C\eta_n^to(1)+\varepsilon_n \left|\tilde{\Pi}_{h_n}\tilde{\sigma}\right|^2_{m,\Omega_{h_n}}\hspace{2em} n\to +\infty \end{equation}
+\[\left|\sigma^{\eta_n}_{\varepsilon_n, h_n}\right|^2_{m,\Omega}\leq C\left(\frac{h_n^{2m}}{\varepsilon_n} + \frac{\eta_n^t}{\varepsilon_n} o(1) \right) + \left|\tilde{\Pi}_{h_n}\tilde{\sigma} \right|^2_{m,\Omega_{h_n}}\hspace{2em} n\to +\infty\]
+Mais, pour $n$ assez grand, on a, sachant que $\left|\tilde{\Pi}_{h_n}\tilde{\sigma}\right|_{m,\Omega_{h_n}}\to |\sigma|_{m,\Omega}$ :
+\[\left|\tilde{\Pi}_{h_n}\tilde{\sigma}\right|_{m,\Omega_{h_n}}^2\leq |\sigma|_{m,\Omega}^2+\mu^2 \hspace{2em} \mu>0 \text{ arbitrairement petit}\]
+Et il vient :
+\begin{equation}\label{eq27}
+	\left|\sigma^{\eta_n}_{\varepsilon_n, h_n}\right|^2_{m,\Omega}\leq C\left(\frac{h_n^{2m}}{\varepsilon_n} + \frac{\eta_n^t}{\varepsilon_n} o(1) \right) + |\sigma|_{m,\Omega}^2+\mu^2\hspace{2em} n\to +\infty
+\end{equation}
+de (\ref{eq4}), on a :
+\[\left\|\sigma^{\eta_n}_{\varepsilon_n, h_n}-\tilde{\sigma}\right\|^2_{0,\omega}\leq \ell^{\eta_n}\left(\left( \sigma^{\eta_n}_{\varepsilon_n, h_n}-\tilde{\sigma}\right)^2\right) +C\eta^t_n\|\sigma^{\eta_n}_{\varepsilon_n, h_n}-\tilde{\sigma}\|^2_{m,\Omega}\]
+Puis, en utilisant (\ref{eq26}), et comme la suite $(\sigma^{\eta_n}_{\varepsilon_n, h_n})_{n\in\mathbb{N}^*}$ est borné dans $H^m(\Omega)$, on a :
+\begin{equation}\label{eq28}
+\left\|\sigma^{\eta_n}_{\varepsilon_n, h_n}-\tilde{\sigma}\right\|^2_{0,\omega}\leq C\varepsilon_n\left(\frac{h_n^{2m}}{\varepsilon_n}+\frac{\eta_n^t}{\varepsilon_n}o(1)+|\sigma|^2_{m,\Omega}+\mu^2+\frac{\eta_n^t}{\varepsilon_n} \right) \hspace{2em} n\to +\infty
+\end{equation}
+Et on a donc :
+\begin{equation}\label{eq29}
+\begin{array}{r c c c l}
+|\sigma^*|^2_{m,\Omega}&\leq& \liminf_{n\to +\infty} \left|\sigma^{\eta_n}_{\varepsilon_h, h_n}\right|^2_{m,\Omega}&\leq& |\sigma|^2_{m,\Omega}+\mu^2\\
+\|\sigma-\sigma^*\|^2_{0,\omega}&\leq& \liminf_{n\to +\infty} \left\|\sigma^{\eta_n}_{\varepsilon_n,h_n}-\tilde{\sigma}\right\|^2_{0,\omega}&\leq& 0
+\end{array}
+\end{equation}
+Et comme $\mu$ est arbitrairement petit :
+	\[\sigma^*\in H^m(\Omega)\]
+	\[|\sigma^*|_{m,\Omega}\leq |\sigma|_{m,\Omega}\]
+	\[\sigma=\sigma^* \text{ sur } \omega\]
+Et donc $\sigma=\sigma^*$ dans $H^m(\Omega)$ en considérant l'existance et l'unicité de la solution du problème (\ref{eq1}).
+
+\bigskip
+On montre maintenant que $\lim_{n\to +\infty} \sigma^{\eta_n}_{\varepsilon_n, h_n}=\sigma$ dans $H^m(\Omega)$ Comme $H^m(\Omega)\Subset H^{m-1}(\Omega)$, et vu que $\sigma=\sigma^*$ dans $H^m(\Omega)$, on a $\lim_{n\to +\infty} \sigma^{\eta_n}_{\varepsilon_n, h_n}=\sigma$ dans $H^{m-1}(\Omega)$. De plus, pour tout $n\in\mathbb{N}$.
+	\[\left| \sigma^{\eta_n}_{\varepsilon_n, h_n}-\sigma\right|^2_{m,\Omega}\leq \left| \sigma^{\eta_n}_{\varepsilon_n, h_n}\right|^2_{m,\Omega}+\left|\sigma\right|^2_{m,\Omega}-2\left( \sigma^{\eta_n}_{\varepsilon_n, h_n},\sigma\right)_{m,\Omega}\]
+Et donc, en utilisant (\ref{eq27}), on obtient :
+\[\left| \sigma^{\eta_n}_{\varepsilon_n, h_n}-\sigma\right|^2_{m,\Omega}\leq C\left(\frac{h_n^{2m}}{\varepsilon_n} + \frac{\eta_n^t}{\varepsilon_n} o(1) \right) + 2|\sigma|_{m,\Omega}^2+\mu^2-2\left( \sigma^{\eta_n}_{\varepsilon_n, h_n},\sigma\right)_{m,\Omega}\hspace{2em} n\to +\infty\]
+Or, comme $\sigma^{\eta_n}_{\varepsilon_n, h_n}\rightharpoonup \sigma^*$ dans $H^m(\Omega)$ 
+\[\lim_{n\to +\infty} \left| \sigma^{\eta_n}_{\varepsilon_n, h_n}-\sigma\right|^2_{m,\Omega}\leq 2|\sigma|_{m,\Omega}^2 +\mu^2-2(\sigma, \sigma)_{m,\Omega}=\mu^2\]
+Le résultat vient du fait que $\mu$ est arbitrairement petit.
+
+\bigskip
+Pour terminer la preuve, on suppose que :
+\[\lim \left\| \sigma^\eta_{\varepsilon, h}-\sigma\right\|^2_{m,\Omega}\neq 0\]
+avec $\varepsilon\to 0$, $\frac{h^{2m}}{\varepsilon}\to 0$, $\frac{\eta^t}{\varepsilon}<\beta$. Il existe donc une suite $(d'_n, \eta_n', \varepsilon'_n, h_n')_{n\in\mathbb{N}^*}$ tel que $\lim_{n\to +\infty} \varepsilon'_n = \lim_{n\to +\infty} \frac{h'{}^{2m}_n}{\varepsilon'_n}=0$, $\left(\frac{\eta{}'^t_n}{\varepsilon'_n}\right)\leq \beta$ satisfaisant pour tout $n\in\mathbb{N}^*$
+\[\left\| \sigma^{d'_n,\eta'_n}_{\varepsilon'_n, h'_n}-f\right\|_{m,\Omega}>\alpha\]
+(Mais qu'est-ce que ce $d_n$...?)\\
+Mais une telle suite est bornée dans $H^m(\Omega)$, et on aboutit donc à une contradiction.\\
+Le deuxième point est une conséquence de (\ref{eq21}) et du premier point, en prenant en compte que $\restriction{\sigma}{\omega}=\restriction{f}{\omega}$.
 \end{dem}
 
 \bibliographystyle{plain}
