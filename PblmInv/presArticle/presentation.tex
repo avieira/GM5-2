@@ -108,4 +108,88 @@ Longue démonstration pour avoir :
 avec $\beta_{-k}=-\beta_k$ et \[r_{kj}(z)=\frac{\int_{\Omega_z} \frac{\partial n^2}{\partial z} U_kU_j ds}{2(\beta_k-\beta_j)}\]
 pour tout $j\neq k$, $j,k\neq 0$\\
 \end{frame}
+
+\section{Résultats numériques et interprétation}
+\begin{frame}
+	\frametitle{Discrétisation}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.15]{images/numOpti.png}
+	\caption{Profil du taper : discrétisation pour le problème d'optimisation}
+	\label{fig:numOpti}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Résultats numériques}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.175]{images/result48.png}
+	\caption{Profil du taper : résultat avec $N=48$. (a) Forme initial du taper (b) Forme optimale (c) Perte d'énergie en fonction du nombre d'itérations.}
+	\label{fig:result48}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Résultats numériques}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.22]{images/powMode.png}
+	\caption{L'énergie est préservée grâce à la resonnance avec les autres modes}
+	\label{fig:powMode}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Un problème mal posé}
+\begin{itemize}
+	\item Variations arbitrairement grandes sur l'indice de refraction $n$ $\Rightarrow$ Une solution $U$ toujours aussi proche qu'on veut.
+	\item Or, dans l'algorithme d'optimisation, la fonction objectif et les contraintes ne dépendent que de $U$, et non de $n$ !
+	\item Point de vue physique : l'onde ne voit pas les pics plus petites que sa longueur d'onde
+	\item Pour gagner en stabilité : réduire l'espace de recherche (ajouter de la continuité par exemple)
+	\item À contrario, on pourrait plutôt essayer de chercher la distribution des indices provenant d'une certaine mesure.
+\end{itemize}
+\[\Rightarrow \text{ approche problème inverse}\]
+\end{frame}
+
+\section{Approche par problèmes inverses}
+\begin{frame}
+	\frametitle{Formulation du problème}
+\[1=\sum_{k\in RB} |a_{-k}(0)|^2 + \sum_{k\in RB} |a_k(z_R)|^2 \]
+\[\text{avec } RB=\{k\in \mathbb{Z}^* | \beta_k^2>0\}\]
+Pour rappel :
+	\[U(x,z_R)=\sum_{k=1}^\infty a_k(z_R)U_k^{(R)}(x)\]
+Égalité seulement si :
+\begin{equation}\label{eq23}
+	\begin{bmatrix} |a_1(z_R)| \\ |a_2(z_R)| \\ |a_3(z_R)| \\ \vdots \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \end{bmatrix}
+\end{equation}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Formulation du problème}
+Avantage numérique : on prend en compte tous les $a_k$ !\\
+Dépendance non linéaire de $n$, et pas forcément de solution. D'où : approche par moindre carrés, et utilisation de la méthode de Newton.
+\begin{equation}\label{eq24}
+	\restriction{\frac{\partial\mathbf{a}}{\partial n}}{n}\delta n=\mathbf{a}_1-\mathbf{a}(n)
+\end{equation}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Formulation du problème}
+	\[\restriction{\frac{\partial\mathbf{a}}{\partial n}}{n}=UDV^T\]
+Instabilité numérique reglé par troncature des valeurs singulières du jacobien : choix de $0<\alpha<1$ et :
+	\[r:=\max\{i | d_i\geq \alpha d_1\}\]
+Et :
+	\[D_{red}=diag(d_1,...,d_r,0,...,0)\]
+\begin{equation}\label{eq26}
+	\delta n=VD_{red}^\dagger U^\dagger [\mathbf{a}_1-\mathbf{a}(n)]
+\end{equation}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Formulation du problème}
+	\[\min F(\lambda)=\|\mathbf{a}_1-\mathbf{a}(n_k+\lambda\delta n)\|_2^2\]
+
+\end{frame}
+
 \end{document}
