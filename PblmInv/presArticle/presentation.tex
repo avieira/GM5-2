@@ -189,7 +189,24 @@ Et :
 \begin{frame}
 	\frametitle{Formulation du problème}
 	\[\min F(\lambda)=\|\mathbf{a}_1-\mathbf{a}(n_k+\lambda\delta n)\|_2^2\]
+	\[n_{k+1}=n_k+\lambda_{min}\delta n\]
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.14]{images/convAlgo13.png}\\
+	\includegraphics[scale=0.16]{images/convAlgo48.png}
+	\caption{(1) N=13, M=10 modes (2) N=48, M=15}
+	\label{fig:accConv}
+\end{figure}
+\end{frame}
 
+\section*{Conclusion}
+\begin{frame}
+	\frametitle{Conclusion}
+\begin{itemize}
+	\item Une approche par problème inverse efficace, mais sous certaines contraintes
+	\item Moyen d'améliorer : algorithme en cascade
+	\item Calculs très formels : il manque parfois quelques considérations mathématiques (notamment sur les séries)
+\end{itemize}
 \end{frame}
 
 \end{document}

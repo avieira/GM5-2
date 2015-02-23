@@ -260,7 +260,7 @@ C'est l'équation d'évolution des amplitudes $\gamma_k(z)$. Notons que :
 \begin{enumerate}
 \item Le membre de droit ne dépend pas de $\gamma_k$, ce qui signifie que l'équation décrit le couplage entre les différents modes
 \item Dans un guide d'onde de section constante, $r_{kj}=0$, donc $\gamma_k(z)$ est constant, comme attendu.
-\item Une borne supérieure pour le couplage est donné par $r_{kj}\leq \frac{\int_{\Omega_z} \left|\frac{\partial n^2}{\partial z}\right|ds}{2|\beta_k-\beta_j|}$, et donc le couplage tent à être plus fort avec les voisins immédiats, pour lesquels $|\beta_k-\beta_j$ est petit.
+\item Une borne supérieure pour le couplage est donné par $r_{kj}\leq \frac{\int_{\Omega_z} \left|\frac{\partial n^2}{\partial z}\right|ds}{2|\beta_k-\beta_j|}$, et donc le couplage tend à être plus fort avec les voisins immédiats, pour lesquels $|\beta_k-\beta_j|$ est petit.
 \end{enumerate}
 
 \subsection{Précisions sur les conditions aux bords}
@@ -278,7 +278,7 @@ Le problème posé précédent a été discrétisé de la manière suivante : la
 \end{figure}
 
 \bigskip
-Cette discrétisation impose une régularité très faible pour le profil du taper. On pourrait en effet obtenir des solution avec un profil totalement discontinu. Le champ est calculé grâce à l'analyse faite sur les modes locaux. Les guides d'onde en entrée et en sortie sont choisis tels qu'ils aient au moins un mode guidé. Les dérivées requises sont calculées via un schmé de type différences finies, avec $N=13$ ou $48$ et une solution initiale qui est une droite comme montrée figure \ref{fig:numOpti}.
+Cette discrétisation impose une régularité très faible pour le profil du taper. On pourrait en effet obtenir des solution avec un profil totalement discontinu. Le champ est calculé grâce à l'analyse faite sur les modes locaux. Les guides d'onde en entrée et en sortie sont choisis tels qu'ils aient au moins un mode guidé. Les dérivées requises sont calculées via un schéma de type différences finies, avec $N=13$ ou $48$ et une solution initiale qui est une droite comme montrée figure \ref{fig:numOpti}.
 
 \subsection{Résultats et interprétation physique}
 Les résultats sont assez étonnants : en effet, on pense en général que le profil devrait plutôt ressembler à une courbe assez lisse. Cependant, comme on peut le voir figure \ref{fig:result48}, le résultat n'est pas vraiment ce à quoi on s'attendait. 
@@ -302,7 +302,7 @@ Cependant, ces résultats soulèvent une autre problématique : le problème est
 
 \subsection{Un problème mal posé}
 Les résultats précédents montrent une certaine instabilité au niveau de l'optimisation du profil. Pire encore, cette instabilité semble croître encore avec le nombre de sous-sections $N$.\\
-Cela s'explique par le fait qu'on peut toujours trouver une variation arbitrairement grande de la solution qui donnerait toujours un champ $U$ arbitraire assez proche. La solution optimale est donc instable par rapport aux variation de l'indice de réfraction du profil.
+Cela s'explique par le fait qu'on peut toujours trouver une variation arbitrairement grande de la solution qui donnerait toujours un champ $U$ arbitraire assez proche. La solution optimale est donc instable par rapport aux variations de l'indice de réfraction du profil.
 On peut voir cela ainsi : supposons que nous avons une solution avec $n^2$ de notre problème d'optimisation, et appliquons une perturbation $\delta n^2$ à $n^2$. Le champ résultant $U$ subira également une perturbation $\delta U$ qui est donné au premier ordre par (\ref{eq10}) :
 \begin{equation}\label{eq20}
 \begin{array}{l r}
@@ -330,7 +330,9 @@ Pour en revenir à notre problème, la fonction de Green $G(r,r')$ est exprimée
 Le champ $\delta U$ est ainsi donné par l'expresion : 
 \[G\Delta\delta U - \delta U\Delta G\equiv \nabla .(G\nabla\delta U - \delta U\nabla G)\]
 
-[... Passage incompris....]
+On intègre sur $\Omega$, et on obtient :
+\[\delta U(r)=\int_{r'\in\Omega} -G(r',r)U(r')\delta n^2(r')d\nu - \underbrace{\int_{r'\in\partial\Omega} \left( G(r',r)\frac{\partial U(r')}{\partial n} -U\derPar{G(r')}{n}\right).n ds'}_{=0 \text{ dû aux conditions aux bords}}\]
+(Et ce passage avec la fonction de Green a été totalement incompris, pour être honnête)
 
 \bigskip
 On a donc :
@@ -340,10 +342,10 @@ On a donc :
 C'est une relation intégrale reliant $\delta U$ et $\delta n^2$. Si on considère $\delta U$ donné, (\ref{eq22}) peut être vu comme une équation intégrale (de Fredholm) du premier type pour $\delta n^2$ avec l'opérateur intégral :
 \[K : \delta n^2 \mapsto -\int_{z\in\Omega} G(r,r')U(r')\delta n^2(r') dv\]
 qui est, en tant qu'opérateur à noyau, compact dans l'espace des fonctions continues $\mathscr{C}^0(\Omega)$. \\
-Selon \cite{engl96regu}, les équations intégrale du premier ordre à opérateur compact débouchent sur des problèmes mal posé, dans le sens que pour tout $\delta U$ admissible correspondant à une solution $\delta n^2$, pour tout $\varepsilon$ petit, il existe une autre fonction $\delta n_1^2$ assez éloignée de $\delta n^2$ (mais typiquement, différent de $\delta n^2$ uniquement sur un petit ensemble) tel que $\|K(\delta n_1^2)-\delta U\|<\varepsilon$\\
+Selon \cite{engl96regu}, les équations intégrales du premier ordre à opérateur compact débouchent sur des problèmes mal posé, dans le sens que pour tout $\delta U$ admissible correspondant à une solution $\delta n^2$, pour tout $\varepsilon$ petit, il existe une autre fonction $\delta n_1^2$ assez éloignée de $\delta n^2$ (mais typiquement, différent de $\delta n^2$ uniquement sur un petit ensemble) tel que $\|K(\delta n_1^2)-\delta U\|<\varepsilon$\\
 On en vient donc aux remarques suivantes :
 \begin{enumerate}
-\item Puisque les fonctions objectifs et les contraintes sur les deux problèmes d'optimisation précédents dépendent explicitement et continuement du champ $U$, et non de l'indice de réfraction $n^2$, de petites variations dans le champ impliquent de petites variation dans les contraintes et les fonctions objectifs. Donc, si $n^2$ est une solution optimale, alors il existe $n_1^2$ aussi éloigné de $n^2$ que l'on veut qui minimise la fonction objectif et qui satisfait également les contraintes à une précision arbitraire.
+\item Puisque les fonctions objectifs et les contraintes sur les deux problèmes d'optimisation précédents dépendent explicitement et continuement du champ $U$, et non de l'indice de réfraction $n^2$, de petites variations dans le champ impliquent de petites variations dans les contraintes et les fonctions objectifs. Donc, si $n^2$ est une solution optimale, alors il existe $n_1^2$ aussi éloigné de $n^2$ que l'on veut qui minimise la fonction objectif et qui satisfait également les contraintes à une précision arbitraire.
 \item Tout schéma d'optimisation qui utilise d'une quelconque manière la linéarisation précédente pour trouver une direction locale de descente rencontrera des instabilités si on n'ajoute aucune présomption sur l'espace dans lequel on recherche la solution, c'est-à-dire si on cherche une solution optimale $n^2$ dans tout $\mathscr{C}^0(\Omega)$.
 \item D'un point de vue physique, ce caractère mal-posé du problème vient du fait que la puissance transmise n'est pas sensible à de grands changements de l'indice de réfraction sur un petit intervalle (comme un pic). En effet, l'onde $U$ "ne voit pas" les variations dans l'indice de réfraction qui sont plus petites que la longueur d'onde de $U$.
 \item On pourrait gagner en stabilité en limitant notre recherche à un espace de fonction plus petit. Par exemple, on pourrait chercher la solution optimale $n^2$ dans un sous-ensemble borné de $\mathscr{C}^1(\Omega)$, ce qui éviterait les pics sus-mentionnés. L'équation (\ref{eq22}) deviendrait alors une fonction $K : \mathscr{C}^1(\Omega)\to K(\mathscr{C}^1(\Omega))$ qui aurait un inverse (s'il existe) dans $\mathscr{C}^0(\Omega)$ dû à la compacité de $\mathscr{C}^0(\Omega)$ dans $\mathscr{C}^1(\Omega)$. Si cet inverse n'existe pas, on peut toujours considérer l'inverse généralisé et calculer de manière stable en troncant les valeurs singulières (voir \cite{engl96regu}). Ces considérations seront la base de l'algorithme alternatif décrit juste après.
@@ -353,7 +355,6 @@ Pour terminer cette discussion, nous allons discuter le role que joue le fait qu
 On considère le problème d'optimisation qui est de trouver une (et pas la) distribution des indices de refraction remplissant un certain nombre de critères. Dans un tel problème, l'uncité n'est pas importante, ni même la stabilité de la solution optimale, puisqu'on souhaite principalement remplir les critères d'optimalité. A contrario, on pourrait aussi considérer le problème inverse, qui est d'identifier la distribution des indices de réfraction provenant d'une certaine mesure. Ce problème inverse est un problème d'identification de paramètre pour une équation aux dérivées partielle et donc mal-posé dans le sens que pour aucune norme disons raisonnable, sa solution (si elle est unique) ne sera pas stable au regard des perturbations sur les données (voir \cite{engl96regu}). Mathématiquement, les deux problèmes sont équivalents - seule la manière de voir le problème est différent. 
 On pourrait donc penser que le fait que ce soit mal-posé n'est pas important. Cependant, tout optimiseur digne de ce nom utilisera l'information donnée par le gradient. Comme montré avant, le problème linéarisé à partir duquel on récupère le gradient est en fait mal posé puisqu'il peut être décrit comme une équation intégrale du premier ordre avec un opérateur compact. 
 C'est une propriété lié à notre linéarisation, peu importe la manière dont on la résoud, c'est-à-dire même si on n'utilise pas l'intégrale dans notre simulation. Et cela est bien retrouvé dans les simulations !\\
-(À voir si on garde...)
 
 \section{L'approche par problème inverse}
 Cette approche est basée sur la conservation de la puissance pour (\ref{eq10}), ie :
@@ -389,11 +390,10 @@ L'étape $\delta n$ est donc choisi comme : \begin{equation}\label{eq26}
 	\delta n=VD_{red}^\dagger U^\dagger [\mathbf{a}_1-\mathbf{a}(n)]
 \end{equation}
 
-(Revoir direction de descente)
 
 \section{Simulation numérique utilisant l'approche problème inverse}
 L'algorithme utilisé est le suivant : étant donné une étape $n_k$ donné, la prochaine itération est donné par (\ref{eq26}). On cherche ensuite à minimiser :
-	\[F(\lambda)=\|\mathbf{a}_1-\mathbf{a}(n_k+\lambda\delta n\|_2^2\]
+	\[F(\lambda)=\|\mathbf{a}_1-\mathbf{a}(n_k+\lambda\delta n)\|_2^2\]
 et on pose
 	\[n_{k+1}=n_k+\lambda_{min}\delta n\]
 On répète ce processus jusqu'à ce que $\|\mathbf{a}_1-\mathbf{a}(n)\|_2$ arrête de décroître.\\
@@ -404,7 +404,7 @@ On remarque d'abord une forte variation en fonction du paramètre de régularisa
 	\item A contrario, un paramètre trop proche de zéro retiendra des valeurs singulières très petite, et augmentera d'autant plus l'instabilité numérique.
 \end{itemize}
 
-Dueixème chose : pour un choix raisonnable du paramètre $\alpha$, les deux algorithmes donnent des résultats similaires dans le cas d'une discrétisation assez grossière, mais la méthode en problème inverse devient plus intéressant pour des discrétisations plus fines (comme on peut le voir figure \ref{fig:accConv}). Cela montre que la régularisation peut en effet accélérer la convergence et nous permettre d'obtenir des résultats en un temps raisonnable, ce qui ne serait pas réalisable avec la l'algorithme direct. 
+Deuxième chose : pour un choix raisonnable du paramètre $\alpha$, les deux algorithmes donnent des résultats similaires dans le cas d'une discrétisation assez grossière, mais la méthode en problème inverse devient plus intéressant pour des discrétisations plus fines (comme on peut le voir figure \ref{fig:accConv}). Cela montre que la régularisation peut en effet accélérer la convergence et nous permettre d'obtenir des résultats en un temps raisonnable, ce qui ne serait pas réalisable avec l'algorithme direct. 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[scale=0.35]{images/convAlgo13.png}

@@ -1,0 +1,40 @@
+- Univ. Linz Autriche
+- Base des composants éléctrique fonctionnant avec lumière. Ex : fibre optique.
+- Ici : adaptateurs de mode intégrés = "taper". Guide d'onde dont la section varie sur la longueur. Faisceau perd en énergie à travers ce taper. But : trouver une formulation pour minimiser la perte
+
+- Partant des équations de Maxwell, et en faisant un léger changement de variable, obtient ça
+- Cependant, équation seule insuffisant. Besoin conditions sur le bord. (Utilisation schéma : bords, domaines, condition ±∞)
+- Sur bord Γ : Dirichlet
+- Hyp : champ entrant de -∞. Après qq calculs épargnés, on arrive à (...) où exposant (L) pour indiquer tout ce qui vient de la gauche, et (R) ...
+U_k : décomposition spectrale de l'onde. Comme cond. Dirichlet : ensemble discret de valeurs propres.
+U_I : onde entrante.
+beta_k : normalisation des U tilde
+- Raisons pratiques : énergie que dans le premier mode. Chercher à maximiser (...) (n² dépendance dans U)
+
+- Passe maintenant à une recherche de représentation locale de la solution.
+Opérateur 1D de Helmotz. Ainsi, pour un z fixé
+On définit ainsi une base locale de modes propres analogue au résultat précédent. Ainsi : décomposition spectrale vérifiant (5)
+
+- Profil divisé en N sous-sections, optimisation des hauteurs du guide d'onde. Régularité très faible. Différences finies, solution initiale étant la droite
+Résultats étonnants : On pense que ça devrait être assez lisse, mais non. On voit déjà que les itérations approtent très rapidement peu d'apport à la performance.
+Mécanisme d'optimisation repose sur la résonnance sur les modes. Petits pics se répètent. Énergie presque entièrement dans les 2 premiers modes. Après passage plat : dernier pic, tout repasse du mode 2 au mode 1.
+Perte d'énergie : 5% sur 80µm, un taper plus classique devrait être 5 fois plus long.
+
+[Prblm mal posé]
+
+-Postulat suivant : puissance totale = puissance à la sortie + puissance à l’entrée :
+puissance transmise dans le mode fondamental (k=1, z_R) est toujours plus petit que 1, et =1 quand (7)
+Avantage : on prend a_2, a_3,... : même si non nécessaire, "attirer" ces coefficients vers les bonnes valeurs
+
+méthode de Newton : prochaine itération n + δn
+En paramétrisant n pour les N sous-sections, jacobien est une matrice M × N , où M est l’indice du dernier mode retenu.
+Calcul jacobien : diff. finies. Syst. sous ou sur-déterminé, moindres carrés.
+
+Décomposition en val. singulières. Puis troncatures des valeurs singulières.
+On cherche ensuite à minimiser F(lambda), On répète ce processus jusqu’à ce que ça arrête de décroître.
+Comparaison des deux algorithmes : lancés avec le même nombre d'itérations, et comparaison des résultats. Région où alpha semble mieux fonctionner :
+- Si alpha trop proche de 1 : val sing. trop hautes retenues, direction de descente trop douce, convergence lente, car solution semble très irrégulière
+- trop proche de 0 : val. sing. très petites augmentera instabilité numérique
+Et deux algos marchent aussi bien dans l'ensemble. Mais avec discrétisation plus fine : deuxième marche mieux pour un alpha bien choisi.
+
+Cascade : solution grossière, puis solution initiale par rafinement et interpolation, et algorithme relancé
