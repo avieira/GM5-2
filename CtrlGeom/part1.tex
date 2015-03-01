@@ -47,13 +47,55 @@ $\mathcal{D}$ est dite involutive si $f,g\in \mathcal{D}\Rightarrow [f,g]\in\mat
 \subsection{Rappel sur les formes différentielles}
 Soit $E$ un espace vectoriel, $e_1,...,e_n$ sa base. On a également $E^*$ son dual, et $e^1,...,e^n$ sa base duale.\\
 \[e^j(e_i)=\delta_i^j\]
-$T:E\times ... \times E\to \mathbb{R}$ $k$-linéaire est dit un $k$-tenseur (ensemble noté $T^k(E)$).\\
+$T:E\times ... \times E\to \mathbb{R}$ $k$-linéaire est dit un $k$-tenseur (ensemble noté $T^k(E)$).
+\Def{}{Soit $T\in T^k(E)$, $S\in T^l(E)$. On pose :
+\[T\otimes S(x_1,...,x_{k+l})=T(x_1,...,x_k)S(x_{k+1},...,x_{k+l})\]}
+\textbf{Remarque : } En général, $T\otimes S\neq S\otimes T$.
+
+\Prop{}{Une base de l'espace des $k$-tenseurs est formé par : \[\bigotimes_{l=1}^k e^{i_l}\]}
+
+\Coro{}{dim $T^k(E)=n^k$.}
+
 $A^k(E)$ : k-tenseur antisymétriques, ie :
 \begin{eqnarray*}
 	& T(v_1,...,v_i,...,v_j,...,v_k)=-T(v_1,...,v_j,...,v_i,...,v_k)\\
 \Leftrightarrow & T(...,v_i,v_{i+1},...)=-T(...,v_{i+1},v_i,...)\\
 \Leftrightarrow & T(v_{\sigma(1)},...,v_{\sigma(k)})=sgn(\sigma)T(v_1,...,v_k)
 \end{eqnarray*}
+
+\textbf{Comment produire des tenseurs antisymétriques ?}\\
+\[Alt :\begin{array}{c c c}
+	T^k(E)\to T^k(E)
+	T\mapsto \frac{1}{k!} \sum_{\sigma\in\Sigma_k} \varepsilon(\sigma) T(x_{\sigma(1)},...,x_{\sigma(k)})
+\end{array}\]
+où $\Sigma_k$ est l'ensemble des permutations de $k$ éléments, $\varepsilon(\sigma)$ est le signe de la permutation.
+\Propo{}{\begin{enumerate}
+	\item $T\in T^k(E)\Rightarrow Alt(T)\in A^k(E)$
+	\item $T\in A^k(E)\Rightarrow Alt(T)=T$
+	\item $T\in S^k(E)$ (tenseur symétrique) $\Rightarrow Alt(T)=0$
+\end{enumerate}}
+
+\Def{Produit extérieur}{Soit $\omega\in A(E)$, $\eta\in A^l(E)$.\\
+On définit $\omega\wedge\eta\in A^{k+l}(E)$, appelé produit extérieur par :
+	\[\omega\wedge\eta=\frac{(k+l)!}{k!l!} Alt(\omega\otimes\eta)\]}
+
+\Prop{}{\begin{enumerate}
+	\item $\omega\in A^k$, $\eta\in A^l$ $\Rightarrow \omega\wedge\eta\in A^{k+l}(E)$
+	\item $\omega\wedge\eta=(-1)^{kl}\eta\wedge\omega$
+	\item $(\omega\wedge\eta)\wedge\theta=\omega\wedge(\eta\wedge\theta)$
+\end{enumerate}}
+
+\Coro{}{Soit $\omega\in A^{2k+1}(E)$
+\[\omega\wedge\omega=0\]}
+
+\Coro{}{Soit $e^1,...,e^n$ la base duale.
+	\[e^i\wedge e^i=0\ e^i\wedge e^j=e^j\wedge e^i\]}
+
+\Propo{}{Une base de $A^k(E)$ est donnée par :
+	\[e^{i_1}\wedge...\wedge e^{i_k} \text{ où } 1\leq i_1<...<i_k\leq n\]}
+
+\Coro{}{Si $\omega\in A^k(E)$
+	\[\omega=\sum_{1\leq i_1<...<i_k\leq n} \omega_{i_1,...,i_k} e^{i_1}\wedge....\wedge e^{i_k}\]}
 
 $f(p)\in E=T_pX$ champ vecteur, $w(p)\in T^*_p X$ une 1-forme différentielle.
 \[f(x)=\sum_{i=1}^n f^i(x) \derPar{}{x^i} \hspace{3em} w(p)=\sum_{j=1}^n w_j(x) dx^j\]
