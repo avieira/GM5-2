@@ -65,8 +65,8 @@ $A^k(E)$ : k-tenseur antisymétriques, ie :
 
 \textbf{Comment produire des tenseurs antisymétriques ?}\\
 \[Alt :\begin{array}{c c c}
-	T^k(E)\to T^k(E)
-	T\mapsto \frac{1}{k!} \sum_{\sigma\in\Sigma_k} \varepsilon(\sigma) T(x_{\sigma(1)},...,x_{\sigma(k)})
+	T^k(E)&\to& T^k(E)\\
+	T&\mapsto& \frac{1}{k!} \sum_{\sigma\in\Sigma_k} \varepsilon(\sigma) T(x_{\sigma(1)},...,x_{\sigma(k)})
 \end{array}\]
 où $\Sigma_k$ est l'ensemble des permutations de $k$ éléments, $\varepsilon(\sigma)$ est le signe de la permutation.
 \Propo{}{\begin{enumerate}
@@ -116,7 +116,7 @@ Réciproquement, si $\mathcal{D}$ est une distribution, on pose :
 \textbf{Remarque :} Si rg$\mathcal{D}$=cste (ou rg$\mathscr{E}$=cste) :
 \begin{enumerate}
 	\item rg $\mathcal{D}$ +rg$\mathscr{E}$= $n$
-	\item $\rangle w,f\langle=0$ peut être considéré point par poinr ou globalement
+	\item $\langle w,f\rangle=0$ peut être considéré point par poinr ou globalement
 \end{enumerate}
 
 \subsubsection{Différentielle extérieure}
@@ -149,7 +149,7 @@ Dans le premier cas, on a un système de coordonnées locales qui redresse le pl
 \begin{enumerate}
 	\item $[f,g](p)\not\in\mathcal{D}=span\{f,g\}$
 	\item $d\omega\wedge\omega(p)\neq 0$, où $\mathcal{D}^\perp=span\{\omega\}$
-	\item $\exists \phi(x,y,z)$ des coordonnées locales autour de $p$ tel que $\phi_*\mathcal{D}=span\left\{\derPar{}{x},\derPar{}{y}, \derPar{}{z}\right\}$
+	\item $\exists \phi(x,y,z)$ des coordonnées locales autour de $p$ tel que $\phi_*\mathcal{D}=span\left\{\derPar{}{x},\derPar{}{y}+x \derPar{}{z}\right\}$
 	\item $\mathcal{D}^\perp=span\{dz-xdy\}$
 \end{enumerate}}
 
@@ -160,7 +160,7 @@ Dans le premier cas, on a un système de coordonnées locales qui redresse le pl
 	\item $\mathcal{D}$ involutive
 	\item $\exists \alpha_j^i\in\Lambda^1(M)$, $1\leq i,j\leq k$ tel que $d\omega_i=\sum_{i=1}^k \alpha_i^j \wedge \omega_j$, $1\leq i\leq k$
 	\item $d\omega_i=0\mod I$ où $I$ est l'idéal dans $\bigcup_{p\geq 0} \Lambda^p(M)$ engendré par $\omega_1,...,\omega_k$ ie :
-	\[i\in I\Leftrightarrow i=i\wedge \omega_j\]
+	\[i\in I\Leftrightarrow i=a\wedge \omega_j\]
 	\[d\omega_i\wedge \omega_1\wedge...\wedge \omega_k\equiv 0\]
 \end{enumerate}}
 
@@ -169,3 +169,25 @@ On pose $\mathcal{D}_0=\mathcal{D}$, $\mathcal{D}_{i+1}=\mathcal{D}_i+[\mathcal{
 
 \textbf{Remarque :} Si on n'indique pas $p$, $d_i$ est constant.
 
+\Coro{Dans $\mathbb{R}^3$, rg$\mathcal{D}$=2}{\begin{enumerate}
+	\item $\mathcal{D}$ involutive $\Leftrightarrow$ $(d_0, d_1)=(2,2)$
+	\item $dw\omega\wedge\omega(p)\neq 0 \Leftrightarrow$ $\forall q\in V_p$, $(d_0(q), d_1(q))=(2,3)$\\
+Si $p$ est singulier, on a en $p$ (2,2,3) et en dehors (2,3).
+\end{enumerate}}
+
+\Def{Caractéristique}{Un champ $v\in \mathcal{D}$ est dit caractéristique pour $\mathcal{D}$ si 
+	\[[v,f]\in\mathcal{D} \forall f\in\mathcal{D}\]
+$\mathcal{C}=\{v\in\mathcal{D}$, $v$ caractéristique$\}$ est dite la distribution caractéristique.}
+
+\textbf{Remarque :} $v$ est parfois appelé symétrie infénitésimale, car $(\gamma_t^v)_t$ est une famille de symétries de $\mathcal{D}$.\\
+$\phi;M\to M$ difféomorphisme est une symétrie de $\mathcal{D}$ si $\phi_*\mathcal{D}=\mathcal{D}$.\\
+Démontrez que $\left(\gamma_t^v\right)_*\mathcal{D}=\mathcal{D}\Leftrightarrow [v,\mathcal{D}]\subset\mathcal{D}$.
+
+\Propo{}{$\mathcal{C}$ est toujours involutive.}
+
+\Propo{}{Soit rg$\mathcal{D}=m$. On suppose que rg$\mathcal{C}=p$.\\
+Autour de chaque point, il existe des coordonnées locales $(x^1,...,x^n)$telles que
+	\[\mathcal{D}=span\left\{\derPar{}{x^1},...,\derPar{}{x^p},f_{p+1},...,f_m\right\}\]
+où
+\[f_j=\derPar{}{x^j}+\sum_{q=m+1}^n f_j^q \derPar{}{x^q},\ p+1\leq j\leq m,\ \text{ où } f_j^q=f_j^q(x^{p+1},...,x^n)\]
+}
