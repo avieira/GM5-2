@@ -1,0 +1,90 @@
+\subsection{Équivalence locale}
+On considère deux distributions $\mathcal{D}=span\{f_1,...,f_m\}$ sur $M$ et $\tilde{\mathcal{D}}=span\{\tilde{f}_1,...,\tilde{f}_m\}$ sur $\tilde{M}$.
+
+\Def{}{$\mathcal{D}$ et $\tilde{\mathcal{D}}$ sont équivalentes s'il existe $\phi : M\to \tilde{M}$ $\mathscr{C}^\infty$ difféomorphise, et $\beta=(\beta_{ij})$, $\beta_{ij}\in\mathscr{C}^\infty$ et $\beta$ inversible tel que :
+	\[\phi_*(f\beta)=\tilde{f}\]
+avec \[\phi_*\left( \sum_{i=1}^m f_i \beta_{ij}\right)=f_j\]
+Autrement dit :
+	\[\phi_*\mathcal{D}=\tilde{\mathcal{D}}\]
+	\[\phi_x(x)\mathcal{D}(x\tilde{\mathcal{D}}(\phi(x))\]}
+
+\Def{Équivalence locale}{$\mathcal{D}$ autour de $p$ et $\tilde{\mathcal{D}}$ aurtout de $\tilde{p}$ sont localement équivalents s'il existe deux voisinages ouverts de $p$ et $\tilde{p}$ et un difféomorphisme local $V_p\to V_{\tilde{p}}$ tel que :
+	\[\phi_*\restriction{\mathcal{D}}{V_p}=\restriction{\tilde{\mathcal{D}}}{V_{\tilde{p}}}\]}
+
+On note $\Delta^n_m$ la famille de toutes les distributions de rang $m$ autour de $p\in M^n$. 
+	\[\Gamma=\{(\phi,\beta), \phi \text{ difféo. local, } \beta \text{ matrice inversible localement } \mathcal{C}^\infty\}\]
+$\Gamma$ est un groupe. On définit :
+	\[Orb(\mathcal{D})=\{\tilde{\mathcal{D}}; \exists \gamma\in\Gamma; \gamma(\mathcal{D})=\tilde{\mathcal{D}}\}\]
+
+\Def{Produit intérieur}{Soit $f\in V^\infty(M)$, $\Omega\in\Lambda^k(M)$. On définit le produit intérieur $f\rfloor\Omega\in\Lambda^{k-1}(M)$ par :
+	\[f\rfloor\Omega(f_1,...,f_{k-1})=\Omega(f,f_1,...,f_{k-1})\]}
+
+\Propo{}{$f,g\in V^{\infty}$, $\Omega\in\Lambda^k$.\\
+\[L_f(g\rfloor \Omega)=L_fg\rfloor\Omega + f\rfloor L_f\Omega=[f,g]\rfloor\Omega + f\rfloor L_f\Omega\]
+\[L_f\Omega=f\rfloor d\Omega + d(f\rfloor \Omega)\]
+Si $d\Omega=0$, alors $L_f\Omega=d(f\rfloor \Omega)$.}
+
+\Def{Fermée, exacte}{Soit $\Omega\in\lambda^k(L)$.\\
+$\Omega$ est dite fermée si $d\Omega=0$. $\Omega$ est dite exacte si $\exists \omega\in\Lambda^{k-1}(M)$ tel que $\Omega=d\omega$.}
+
+Soit $\Omega$ une deux forme. On définit 
+	\[Ker \Omega(p)=\{v\in T_pM; v\rfloor\Omega\equiv 0\}\]
+\Def{}{$\Omega\in\Lambda^2(M)$ est dite non dégénérée si Ker $\Omega(p)=\{0\}$ $\forall p\in M$.
+Ceci est équivalent à dire que $(\Omega_{ij})$ est inversible.}
+
+\Theo{de Darboux}{Supposons $dim M=2n$, $\Omega\in\Lambda^2(M)$. Supposons $\Omega$ non dégénérée et fermée. Donc $\exists (x_1,...,x_n, y^1,...,y^n)$ tel que 
+	\[\Omega=\sum_{i=1}^n dx_i\wedge dy^i\]
+et donc, \[\Omega=\begin{pmatrix} 0 & I \\ -I & 0 \end{pmatrix}\]}
+
+\Propo{}{Soit $\Omega\in\Lambda^2(M)$.\\
+Si $rg \Omega(p)$ est constant, alors la distribution Ker $\Omega$ est de rang constant.\\
+Si $\Omega$ est fermée, alors Ker $\Omega$ est involutive.}
+
+\Theo{Darboux réduit}{Soit $dim M=2n+k$ et $\Omega\in\Lambda^2(M)$. Supposons que rg$(\Omega(p))=2n$ et que $\Omega$ est fermée. Alors $\exists (x_1,...,x_n, y^1,...,y^n, z^1,...,z^k)$ tel que 
+	\[\Omega=dx_i\wedge dy^i, i=\overline{1,n}\]
+}
+
+\Rem{}{rg $\Omega=2n$ $\Leftrightarrow$ $n$ est l'entier le plus large tel que $\Omega^n=\Omega\wedge...\wedge\Omega\neq 0$}
+
+Soit $\omega\in\Lambda^1(M)$.
+\Def{}{\[Classe\ w(p)=\left\{\begin{array}{c c c}
+	2s+1 &\text{ si }& \omega\wedge(d\omega)^s(p)\neq 0\\
+		&	&  d(\omega)^{s+1}(p)=0\\
+	2s &\text{ si }& (dw)^s(p)\neq 0\\
+		&	& \omega\wedge(d\omega)^s(p)= 0
+\end{array}\right.\]}
+
+\Theo{de Darboux pour les 1-formes}{Supposons classe $\omega(p)=cst$, $\omega\in\Lambda^1(M)$. 
+\begin{enumerate}
+	\item Si classe $\omega(p)=2s+1$, alors il existe des coordonnées locales $(x_1,...,x_s, y^1,...,y^s, z, w^1,...,w^k)$ tel que
+	\[\omega=dz+x_idy^i, i=\overline{1,s}\]
+	\[dim M=2s+k+1\]
+
+	\item Si classe $\omega(p)=2s$, alors il existe des coordonnées locales $(x_1,...,x_s, y^1,...,y^s, w^1,...,w^k)$ tel que
+	\[\omega=(1+x_1)dy^1+x_idy^i, i=\overline{2,s}\]
+	\[dim M=2s+k\]
+\end{enumerate}}
+
+\subsection{Système de Pfaff}
+Soit $\mathcal{D}$ une distribution, rg $\mathcal{D}=m=n-1$.\\
+$\exists \omega\in\Lambda^1(M)$; $\mathcal{D}=ker\{\omega\}$. On appelle équation de Pfaff $\omega=0$.
+
+\Def{Classe de l'équation}{classe $(\omega=0)(p)=2s+1$ où $s$ est le plus grand entier tel que $\omega\wedge(d\omega)^s(p)\neq 0$.}
+
+\Propo{}{classe $(\omega=0)$ est bien définie, ie si $\tilde{\omega}=\beta\omega$ où $\beta\neq 0$ $\mathcal{C}^\infty(M)$, alors $\omega\wedge(d\omega)^s(p)\neq 0 \Leftrightarrow \tilde{\omega}\wedge(d\tilde{\omega})^s(p)\neq 0$}
+
+\Theo{de Darboux pour l'équation de Pfaff}{Soit classe $(\omega=0)=2s+1$.\\
+Alors $(x_1,...,x_s, y^1,...,y^s, z, w^1,...,w^k)$ tel que $\omega=0$ est donné par :
+	\[\omega=dz+\sum_{i=1}^s x_idy^i=0\]}
+
+\Coro{}{Considérons $\mathcal{D}$ tel que $\mathcal{D}^\perp=span\{\omega\}$, avec classe $(\omega=0)=2s+1$.\\
+Rg $\mathcal{D}=n-1=2s+k$ et $\exists (x_1,...,x_s, y^1,...,y^s, z, w^1,...,w^k)$ tel que :
+	\[\mathcal{D}=span\left\{ \derPar{}{w_1},...,\derPar{}{w_k}, \derPar{}{x_1},...,\derPar{}{x_s}, \derPar{}{y^1}-x_1\derPar{}{z}, ..., \derPar{}{y^s}-x_s\derPar{}{z}\right\}\]}
+
+\Theo{}{Supposons classe $(\omega=0)$ maximale, ie :
+\begin{itemize}
+	\item $n=2s+1$, et $\omega\wedge(d\omega)^s(p)\neq 0$. $\exists (x_1,...,x_s, y^1,...,y^s, z)$ tel que 
+	\[\mathcal{D}=span\left\{ \derPar{}{x_1},...,\derPar{}{x_s}, \derPar{}{y^1}-x_1\derPar{}{z}, ..., \derPar{}{y^s}-x_s\derPar{}{z}\right\}\]
+	\item $n=2s+2$, et $\omega\wedge(d\omega)^s(p)\neq 0$. $\exists (x_1,...,x_s, y^1,...,y^s, z, w)$ tel que 
+	\[\mathcal{D}=span\left\{ \derPar{}{w}, \derPar{}{x_1},...,\derPar{}{x_s}, \derPar{}{y^1}-x_1\derPar{}{z}, ..., \derPar{}{y^s}-x_s\derPar{}{z}\right\}\]
+\end{itemize}}

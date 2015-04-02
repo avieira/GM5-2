@@ -145,6 +145,7 @@ $d\omega\wedge\omega\neq 0 \Leftrightarrow d\omega(f_1,f_2)=-\omega([f_1,f_2])\n
 
 Dans le premier cas, on a un système de coordonnées locales qui redresse le plan. Est-ce de même pour le deuxième cas ? Sachant qu'ils sont bien plus courants, et stable : même s'il est perturbé, le tout reste $\neq 0$ !
 
+\section{Systèmes équivalents}
 \Propo{dans $\mathbb{R}^3$, rg$\mathcal{D}=2$}{Les conditions suivantes sont équivalentes localement autour de $p\in M$
 \begin{enumerate}
 	\item $[f,g](p)\not\in\mathcal{D}=span\{f,g\}$
@@ -191,3 +192,13 @@ Autour de chaque point, il existe des coordonnées locales $(x^1,...,x^n)$telles
 où
 \[f_j=\derPar{}{x^j}+\sum_{q=m+1}^n f_j^q \derPar{}{x^q},\ p+1\leq j\leq m,\ \text{ où } f_j^q=f_j^q(x^{p+1},...,x^n)\]
 }
+
+\Theo{Enegel, 1880}{Supposons que $(d_i)$ est (2,3,4). Alors localement, il existe $(x,y,z,w)$ des coordonnées tel que 
+	\[\mathcal{D}=\left\{ \derPar{}{x}, \derPar{}{y}+x \derPar{}{z}+z \derPar{}{w} \right\}\]}
+
+Supposons que $f, g, [f,g], [g,[f,g]]$ sont indépendant en $p$. 
+	\[\exists \alpha\in\mathcal{C}^\infty;\ [f,[f,g]]=\alpha [g,[f,g]] \mod \mathcal{D}_1\]
+
+\Lem{}{Le champ de vecteur $f-\alpha g\in\mathcal{D}$ est caractéristique pour $\mathcal{D}_1$. }
+
+
