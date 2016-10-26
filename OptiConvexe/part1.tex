@@ -22,6 +22,9 @@ Autrement dit, un ensemble affine contient toujours le segment $[x,y]$. }
 \item Le produit cartésien de $C\in E$ et $C'\in E'$, ie $C\times C'=\{(x;y);x\in C; y\in C'\}$ est un sous ensemble convexe de $E\times E'$
 \item La somme $C_1+C_2=\{x_1+x_2; x_1\in C_1; x_2\in C_2\}$ de deux ensembles convexes $C_1$ et $C_2$ est convexe.
 \item L’union de sous-ensembles convexes n’est en général pas convexe, mais l’union croissante de convexes est convexe.
+\item Soit $f:\mathbb{R}^n\to\mathbb{R}^k$ une fonction affine, et $C\subseteq\mathbb{R}^n$, $S\subseteq\mathbb{R}^k$ deux convexes. Alors $f(C)$ et $f^{-1}(S)$ sont également convexes.
+\item La somme partielle de deux convexes $S$ et $C\subseteq\mathbb{R}^n\times\mathbb{R}^m$ : \[\{(x,y_1+y_2) | (x,y_1)\in S,\ (x,y_2)\in C\}\] est aussi convexe.
+\item L'image d'un convexe $C\subset\mathbb{R}^{n+1}$ par la fonction perspective $P:\mathbb{R}^n\times\mathbb{R}^+_*\to\mathbb{R}^n$ : \[P(z,t)=z/t\] est convexe. De même, la pré-image d'un convexe $S$ par $P$ \[P^{-1}(S)=\{(x,t)\in\mathbb{R}^n\times\mathbb{R}^+_* | x/t\in C\}\] est convexe.
 \end{itemize}}
 
 \Def{}{Soit $C$ un ensemble convexe. Une partie convexe $F$ de $C$ est appelée face (ou partie extrémale) de $C$ si la propriété suivante est vérifiée
@@ -31,9 +34,12 @@ Autrement dit, un ensemble affine contient toujours le segment $[x,y]$. }
 \end{array}\right\} \Rightarrow [x,y]\in F\]
 On appelle point extrémal une face réduite à un seul point. En d’autres termes, $\bar{x}\in C$ est un point extrémal de $C$ s’il n’est pas possible d’avoir $\bar{x}=\alpha y+ (1-\alpha)z$ avec $y$ et $z$ deux points distincts de $C$ et $\alpha\in]0,1[$. On note $Ext(C)$ l’ensemble des points extrémaux de $C$.}
 
+\Def{Polyèdre}{Soit $A\in\mathbb{R}^{m\times n}$, $b\mathbb{R}^m$, $C\in\mathbb{R}^{p\times n}$, $d\in\mathbb{R}^d$. On définit le polyèdre $\mathcal{P}$ par :
+	\[\mathcal{P}=\{x\in\mathbb{R}^n | Ax\leq b,\ Cx=d\}\]}
 
 \section{Enveloppe affine et enveloppe convexe}
-\Def{Enveloppe affine}{Soit $A$ une partie de $E$. L’enveloppe affine de $A$, notée $Aff(A)$, est l’intersection de tous les espaces affines contenant $A$.}
+\Def{Enveloppe affine}{Soit $A$ une partie de $E$. L’enveloppe affine de $A$, notée $Aff(A)$, est l’intersection de tous les espaces affines contenant $A$.\\
+On appelle \textit{dimension affine} d'un ensemble $C$ la dimension de Aff$(C)$.}
 
 \Propo{}{Soit $A$ une partie de $E$. On a :
 \[Aff(A)=\left\{ \sum_{i=1}^n \alpha_i x_i; n\geq 1, x_i\in A, \alpha_i\in \mathbb{R}, \sum_{i=1}^n \alpha_i=1\right\}\]}
@@ -45,6 +51,10 @@ On appelle point extrémal une face réduite à un seul point. En d’autres ter
 
 \Theo{Carathéodory}{Soit $A$ une partie d’un espace vectoriel $E$ de dimension $n$. Alors tout élément de $conv(A)$ peut s’écrire comme une combinaison convexe de $n+ 1$ éléments de $A$.}
 
+\Def{Simplexe}{Soient $v_0,...,v_k\in\mathbb{R}^n$, $k+1$ vecteurs affinement indépendants, i.e. $v_1-v_0$, ...,$v_k-v_0$ sont linéairement indépendants. On appelle simplexe l'ensemble défini par :
+	\[C=\text{conv} \{v_0,...,v_k\}\]}
+
+\Prop{}{Un simplexe est un polyèdre}
 
 \section{Propriétés topologiques des convexes}
 \subsection{Ouverture et fermeture des convexes}
@@ -142,6 +152,34 @@ Alors l'intersection de tous les demi-espaces fermés contenant $C$ est $\overli
 \item $A\subset cone(A)\subset cone(\bar{A})\subset \coneBar(A)$ et $\coneBar(A)=\coneBar(\bar{A})=\overline{cone(A)}$
 \end{itemize}}
 
+\Def{Cône induit par une norme}{Soit $\|\cdot\|$ une norme (quelconque) sur $\mathbb{R}^n$. On définit le cône induit par cette norme par :
+	\[C=\{(x,t) | \|x\|\leq t\}\subseteq\mathbb{R}^{n+1}\}\]
+}
+
+\subsection{Cône propre et inégalités généralisées}
+\Def{Cône propre}{Un cône $K\subseteq\mathbb{R}^n$ est dit \textit{propre} si
+\begin{itemize}
+	\item $K$ est convexe
+	\item $K$ est fermé
+	\item $K$ est solide, i.e. il est d'intérieur non vide
+	\item $K$ est pointé, ce qui signifie qu'il ne contient aucune droite, ou autrement dit \[x\in K,\ -x\in K\implies x=0\]
+\end{itemize}}
+
+\Def{Équations généralisées}{On définit un pré-ordre sur $\mathbb{R}^n$ de la façon suivante : à un cône propre $K$, on associe l'ordre partiel défini par \[x\preccurlyeq_K y\Leftrightarrow y-x\in K\]
+On définit aussi un ordre partiel strict par : \[x\prec_K y\Leftrightarrow y-x\in \text{int }K\]}
+
+\Prop{}{La relation d'ordre $\preccurlyeq_K$ est transitive, refléxive, antisymétrique, stable par addition et multiplication par un scalaire positif.}
+
+\subsubsection{Minimum et élément minimal}
+\Def{Élément minimum et minimal}{$x\in S$ est un minimum de $S$ (en vue de la relation $\preccurlyeq_K$) si pour tout $y\in S$, $x\preccurlyeq_K y$.\\
+$x$ est un élément minimal de $S$ si pour $y\in S$, $y\preccurlyeq_K x$ seulement si $y=x$.}
+
+\Prop{}{\begin{itemize}
+	\item S'il existe, le minimum est unique.
+	\item $x\in S$ est un minimum de $S$ si et seulement si $S\subset x+K$.
+	\item $x\in S$ est un élément maximal de $S$ si et seulement si $(x-K)\cap S=\{x\}$
+\end{itemize}}
+
 \subsection{Cône normal}
 \Def{}{Soient $H$ de Hilbert, $C\subset H$, $x\in C$.\\
 On définit le cône normal à $C$ en $x$, noté $\mathscr{N}_xC$ ou $\mathscr{N}_C(x)$ par :
@@ -160,7 +198,19 @@ On appelle cône polaire (ou dual négatif) $P^-$ l'ensemble
 \[P^-=\{x\in H; (x,y)\leq 0\ \forall y\in P\}=-P^*\]
 }
 
-\Propo{}{$P^*$ est un cône convexe fermé non vide.}
+\Propo{}{\begin{itemize}
+	\item $P^*$ est un cône convexe fermé non vide.
+	\item $K_1\subseteq K_2 \implies K_2^*\subseteq K_1^*$
+	\item Si $K$ est d'intérieur non vide, alors $K^*$ est pointé
+	\item Si la fermeture de $K$ est pointé, alors $K^*$ est d'intérieur non vide
+\end{itemize}}
+
+\Prop{Caractérisation duale du minimum}{Soit $K$ un cône propre : on prend la relation d'ordre partielle $\preccurlyeq_K$. $x$ est le minimum de $S$ selon la relation d'ordre partielle $\preccurlyeq_K$ si et seulement si pour tout $\lambda \succ_{K^*}0$, $x$ est l'unique minimiseur de $\langle\lambda, z\rangle$ pour $z\in S$}
+
+\Prop{Caractérisation dual de l'élément minimal}{\begin{itemize}
+	\item Si $\lambda\succ_{K^*} 0$ et $x$ minimise $\langle\lambda, z\rangle$ pour $z\in S$, alors $x$ est minimal.
+	\item Si $S$ est convexe, alors $x\in S$ est minimal s'il existe $\lambda\succcurlyeq_{K^*}0$ non nul tel que $x$ minimise $\langle\lambda, z\rangle$ pour $z\in S$.
+\end{itemize}}
 
 \section{Hyperplan d'appui}
 \Def{}{Un hyperplan d'affine d'équation $(s,x)=r$ est appelé hyperplan d'appui à $C$ en $\bar{x}$ si : \[(s,x)\leq r\ \forall x\in C\] \[(s,\bar{x})=r\]}
