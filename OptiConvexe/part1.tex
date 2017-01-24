@@ -234,6 +234,7 @@ Soit $(s,\beta)\in H\times\mathbb{R}$. On a équivalence entre les 2 proposition
 
 \part{Fonctions convexes}
 \section{Définitions et propriétés}
+	\subsection{Fonctions convexes}
 $f:H\to\overline{\mathbb{R}}=\mathbb{R}\bigcup\{+\infty\}$
 \Def{}{\[Dom(f)=\{x\in H;f(x)<+\infty\}\]
 \[epi(f)=\{(\alpha,x)\in\mathbb{R}\times H, \alpha\geq f(x)\}\]
@@ -271,6 +272,22 @@ Si $\Gamma_\alpha(f)$ est convexe $\forall\alpha\in\mathbb{R}$, alors on dit que
 \textbf{Remarque : } Si $P$ convexe, alors $\mathbb{1}_P$ est convexe.\\
 Si $\alpha>0$, $\alpha\in\mathbb{R}$, alors $\Gamma_{\alpha}(\mathbb{1}_P)=P$ donc $\mathbb{1}_P$ caractérise $P$.
 
+	\subsection{Fonctions quasi-convexes}
+\Def{Quasi-convexe}{$f:\mathbb{R}^n\to\mathbb{R}$ est dite quasi-convexe (ou unimodale) si son domaine et tous ses ensembles de niveau sont convexes.\\
+$f$ est quasi-concave si $-f$ est quasi-convexe. On fonction à la fois quasi-convexe et quasi-concave est dite quasi-linéaire.}
+
+\Prop{}{\begin{itemize}
+	\item $f:\mathbb{R}^n\to\mathbb{R}$ est quasi-convexe si et seulement si dom $f$ est convexe et pour tout $x,y\in$ dom $f$, et $0\leq\lambda\leq 1$ :
+	\[f(\theta x+(1-\theta)y)\leq \max\{f(x),f(y)\}\]
+	\item $f:\mathbb{R}\to\mathbb{R}$, continue, est quasiconvexe si et seulement si une de ces conditions est vérifiée : \begin{itemize}
+		\item $f$ est croissante
+		\item $f$ est décroissante
+		\item il existe $c\in$ dom $f$ tel que pour tout $t\leq c$ (et $t\in$ dom $f$), $f$ est décroissante, et pour tout $t\geq c$ (et $t\in$ dom $f$), $f$ est croissante.
+	\end{itemize}
+\end{itemize}
+}
+
+
 \section{Fonctions d'appui}
 \Def{}{Soit $S\subset H$.\\
 On appelle fonction d'appui à $S$ et on note $\sigma_S$ la fonction définie par : \[\sigma_S(d)=\sup_{s\in S} (s,d)\]}
@@ -295,6 +312,8 @@ On va prendre $-\alpha=\sup_{x\in H} \{\langle p,x\rangle -f(x)\}=f^*(p)$.
 
 \Def{Transformée de Fenchel}{Soit $H$ un Hilbert et $f:H\to\overline{\mathbb{R}}$. On définit la transformée de Fenchel de $f$, notée $f^*:H\to\overline{\mathbb{R}}$ par :
 \[f^*(p)=\sup_{x\in H}\{\langle p,x\rangle -f(x)\}\]}
+
+Remarquons que, peu importe si $f$ est convexe ou non, $f^*$ est convexe.
 
 \Prop{Inégalité de Young}{\[\forall p,x\in H,\ f^*(p)+f(x)\geq\langle p,x\rangle\]}
 
@@ -323,7 +342,14 @@ On va prendre $-\alpha=\sup_{x\in H} \{\langle p,x\rangle -f(x)\}=f^*(p)$.
 \[f^*:\begin{array}{c c c} E'&\to&\mathbb{R}\\ p&\mapsto&\sup_{x\in E} \{\langle p,x\rangle_{E'E} -f(x)\}\end{array}\]
 Dans ce cas, les propositions précédentes et le théorème de Fenchel-Moreau restent vraies.}
 
-\Coro{}{Soit $f$ propre. alors $f$ est convexe et sci si et seulement si $f$ est l'eneoppe supérieure de ses minorantes affines.}
+\Coro{}{Soit $f$ propre. alors $f$ est convexe et sci si et seulement si $f$ est l'enveloppe supérieure de ses minorantes affines.}
+
+\Prop{}{\begin{itemize}
+	\item Supposons $f:\mathbb{R}^n\to\mathbb{R}$ convexe, Fréchet-différentiable, avec dom $f=\mathbb{R}^n$. Soit $z\in\mathbb{R}^n$. Posons $y=\nabla f(z)$. Alors
+	\[f^*(y)=\langle z,\nabla f(z)\rangle-f(z)\]
+	\item Supposons $A\in\mathbb{R}^{n\times n}$ inversible, $b\in\mathbb{R}^n$, $f:\mathbb{R}^n\to\mathbb{R}$ convexe et propre. Alors la conjuguée de $g(x)=f(Ax+b)$ est :
+		\[g^*(p)=f^*\left(\left(A^{-1}\right)^\intercal y\right)-\langle A^{-1}b,y\rangle\] et dom $g^*=A^\intercal$ dom $f^*$.
+\end{itemize}}
 
 \section{Continuité des fonctions convexes}
 \Propo{}{Soit $f:H\to\overline{\mathbb{R}}$ convexe et propre. On suppose qu'il existe une boule ouverte sur laquelle $f$ est bornée. Alors $f$ est continue sur l'intérieur de son domaine qui est non vide.}
