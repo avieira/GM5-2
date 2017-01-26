@@ -1,11 +1,57 @@
 \part{Conditions d'optimalité}
+\section{Introduction aux problèmes d'optimisation}
+\subsection{Terminologie}
+On considère un problème du type
+\begin{equation}\label{optimGal}
+\begin{aligned}
+	\min\ & f_0(x)\\
+	\text{t.q. } & f_i(x)\leq 0,& i=1,...,m\\
+			& h_i(x)=0,& i=1,...,p 
+\end{aligned}
+\end{equation}
+On appelle 
+\begin{itemize}
+	\item $\mathcal{U}_{ad}$ \textit{l'ensemble admissible} des points vérifiant les contraintes d'inégalité et d'égalité
+	\item \textit{point admissible} un point de $\mathcal{U}_{ad}$
+	\item \textit{valeure optimale} $p^*$ de \eqref{optimGal} : \[p^*=\inf\{f_0(x) | f_i(x)\leq 0, i=1,...,m, h_i(x)=0, i=1,...,p\}\]
+	\item \textit{ensemble optimal} l'ensemble des \textit{points optimaux} $x^*$ réalisant l'infimum : \[X_{opt}=\{x^* | f_i(x^*)\leq 0, i=1,...,m, h_i(x^*)=0, i=1,...,p,\ f(x^*)=p^*\}\]
+	\item \textit{$\epsilon$-suboptimal} un point admissible $x$ tel que $f_0(x)\leq p^*+\epsilon$
+	\item un point $x$ \textit{locallement optimal} s'il existe $R>0$ tel que \[f_0(x)=\inf\{f_0(z) | f_i(z)\leq 0, i=1,...,m, h_i(z)=0, i=1,...,p,\ \|x-z\|<R\}\]
+\end{itemize} 
+
+\subsection{Quelques formes équivalentes}
+\paragraph{Problème sous forme d'épigraphe}
+On peut remettre le problème \eqref{optimGal} sous la forme :
+\[\begin{aligned}
+	\min\ & t\\
+	\text{t.q. } & f_0(x)-t\leq 0\\
+			&f_i(x)\leq 0,& i=1,...,m\\
+			& h_i(x)=0,& i=1,...,p 
+\end{aligned}\]
+
+\paragraph{Problèmes différentiables avec contraintes linéaires : première approche des multiplicateurs}
+Prenons le problème suivant où $f_0$ est Fréchet-différentiable :
+\[\begin{aligned}
+	\min\ & f_0(x)\\
+	\text{t.q. } & Ax=b
+\end{aligned}\]
+Les conditions d'optimalité pour un $x$ admissibles sont :
+	\[\langle \nabla f_0(x),y-x\rangle\geq 0\]
+pour tout $y$ vérifiant $Ay=b$. Comme $x$ est admissible, tout $y$ admissible est de la forme $y=x+v$ avec $v\in$ ker$(A)$. On peut donc réécrire la condition d'optimalité comme :
+	\[\langle \nabla f_0(x),v\rangle\geq 0,\ \forall v\in\text{ker}(A)\]
+et comme $v$ est quelconque dans un espace vectoriel (rempalcer $v$ par $-v$) : 
+	\[\nabla f_0(x)\perp\text{ker}(A)\]
+Mais comme ker$(A)^\perp=$Im$(A^\intercal)$, on peut dire que $\nabla f_0(x)\in$Im$(A^\intercal)$, ou encore qu'il existe $\nu\in\mathbb{R}^p$ tel que :
+	\[\nabla f_0(x)+A^\intercal \nu=0\]
+
+\section{Problèmes convexes}
 \[\min_{u\in\mathcal{U}_{ad}} J(u)\]
 $\mathcal{U}_{ad}\subset\mathbb{R}^n$ est l'ensemble (non vide) admissible.
 On suppose $\mathcal{U}_{ad}$ fermé convexe, et $J$ convexe.
 
 \Theo{}{Si $J$ est coercive ou si $\mathcal{U}_{ad}$ est borné, alors il existe un point de minimum.}
 
-\section{Une condition nécessaire générale d'optimalité}
+\subsection{Une condition nécessaire générale d'optimalité}
 \Def{Cône tangent}{On dit que $d\in\mathbb{R}^n$ est une tangente à $X$ en $\bar{x}$ si $\exists x_k\to\bar{x}$ avec $(x_k\subset X$, $t_k\to 0$, $t_k>0$ tel que :
 	\[\frac{x_k-\bar{x}}{t_k}\to d\]
 L'ensemble de toutes les directions tangentes est appelé le cône tangent et est noté $T_{\bar{x}}X$.}
@@ -31,7 +77,7 @@ $\mathcal{N}_{\bar{x}}X$ est donc un cône convexe.}
 	\item $0\in\partial J(\bar{u}) + \mathcal{N}_{\bar{u}}\mathcal{U}_{ad}$.
 \end{enumerate}}
 
-\section{Cas où les contraintes sont explicites}
+\subsection{Cas où les contraintes sont explicites}
 \[\mathcal{U}_{ad}=\left\{\begin{array}{c l r}
 	u; & \langle a_i, u\rangle = b_i & i=1,...,m\\
 	   & c_j(u)\leq 0 		 & j=1,...,p
@@ -66,7 +112,7 @@ Alors
 \end{enumerate}
 Alors $(3)\Rightarrow (1) \Leftrightarrow (2)$}
 
-\subsection{Qualification des contraintes}
+\subsubsection{Qualification des contraintes}
 Les contraintes sont qualifiées si :
 	\[\mathscr{N}_{(a,b,c)}(u)=\mathscr{N}_{\mathcal{U}_{ad}}(u) \text{ et alors } (3)\Leftrightarrow(1)\]
 

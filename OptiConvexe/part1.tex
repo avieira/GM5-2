@@ -279,6 +279,9 @@ $f$ est quasi-concave si $-f$ est quasi-convexe. On fonction à la fois quasi-co
 \Prop{}{\begin{itemize}
 	\item $f:\mathbb{R}^n\to\mathbb{R}$ est quasi-convexe si et seulement si dom $f$ est convexe et pour tout $x,y\in$ dom $f$, et $0\leq\lambda\leq 1$ :
 	\[f(\theta x+(1-\theta)y)\leq \max\{f(x),f(y)\}\]
+	\item Supposons $f$ Fréchet-différentiable. $f$ est quasi-convexe si et seulement si dom $f$ est convexe et pour tout $x,y\in$ dom$f$, \[f(y)\leq f(x)\implies \langle\nabla f(x),y-x\rangle\leq 0\]
+	Si $f$ est deux fois différentiable et quasi-convexe, alors pour tout $x\in$ dom$f$, tout $y\in\mathbb{R}^n$, \[\langle \nabla f(x),y\rangle=0\implies \langle y,\nabla^2f(x)y\rangle\geq 0\]
+	On a équivalence si l'inégalité est stricte.
 	\item $f:\mathbb{R}\to\mathbb{R}$, continue, est quasiconvexe si et seulement si une de ces conditions est vérifiée : \begin{itemize}
 		\item $f$ est croissante
 		\item $f$ est décroissante
@@ -286,6 +289,39 @@ $f$ est quasi-concave si $-f$ est quasi-convexe. On fonction à la fois quasi-co
 	\end{itemize}
 \end{itemize}
 }
+
+	\subsection{Fonctions log-convexes}
+\Def{Logarithmiquement convexe}{$f:\mathbb{R}^n\to\mathbb{R}^+_*$ est dite log-convexe si $\log f$ est convexe.\\
+$f$ est log-concave si $\log f$ est concave, ou de manière équivalente, $1/f$ est log-convexe.}
+
+\Prop{}{\begin{itemize}
+	\item $f:\mathbb{R}^n\to\mathbb{R}^+_*$, avec dom$f$ convexe, est log-convave si et seulement si, pour tout $x,y\in$ dom$f$, et $0\leq\theta\leq 1$, on a \[f(\theta x+(1-\theta)y)\geq f(x)^\theta f(y)^{1-\theta}\]
+	\item $f$ est log-concave si et seulement si pour tout $x\in$ dom$f$, \[f(x)\nabla^2f(x)\preccurlyeq\nabla f(x) \nabla f(x)^\intercal\]
+\end{itemize}}
+
+	\subsection{Convexité en regard des inégalités généralisées}
+		\subsubsection{Monotonicité}
+Soit $K\subseteq \mathbb{R}^n$ un cône propre, associé à l'inégalité généralisée $\preccurlyeq_K$.
+\Def{$K$-croissant}{Une fonction $f:\mathbb{R}^n\to\mathbb{R}$ est dite $K$-croissante si \[x\preccurlyeq_K y\implies f(x)\leq f(y)\]
+et $K$-strictement croissante si \[x\preccurlyeq_K y,\ x\neq y\implies f(x)<f(y)\]
+On définit la décroissance de manière similaire.}
+
+\Prop{}{\begin{itemize}
+	\item $f$, de domaine convexe, et $K$-croissante si et seulement si \[\forall x\in \text{dom}f,\ \nabla f(x)\succcurlyeq_{K^*} 0\]
+	Si l'inégalité est stricte, alors $f$ est $K$-strictement croissante (mais la réciproque est fausse !)
+\end{itemize}}
+
+		\subsubsection{Convexité}
+Soit $K\subseteq \mathbb{R}^m$ un cône propre, associé à l'inégalité généralisée $\preccurlyeq_K$.
+\Def{$K$-croissant}{Une fonction $f:\mathbb{R}^n\to\mathbb{R}^m$ est dite $K$-convexe si pour tout $x,y$ et $0\leq \theta\leq 1$, \[ f(\theta x+(1-\theta)y)\preccurlyeq_K \theta f(x)+(1-\theta)f(y)\]
+$f$ est strictement $K$-convexe si l'inégalité est stricte pour tout tout $x\neq y$ et $0<\theta<1$.}
+
+\Prop{}{\begin{itemize}
+	\item $f$ est $K$-convexe si et seulement si pour tout $w\succcurlyeq_{K^*} 0$, la fonction scalaire $\langle w,f\rangle$ est convexe. $f$ est strictement $K$-convexe si et seulement si pour tout $w\succcurlyeq_{K^*} 0$ non nul, la fonction scalaire $\langle w,f\rangle$ est strictement convexe
+	\item $f$ différentiable est $K$-convexe si et seulement si son domaine est convexe et pour tout $x,y\in$ dom$f$, \[f(y)\succcurlyeq_K f(x)+Df(x)(y-x)\]
+	(où $Df(x)$ est la jacobienne de $f$ en $x$). $f$ est stricement $K$-convexe si l'inégalité est stricte pour tout $x\neq y$.
+\end{itemize}}
+
 
 
 \section{Fonctions d'appui}
