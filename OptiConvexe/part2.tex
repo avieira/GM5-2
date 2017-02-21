@@ -44,6 +44,34 @@ et comme $v$ est quelconque dans un espace vectoriel (rempalcer $v$ par $-v$) :
 Mais comme ker$(A)^\perp=$Im$(A^\intercal)$, on peut dire que $\nabla f_0(x)\in$Im$(A^\intercal)$, ou encore qu'il existe $\nu\in\mathbb{R}^p$ tel que :
 	\[\nabla f_0(x)+A^\intercal \nu=0\]
 
+\section{Dualité}
+On s'intéresse aux problème sous forme standard \eqref{optimGal} (qui est appelé pour la suite problème primal) avec $x\in\mathbb{R}^n$. On note $\mathcal{U}_{ad}=\bigcap_{i=0}^m$ dom $f_i\cap \bigcap_{i=1}^p $ dom $h_i$, le domaine admissible, qu'on suppose non vide, et $p^*$ la valeur optimale. L(idée de la dualité est de former un coût augmenté : on définit $L:\mathcal{U}_{ad}\times\mathbb{R}^m\times\mathbb{R}^p\to\mathbb{R}$ par :
+	\[L(x,\lambda,\nu)=f_0(x)+\sum_{i=1}^m \lambda_i f_i(x)+\sum_{i=1}^p \nu_i h_i(x)\]
+et la fonction duale $g:\mathbb{R}^m\times\mathbb{R}^p\to\mathbb{R}$ par :
+	\[g(\lambda,\mu)=\inf_{x\in\mathcal{U}_{ad}} L(x,\lambda,\nu)\]
+Cette fonction duale duale donne une borne inferieure à la valeur $p^*$ : pour tout $\lambda\geq 0$ et tout $\nu$, \[g(\lambda,\nu)\leq p^*\]
+Une question naturelle est de savoir quelle est la \textit{meilleure} borne inférieure qu'on puisse obtenir. Pour cela, on s'intéresse au problème :
+\begin{equation}\label{maxDual}
+	\max_{\lambda\in\mathbb{R}^m_+,\ \nu\in\mathbb{R}^p} g(\lambda,\nu)
+\end{equation}
+Ce problème, peu importe la forme de \eqref{optimGal}, admet un obejectif concave et un domaine convexe. La valeure optimale de ce problème, notée $d^*$, vérifie :
+	\[d^*\leq p^*\]
+On appelle cette propriété \textit{dualité faible}, et on appelle \textit{écart dual} la valeur $p^*-d^*$. \\
+Sous certaines conditions, on vérifie que $d^*=p^*$ ; c'est ce qu'on appelle la \textit{dualité forte}. Une de ces conditions est la condition de Slater, présentée plus loin. 
+
+\subsection{Conditions KKT}
+Supposons pour le moment que les $f_i$ et $h_i$ sont différentiables. On note $x^*$ et $(\lambda^*,\nu^*)$ les minimiseurs des problèmes primal et dual respectivement. Comme $x^*$ minimise $L(x,\lambda^*,\nu^*)$ sur $x$, on a que le gradient s'annule en $x^*$, i.e. :
+	\[\nabla f_0(x^*)+\sum_{i=1}^m \lambda_i^* \nabla f_i(x^*)+\sum_{i=1}^p \nu_i^*\nabla h_i(x^*)=0\]
+On a donc que si on vérifie la dualité forte, alors tout point primal-dual optimal $(x^*,\lambda^*,\nu^*)$ doit vérifier :
+\[\begin{aligned}
+	f_i(x^*)\leq 0,&\ i=1,...,m\\
+	h_i(x^*)=0,&\ i=1,...,p\\
+	\lambda_i^*\geq 0,&\ i=1,...,m\\
+	\lambda_i f_i(x^*)=0,&\ i=1,...,m\\
+\nabla f_0(x^*)+\sum_{i=1}^m \lambda_i^* \nabla f_i(x^*)+\sum_{i=1}^p \nu_i^*\nabla h_i(x^*)=0
+\end{aligned}\]
+ce qu'on appelle les conditions KKT.
+
 \section{Problèmes convexes}
 \[\min_{u\in\mathcal{U}_{ad}} J(u)\]
 $\mathcal{U}_{ad}\subset\mathbb{R}^n$ est l'ensemble (non vide) admissible.
